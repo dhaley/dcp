@@ -1,0 +1,70 @@
+Note: To use the GUI versions of the tools, you must have a license.
+
+Freeway example program:
+
+Description:
+
+	Freeway simulates traffic flow on a typical California highway.
+	Individual vehicles make decisions about how fast and where to
+	drive based on the conditions around them.
+
+	The user can control some of the simulation parameters:
+	* Speed limit in the three zones
+	* Distance between cars
+	* Simulation speed
+
+Usage:
+
+	Freeway
+
+	Click Start to begin the simulation.
+
+Example Scenario:
+
+	Step 1: Make a copy of the program
+
+	Copy the contents of the freeway directory to your own 
+	private working area with the following command:
+
+		cp -r /opt/SUNWspro/examples/general/freeway ~/freeway
+
+	NOTE: /opt/SUNWspro is the base directory where the product is
+	installed. This directory maybe different in your environment.
+
+	The Freeway Makefile assumes that Freeway source files are under
+	SCCS control. If you intend to use this Makefile, please ensure
+	the source files have read-only permissions.
+
+	Step 2: Mount Freeway Program
+
+	Start the IDE with the sunstudio command.
+
+	In the Explorer window, right-click Filesystems at the top of the 
+	Filesystems tab and choose Mount -> Local Directory to open the 	
+	Local Directory wizard. Find and select the freeway directory on the 
+	Select Directory page of the wizard and click Finish.
+	
+	Step 3: Build your own copy of Freeway.
+        
+        Select Makefile and choose Build -> Make from the main menu.
+        You can see the build status "Build Successful." in the Output Window.
+
+	Step 4: Run the program under the debugger.
+
+	In the Explorer window, select Freeway, and choose Debug -> Load 
+	Program from the main menu. Wait for the debugger session to start.
+	
+	Click Start in the Freeway GUI to begin the simulation. 
+
+	Step 5: Play with it.
+
+	Though the program seems to work correctly, there are some bugs in it.
+	Use the runtime checking facilities available from Debug -> Memory -> 
+	Check Access and Debug -> Memory -> Check Usage to find access errors 
+	and potential memory leaks. Try making changes to enhance the program. 
+	Have fun.
+
+
+Copyright © 2004 Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, California
+95054, U.S.A. All rights reserved.
+

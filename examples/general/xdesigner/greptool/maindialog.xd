@@ -1,0 +1,291 @@
+module 'greptool'
+version = 48;
+xdesigned = 1;
+applicationName = 'greptool';
+generateNameC = * 'maindialog.xc';
+generateUidFile = '';
+generateCPixmapFile = '';
+generateCHeaderFile = '';
+motifFlavour = 2;
+generateMask = 4423680;
+useMask = 1;
+ansiC = 0;
+generateNewMakefile = 1;
+generateMakeTemplate = 0;
+useCPixmaps = 0;
+useUILPixmaps = 0;
+useCHeaders = 0;
+useCUILHeaders = 0;
+CPPFlavour = 0;
+useCPPHeaders = 0;
+useCPPHeadersMFCWindows = 0;
+useCPPHeadersMFCMotif = 0;
+javaVersion = 2;
+/* group data */
+groupIndex 0;
+/* end group data */
+object 'mainshell' : XtSessionShell {
+	arguments {
+	was_selected = true;
+	lastGenName = 'mainshell';
+	createPreludeStatus = 1;
+	preInstantiation = 'void create_mainshell (display, app_name, app_argc, app_argv)Display *display;
+char *app_name;
+int app_argc;
+char **app_argv;
+';
+	preRealisation = '/* Pre-manage prelude for main dialog shell */
+/* Define and initialise client data structure for setcommand calback */
+static ccdata_t ccdata= {
+	&searchfiles,
+	&pattern,
+	&ignore_case,
+	&show_lines,
+	&show_files,
+	&invert,
+	&count_lines,
+	&show_block,
+	&command
+};
+
+/* Define and initialise client data for the rungrep callback */
+static rcdata_t rcdata = {
+	&hitstring,
+	&errorshell,
+	&errorform,
+	&errortext,
+	&mainshell
+};
+
+/* End of shell pre-manage prelude */';
+	XmNallowShellResize = true;
+	XmNtitle = 'greptool';
+	XmNsession = 1;
+	};
+object 'command' : XmCommand {
+	arguments {
+	lastGenName = 'command';
+	XmNwidth = 480;
+	XmNtextColumns = 62;
+	XmNcommand = '/bin/grep';
+	};
+	callbacks {
+	XmNcommandEnteredCallback = '
+rungrep(&rcdata)
+';
+	};
+abstract object '1' : XmScrolledList {
+	arguments {
+	lastGenName = 'scrolledList1';
+	};
+abstract object '1' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar1';
+	};
+};
+abstract object '2' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar2';
+	};
+};
+abstract object '1' : XmList {
+	arguments {
+	name = 'ItemsList';
+	lastGenName = 'list1';
+	XmNlistSpacing = 0;
+	XmNlistSizePolicy = 2;
+	};
+};
+};
+abstract object '1' : XmLabel GADGET {
+	arguments {
+	name = 'Selection';
+	lastGenName = 'label1';
+	};
+};
+abstract object 'commandline' : XmText {
+	arguments {
+	name = 'Text';
+	lastGenName = 'commandline';
+	};
+};
+object '1' : XmForm {
+	arguments {
+	lastGenName = 'form1';
+	XmNautoUnmanage = false;
+	};
+object '2' : XmLabel GADGET {
+	arguments {
+	lastGenName = 'label2';
+	XmNlabelString = 'Search for';
+	};
+};
+object 'pattern' : XmText {
+	arguments {
+	lastGenName = 'pattern';
+	};
+	callbacks {
+	XmNactivateCallback = '
+setcommand(&ccdata)
+';
+	};
+};
+object '3' : XmLabel GADGET {
+	arguments {
+	lastGenName = 'label3';
+	XmNlabelString = 'File filter';
+	};
+};
+object 'searchfiles' : XmText {
+	arguments {
+	lastGenName = 'searchfiles';
+	};
+	callbacks {
+	XmNactivateCallback = '
+setcommand(&ccdata)
+';
+	};
+};
+object '4' : XmLabel GADGET {
+	arguments {
+	lastGenName = 'label4';
+	XmNlabelString = 'Hits';
+	};
+};
+object '1' : XmScrolledText {
+	arguments {
+	lastGenName = 'scrolledText1';
+	};
+abstract object '3' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar3';
+	};
+};
+abstract object '4' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar4';
+	};
+};
+abstract object 'hitstring' : XmText {
+	arguments {
+	lastGenName = 'hitstring';
+	XmNeditable = false;
+	XmNresizeWidth = true;
+	XmNeditMode = XmMULTI_LINE_EDIT;
+	XmNrows = 16;
+	};
+};
+};
+object '1' : XmRowColumn {
+	arguments {
+	lastGenName = 'rowcol1';
+	};
+object 'ignore_case' : XmToggleButton {
+	arguments {
+	lastGenName = 'ignore_case';
+	XmNlabelString = 'Ignore case';
+	};
+	callbacks {
+	XmNvalueChangedCallback = '
+setcommand(&ccdata)
+';
+	};
+};
+object 'show_files' : XmToggleButton {
+	arguments {
+	lastGenName = 'show_files';
+	XmNlabelString = 'Show file names';
+	};
+	callbacks {
+	XmNvalueChangedCallback = '
+setcommand(&ccdata)
+';
+	};
+};
+object 'show_lines' : XmToggleButton {
+	arguments {
+	lastGenName = 'show_lines';
+	XmNlabelString = 'Show line numbers';
+	};
+	callbacks {
+	XmNvalueChangedCallback = '
+setcommand(&ccdata)
+';
+	};
+};
+object 'invert' : XmToggleButton {
+	arguments {
+	lastGenName = 'invert';
+	XmNlabelString = 'Invert search';
+	};
+	callbacks {
+	XmNvalueChangedCallback = '
+setcommand(&ccdata)
+';
+	};
+};
+object 'count_lines' : XmToggleButton {
+	arguments {
+	lastGenName = 'count_lines';
+	XmNlabelString = 'Count lines only';
+	};
+	callbacks {
+	XmNvalueChangedCallback = '
+setcommand(&ccdata)
+';
+	};
+};
+object 'show_block' : XmToggleButton {
+	arguments {
+	lastGenName = 'show_block';
+	XmNlabelString = 'Show block numbers';
+	};
+	callbacks {
+	XmNvalueChangedCallback = '
+setcommand(&ccdata)
+';
+	};
+};
+};
+    attachments {
+    attachment {
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 1 0;
+    };
+    attachment {
+	XmNrightAttachment = 3 7 20;
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 3 1 10;
+    };
+    attachment {
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 3 2 20;
+    };
+    attachment {
+	XmNrightAttachment = 3 7 20;
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 3 3 10;
+    };
+    attachment {
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 3 4 20;
+    };
+    attachment {
+	XmNrightAttachment = 1 0 0;
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 3 5 20;
+    };
+    attachment {
+	XmNrightAttachment = 1 0 0;
+	XmNleftAttachment = 0 0 0;
+	XmNtopAttachment = 1 0;
+    };
+    };
+};
+};
+};
+end module;

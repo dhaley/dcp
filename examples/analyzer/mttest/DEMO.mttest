@@ -1,0 +1,138 @@
+This demo covers the functionality of the analyer with respect
+to explicitly threads programs.  It shows synchronization
+delay tracing, and the function list, source, and dissassembly
+for such codes.
+
+The test code is from the analyzer test suite, and is a program
+with a number of different tasks, each of which uses a basic
+algorithm which is to:
+    1.  queue up a bunch of work blocks (4, by default)
+    2.  spawn a number of threads to process them (also, 4, by default)
+    3.  have each task use a particular synchronization primitive
+	to control access to the work blocks
+    4.  Process the work for the block, after the synchronization.
+
+Setup
+-----
+Compile the test code, with compile flags specifying no optimization,
+and specitying bound solaris threads.
+
+To demo only synctrace:
+        "collect -s on mttest -t2 -b2"
+	This uses two threads and two blocks, since the
+	machine is only a 2-CPU machine.
+
+To demo synctrace and the new memObj tab: 
+        "collect -p on -s on -h +dcstall -d /tmp mttest"
+	This collect uses 4 threads 4 blocks.  Good for 
+        4-CPU machines.  Places the experiment on a local
+        drive to avoid the NFS warning.
+
+        "collect -p on -s on -h +dcstall mttest -t2 -b2"
+	This uses two threads and two blocks, good for
+	2-CPU machines
+
+
+Demoing the new memobjs tab:
+----------------------------
+setenv SP_COLLECTOR_MEMOBJECTS  (only needed until memobjects are enabled automatically)
+
+cp dot.er.rc.dcache .er.rc 
+(does not show synctrace columns)
+
+Type analyzer test.1.er
+(Note: make sure you are using ym39932's analyzer which has fixes for L1 cache line selection)
+
+Show the user the function list.  Note that computeA thru computeI are
+a series of simple workloads which get distributed to 4 cpus.  The
+code for each compute function is identical, but the location of the
+memory which is manipulated and the thread synchronization used
+differs for each compute function.
+
+Note that computeB is the source of almost all D$/E$ misses.  Select
+computeB, and switch to source.  Point out that this function is
+exactly the same source as the one above and the one below. (optional:
+Switch to disassembly, and show that there is one single instruction
+that is responsible for D$ and E$ stalls.)
+
+View the distribution of D$/E$ misses with the new memory objects tab.
+Note all misses are on L2 cache line 3533.  Switch to L1-Cache view;
+point out that all misses are on L1 cache lines 222 and 223.  Point
+out that, unlike the MCF example, this shows spikes for a very hot
+cache lines.
+
+In order to see the call stacks that affect a particular cache line,
+use the filter "Memory objects" field to select line (222). (use
+"apply" so the filter window stays up.)  Switch to callers callees
+tab.  ComputeB should still be the central (purple) function.  The
+callers are cache_trash_even and cache_trash_odd.  cache_trash_even()
+causes misses on line 222.  Then, using the filter to switch to line
+223, show cache_trash_odd() causes misses on 223.
+
+Tell the user that this is an artificial example of "false sharing" of
+cache lines [different cpus are accessing independent data elements
+that happen to be in the same cache line].  The memory object display
+makes it easy to see the hot lines, and what the references to it are.
+
+
+Demoing synctrace:
+------------------
+Go to the mttest directory
+
+1.  Type analyzer test.1.er
+
+2.  The function list will come up.
+	From "Find Text:" on the icon bar
+	type lock_global in it, and hit apply TWICE.
+	The first will find trylock_global, and the
+	second will find lock_global which is what we want.
+	Or search for "^lock_global", if that works.
+
+3.  The function list will position to show lock_global
+	at the top, with lock_local immediately below
+	it.  (Assuming the experiment as is recorded now.)
+
+4.  Point out that these two function show identical
+	Inclusive User CPU sec., but that they show
+	very different Incl. Sync Wait sec.
+
+	That's because each of the two functions does the
+	same amount of work, but they use different synchronization
+	methods.  lock_local uses a lock that is local to the
+	work block; lock_global uses a global lock, thus serializing
+	execution.
+
+5.  Bring up the source of lock_global.  Point out that the
+	analyzer shows Sync wait time on the mutex_lock
+	call.  Then scroll down a bit, until you see the
+	function lock_local.  Show that there is no
+	sync Wait secs. on the mutex_lock call there.
+
+7.  Scroll up to the top of the function list.
+	Note that computeB shows almost 4 times as much
+	time as the other compute functions.
+	Select computeB and hit "Source"
+	Point out that all the compute functions look the
+	same in source, yet computeB is more expensive.
+
+8.  Now hit the "Disassembly" button.  Scroll down a little
+	into the computeB function, and note the highlighted
+	lines, and that the time shown on two load instructions
+	is quite high -- more than 1 second.
+
+9.  Search forward in the disassembly for the string faddd.  The first
+	hit will be the faddd between the two expensive loads.
+	Search again.  Point out that the code there is identical,
+	but the high-cost is absent from the two loads.
+
+	Explain that for all the other compute functions, the double
+	word pointed to by the argument is a word within the workblock,
+	while for computeB, the arguments are consecutive words,
+	indexed by the workblock index.  That means that the words
+	used by the two threads will share a cache line, and that
+	will cause each store from one thread, to invalidate the
+	cache line in the other thread.
+
+----------------
+  @(#)DEMO.mttest 1.5 06/03/07
+

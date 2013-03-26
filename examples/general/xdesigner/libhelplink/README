@@ -1,0 +1,15 @@
+This directory contains a number of implementations of the callback
+XDhelp_link.  These are for linking into your generated application so
+that the online help specified in the design will work.
+
+Each directory contains a different implementation and instructions on
+how to use the files contained in it.
+
+Implementations provided at present are:
+
+fmhelplink/		files for integrating your application with Frame
+			Technology Corp's FrameViewer application.
+nshelplink/		files for integrating your application with the 
+			World Wide Web browser Netscape, or a similar browser.
+helplink/		files for integrating your application with the
+			native help system.

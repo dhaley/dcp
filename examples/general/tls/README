@@ -1,0 +1,28 @@
+Note: To use the GUI versions of the tools, you must have a license.
+
+tls example program:
+
+Description:
+
+
+Usage:
+
+
+Example Scenario:
+
+	Step 1: Make a copy of the program
+
+	Copy the contents of the tls directory to your own 
+	private working area with the following command:
+
+		cp -r /opt/SUNWspro/examples/general/tls ~/tls
+
+	NOTE: /opt/SUNWspro is the base directory where the product is
+	installed. This directory maybe different in your environment.
+	
+	Step 2: Build your own copy of the tls executable.
+
+
+Copyright © 2004 Sun Microsystems, Inc.
+4150 Network Circle, Santa Clara,California 95054, U.S.A.  
+All rights reserved.

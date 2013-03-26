@@ -1,0 +1,56 @@
+/* README */
+
+Example XRT 3rd Party Widget Integration
+----------------------------------------
+
+
+This directory contains an example integration of the XrtTable
+widget.
+
+To build this software:
+-----------------------
+
+1. Set the environment variable XRTHOME to the XRT distribution root.
+2. check the machine target by typing
+	$ make
+
+   (it will print out thelist of known targets - ie machine types)
+
+3. make the shared object for your system, eg for solaris
+
+	$ make solaris
+
+4. Copy or link the shared object into the directory $XDROOT/lib/xds
+
+	$ cp libCvtInt.so $XDROOT/lib/xds
+
+
+The integration will be used whenever needed (ie whenever you try to record
+or replay from Xrt (XtXrt...) widgets.
+
+
+
+
+To add other integrations
+-------------------------
+
+The file xrt1.c contains the two converter routines required for
+the Xrt Table widget.
+
+You will need to write two similar converters for each widget you are
+integrating
+
+The file register.c contains the routine that REGISTERS the converters
+with the replay software. You will need to add a call for your new
+integration.
+
+The makefile is configured to build the object on systems currently
+supported. Once built, you should copy or link it into the xds lib
+directory.
+
+The other files in the directory SHOULD NOT be touched. The replay software
+is a collection of shared objects, with a very simple protocol - using
+Xt resources just like widgets do. A 3rd party integration is a very
+restricted form of object, where the replay software WILL NOT communicate
+with it, other than to create it. During object creation, your registering
+code is invoked.

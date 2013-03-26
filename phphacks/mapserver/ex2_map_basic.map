@@ -1,0 +1,13 @@
+MAP
+  NAME MAP_POINTS
+  SIZE 600 300
+  EXTENT -180 -90 180 90
+
+  LAYER
+    NAME clouds
+    TYPE RASTER
+    STATUS DEFAULT
+    DATA "data/global_clouds.tif"
+  END
+
+END

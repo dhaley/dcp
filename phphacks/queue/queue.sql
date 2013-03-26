@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS queue;
+CREATE TABLE queue (
+  id MEDIUMINT NOT NULL AUTO_INCREMENT,
+  func TEXT,
+  args TEXT,
+  PRIMARY KEY ( id )
+);

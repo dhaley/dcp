@@ -1,0 +1,20 @@
+This is a simple bitmap editor that is implemented on Motif and Microsoft Windows.
+It's not very functional, but it conveys some of the basic constructs.
+In particular there is no feedback during mouse dragging.
+
+The Makefile in motif/ needs the Make macro $XDROOT set to the installation
+root directory of X-Designer before you attempt to make anything.
+
+bitmap.xd            - The design.
+motif                - The motif implementation
+motif/Makefile       - Makefile
+motif/main.cxx       - Generated code for the window
+motif/main.h         - Include file: defines some values and include main_xd.h
+motif/main_xd.h      - Generated headers file
+motif/shared.cxx     - Shared callbacks: same as windows/shared.cxx
+motif/specific.cxx   - Motif specific callbacks
+windows/main.cxx     - Generated code for the window
+windows/main.h       - Include file: defines some values and include main_xd.h
+windows/main_xd.h    - Generated headers file
+windows/shared.cxx   - Shared callbacks: same as motif/shared.cxx
+windows/specific.cxx - Microsoft Windows specific callbacks

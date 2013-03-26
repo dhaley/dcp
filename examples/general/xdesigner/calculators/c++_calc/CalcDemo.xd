@@ -1,0 +1,760 @@
+module 'CalcDemo'
+version = 48;
+prelude = '#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include "xdclass.h"
+';
+xdesigned = 1;
+applicationName = 'CalcDemo';
+generateNameCPPMainProgram = * 'CalcDemo.cpp';
+generateNameCPP = * 'CalcDemo.cpp';
+generateNameCPPStubs = * 'CalcDemo_stubs.cpp';
+generateNameCPPExterns = * 'CalcDemo.h';
+generateNameResDB = * 'CalcDemo.defaults';
+generateNameCPixmaps = * 'CalcDemo_pixmaps.h';
+generateCPixmapFile = '';
+generateCPPHeaderFile = '"CalcDemo.h"';
+generateNameMakefile = * 'Makefile';
+motifFlavour = 0;
+generateMask = 4325376;
+useMask = 1;
+ansiC = 1;
+generateNewMakefile = 1;
+generateMakeTemplate = 0;
+useCPixmaps = 0;
+useUILPixmaps = 0;
+useCHeaders = 0;
+useCUILHeaders = 0;
+CPPFlavour = 0;
+useCPPHeaders = 1;
+useCPPHeadersMFCWindows = 0;
+useCPPHeadersMFCMotif = 0;
+javaVersion = 2;
+/* group data */
+groupIndex 0;
+/* end group data */
+object 'topshell' : XmDialogShell {
+	arguments {
+	name = 'topshell';
+	was_selected = true;
+	codeStruct = 4;
+	accessControl = 0;
+	XmNallowShellResize = true;
+	XmNtitle = 'CalcDemo';
+	XmNprimary = 1;
+	};
+object 'topform' : XmForm {
+	arguments {
+	name = 'topform';
+	XmNwidth = 241;
+	XmNheight = 481;
+	XmNautoUnmanage = false;
+	};
+object 'command' : XmCommand {
+	arguments {
+	name = 'command';
+	codeStruct = 4;
+	accessControl = 0;
+	};
+abstract object 'slist' : XmScrolledList {
+	arguments {
+	name = 'slist';
+	};
+abstract object 'hbar' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	};
+};
+abstract object 'vbar' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	};
+};
+abstract object 'list' : XmList {
+	arguments {
+	name = 'ItemsList';
+	XmNbackground = color('#e5e5e5e5e5e5');
+	};
+};
+};
+abstract object 'sellabel' : XmLabel GADGET {
+	arguments {
+	name = 'Selection';
+	XmNlabelString = 'Enter Expression';
+	XmNalignment = XmALIGNMENT_BEGINNING;
+	};
+};
+abstract object 'textentry' : XmText {
+	arguments {
+	name = 'Text';
+	accessControl = 0;
+	XmNbackground = color('#cecee7e7e7e7');
+	};
+	callbacks {
+	XmNactivateCallback = '
+eval_callback(topshell->command)
+';
+	};
+};
+object 'result_form' : XmForm {
+	arguments {
+	name = 'result_form';
+	};
+object 'textresult' : XmTextField {
+	arguments {
+	name = 'Text';
+	accessControl = 0;
+	};
+};
+object 'result_label' : XmLabel {
+	arguments {
+	name = 'label';
+	XmNlabelString = 'Result:';
+	XmNalignment = XmALIGNMENT_BEGINNING;
+	};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 3 2;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 0 0 0;
+	XmNtopAttachment = 1 0;
+    };
+    };
+};
+};
+object 'rcform' : XmForm {
+	arguments {
+	name = 'rcform';
+	codeStruct = 4;
+	};
+object 'buttonform' : XmForm {
+	arguments {
+	name = 'buttonform';
+	};
+object 'col1form' : XmForm {
+	arguments {
+	name = 'col1form';
+	folded = true;
+	};
+object 'button_eq' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = '=';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_plus' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = '+';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button7' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '7';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button4' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '4';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button1' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '1';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button0' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '0';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 16;
+	XmNtopAttachment = 1 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 33;
+	XmNtopAttachment = 5 0 16;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 50;
+	XmNtopAttachment = 5 0 33;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 66;
+	XmNtopAttachment = 5 0 50;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 83;
+	XmNtopAttachment = 5 0 66;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 5 0 83;
+    };
+    };
+};
+object 'col2form' : XmForm {
+	arguments {
+	name = 'col2form';
+	folded = true;
+	};
+object 'button_left' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = '(';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_minus' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = '-';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button8' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '8';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button5' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '5';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button2' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '2';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_decimal' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '.';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 16;
+	XmNtopAttachment = 1 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 33;
+	XmNtopAttachment = 5 0 16;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 50;
+	XmNtopAttachment = 5 0 33;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 66;
+	XmNtopAttachment = 5 0 50;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 83;
+	XmNtopAttachment = 5 0 66;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 5 0 83;
+    };
+    };
+};
+object 'col3form' : XmForm {
+	arguments {
+	name = 'col3form';
+	folded = true;
+	};
+object 'button_right' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = ')';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_times' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = '*';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button9' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '9';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button6' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '6';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button3' : XmPushButton {
+	arguments {
+	name = 'calc_button_num';
+	XmNlabelString = '3';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_log10' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = 'log10';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 16;
+	XmNtopAttachment = 1 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 33;
+	XmNtopAttachment = 5 0 16;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 50;
+	XmNtopAttachment = 5 0 33;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 66;
+	XmNtopAttachment = 5 0 50;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 83;
+	XmNtopAttachment = 5 0 66;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 5 0 83;
+    };
+    };
+};
+object 'col4form' : XmForm {
+	arguments {
+	name = 'col4form';
+	folded = true;
+	};
+object 'button_pow' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = '^';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_div' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = '/';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_loge' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = 'loge';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_sin' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = 'sin';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_cos' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = 'cos';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_atan' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = 'atan';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 3 2;
+	XmNtopAttachment = 1 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 33;
+	XmNtopAttachment = 5 0 16;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 50;
+	XmNtopAttachment = 5 0 33;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 66;
+	XmNtopAttachment = 5 0 50;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 5 0 83;
+	XmNtopAttachment = 5 0 66;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 5 0 83;
+    };
+    };
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 5 0 25;
+	XmNleftAttachment = 1 0 0;
+	XmNbottomAttachment = 1 0 0;
+	XmNtopAttachment = 1 0 0;
+    };
+    attachment {
+	XmNrightAttachment = 5 0 50;
+	XmNleftAttachment = 5 0 25;
+	XmNbottomAttachment = 1 0 0;
+	XmNtopAttachment = 1 0 0;
+    };
+    attachment {
+	XmNrightAttachment = 5 0 75;
+	XmNleftAttachment = 5 0 50;
+	XmNbottomAttachment = 1 0 0;
+	XmNtopAttachment = 1 0 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0 0;
+	XmNleftAttachment = 5 0 75;
+	XmNbottomAttachment = 1 0 0;
+	XmNtopAttachment = 1 0 0;
+    };
+    };
+};
+object 'var_popup_form' : XmForm {
+	arguments {
+	name = 'var_popup_form';
+	};
+object 'var_popup' : XmOptionMenu {
+	arguments {
+	name = 'var_popup';
+	};
+abstract object 'OptionLabel' : XmLabel GADGET {
+	arguments {
+	name = 'OptionLabel';
+	XmNlabelString = 'Constants';
+	};
+};
+abstract object 'OptionButton' : XmCascadeButton GADGET {
+	arguments {
+	name = 'OptionButton';
+	};
+object 'var_menu' : XmPulldownMenu {
+	arguments {
+	name = 'var_menu';
+	};
+object 'button_e' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = 'e';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'button_pi' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = 'pi';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+};
+};
+};
+object 'space_clear_form' : XmForm {
+	arguments {
+	name = 'space_clear_form';
+	};
+object 'space_button' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNbackground = color('#b0b0c4c4dede');
+	XmNlabelString = ' ';
+	};
+	callbacks {
+	XmNactivateCallback = '
+insert_callback(topshell->command)
+';
+	};
+};
+object 'eval_button' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = 'Eval';
+	};
+	callbacks {
+	XmNactivateCallback = '
+eval_callback(topshell->command)
+';
+	};
+};
+object 'clear_button' : XmPushButton {
+	arguments {
+	name = 'calc_button';
+	XmNlabelString = 'Clear';
+	};
+	callbacks {
+	XmNactivateCallback = '
+clear_callback(topshell->command)
+';
+	};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 5 0 33;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 1 0 0;
+    };
+    attachment {
+	XmNrightAttachment = 5 0 66;
+	XmNleftAttachment = 5 0 33;
+	XmNbottomAttachment = 1 0 0;
+	XmNtopAttachment = 1 0 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0 0;
+	XmNleftAttachment = 5 0 66;
+	XmNbottomAttachment = 1 0 0;
+	XmNtopAttachment = 1 0 0;
+    };
+    };
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 3 2;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 1 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0 0;
+	XmNleftAttachment = 0 0 0;
+	XmNbottomAttachment = 1 0 0;
+	XmNtopAttachment = 1 0 0;
+    };
+    };
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 3 2;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 1 0;
+    };
+    };
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 3 2;
+	XmNtopAttachment = 1 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 0 0 0;
+    };
+    };
+};
+};
+end module;

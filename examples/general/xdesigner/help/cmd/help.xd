@@ -1,0 +1,3019 @@
+module 'xdhelp'
+version = 48;
+heading = '#include "CCmdHandler.h"
+';
+prelude = '
+Widget xd_tooltip = (Widget) 0 ;
+';
+xdesigned = 1;
+applicationName = 'xdhelp';
+generateNameC = 'help.c';
+generateNameStubs = 'help_stubs.c';
+generateNameExterns = 'help.h';
+generateNameCPP = * '../../../../../strfixes/release/src/help/cmd/CGuru.cxx';
+generateNameCPPStubs = 'GuruStubs.cxx';
+generateNameResDB = * '../../../../../i18n/release/src/help/defaults/share/Guru.res';
+generateNameWinRes = 'help.rc';
+generateNameCPixmaps = 'HelpPixmaps.cxx';
+generateCPixmapFile = 'HelpPixmaps.cxx';
+generateCPPHeaderFile = 'CGuru.h';
+generateNameMakefile = 'Makefile';
+motifFlavour = 2;
+generateMask = 4391020;
+useMask = 1;
+ansiC = 1;
+generateNewMakefile = 1;
+generateMakeTemplate = 0;
+useCPixmaps = 0;
+useUILPixmaps = 0;
+useCHeaders = 0;
+useCUILHeaders = 0;
+CPPFlavour = 0;
+useCPPHeaders = 1;
+useCPPHeadersMFCWindows = 0;
+useCPPHeadersMFCMotif = 0;
+javaVersion = 1;
+/* group data */
+groupIndex 0;
+/* end group data */
+value
+	'buttonBackground' : color ( '#dededededede' );
+	'homeIPixmap' : icon ( 
+	24 24 4 1
+	homeIPixmap_color_table : color_table (
+		color ( 'SlateGrey' )= ' ',
+		color ( 'LightGrey' )= '.',
+		color ( '#FFFF00' )= 'o',
+		'buttonBackground' = 'O');
+	'homeIPixmap' :  icon (
+		color_table = homeIPixmap_color_table,
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOO OOOOOOOOOOOO',
+'OOOOOO   O . OOOOOOOOOOO',
+'OOOOOO .  ... OOOOOOOOOO',
+'OOOOOO . .. .. OOOOOOOOO',
+'OOOOOO ... . .. OOOOOOOO',
+'OOOOOO .. ... .. OOOOOOO',
+'OOOOO .. ..... .. OOOOOO',
+'OOOO    .......    OOOOO',
+'OOOOOO ......... OOOOOOO',
+'OOOOOO ...   ... OOOOOOO',
+'OOOOOO ... . ... OOOOOOO',
+'OOOOOO ... . ... OOOOOOO',
+'OOOOOO ... . ... OOOOOOO',
+'OOOOOO           OOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO' );
+ );
+	'homePixmap' : icon ( 
+	24 24 5 1
+	homePixmap_color_table : color_table (
+		color ( '#000000' )= ' ',
+		color ( 'tan' )= '.',
+		color ( '#FFFFFF' )= 'o',
+		color ( '#FFFF00' )= 'O',
+		'buttonBackground' = 'a');
+	'homePixmap' :  icon (
+		color_table = homePixmap_color_table,
+'aaaaaaaaaaaaaaaaaaaaaaaa',
+'aaaaaaaaaaaaaaaaaaaaaaaa',
+'aaaaaaaaaaaaaaaaaaaaaaaa',
+'aaaaaaaaaaaaaaaaaaaaaaaa',
+'aaaaaaaaaaaaaaaaaaaaaaaa',
+'aaaaaaaaaaa aaaaaaaaaaaa',
+'aaaaaa   a . aaaaaaaaaaa',
+'aaaaaa .  ... aaaaaaaaaa',
+'aaaaaa . .. .. aaaaaaaaa',
+'aaaaaa ... . .. aaaaaaaa',
+'aaaaaa .. ... .. aaaaaaa',
+'aaaaa .. ..... .. aaaaaa',
+'aaaa    .......    aaaaa',
+'aaaaaa ......... aaaaaaa',
+'aaaaaa ...   ... aaaaaaa',
+'aaaaaa ... o ... aaaaaaa',
+'aaaaaa ... o ... aaaaaaa',
+'aaaaaa ... o ... aaaaaaa',
+'aaaaaa           aaaaaaa',
+'aaaaaaaaaaaaaaaaaaaaaaaa',
+'aaaaaaaaaaaaaaaaaaaaaaaa',
+'aaaaaaaaaaaaaaaaaaaaaaaa',
+'aaaaaaaaaaaaaaaaaaaaaaaa',
+'aaaaaaaaaaaaaaaaaaaaaaaa' );
+ );
+	'helpShellMask' : icon ( 
+	48 48 2 1
+	helpShellMask_color_table : color_table (
+		color ( 'DodgerBlue' )= ' ',
+		color ( '#FF0000' )= '.');
+	'helpShellMask' :  icon (
+		color_table = helpShellMask_color_table,
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                      ........                  ',
+'                   .............                ',
+'                 ................               ',
+'                ..................              ',
+'                ..................              ',
+'                ......      .......             ',
+'               .....         ......             ',
+'               .....          .....             ',
+'               ....           .....             ',
+'                ...           ....              ',
+'                             .....              ',
+'                            ......              ',
+'                          .......               ',
+'                        ........                ',
+'                      .........                 ',
+'                     .........                  ',
+'                    ........                    ',
+'                    .......                     ',
+'                    .....                       ',
+'                    ....                        ',
+'                     ..                         ',
+'                                                ',
+'                                                ',
+'                   ....                         ',
+'                  ......                        ',
+'                 .......                        ',
+'                 .......                        ',
+'                 .......                        ',
+'                 ......                         ',
+'                  ....                          ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ' );
+ );
+	'helpShellPixmap' : icon ( 
+	48 48 2 1
+	helpShellPixmap_color_table : color_table (
+		color ( 'DodgerBlue' )= ' ',
+		color ( '#FF0000' )= '.');
+	'helpShellPixmap' :  icon (
+		color_table = helpShellPixmap_color_table,
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                      ........                  ',
+'                   .............                ',
+'                 ................               ',
+'                ..................              ',
+'                ..................              ',
+'                ......      .......             ',
+'               .....         ......             ',
+'               .....          .....             ',
+'               ....           .....             ',
+'                ...           ....              ',
+'                             .....              ',
+'                            ......              ',
+'                          .......               ',
+'                        ........                ',
+'                      .........                 ',
+'                     .........                  ',
+'                    ........                    ',
+'                    .......                     ',
+'                    .....                       ',
+'                    ....                        ',
+'                     ..                         ',
+'                                                ',
+'                                                ',
+'                   ....                         ',
+'                  ......                        ',
+'                 .......                        ',
+'                 .......                        ',
+'                 .......                        ',
+'                 ......                         ',
+'                  ....                          ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ',
+'                                                ' );
+ );
+	'upArrowPixmap' : icon ( 
+	24 24 6 1
+	upArrowPixmap_color_table : color_table (
+		color ( '#000000' )= ' ',
+		color ( '#6666cfcfffff' )= '.',
+		color ( 'tan' )= 'o',
+		color ( '#FFFFFF' )= 'O',
+		color ( '#FFFF00' )= 'a',
+		'buttonBackground' = 'b');
+	'upArrowPixmap' :  icon (
+		color_table = upArrowPixmap_color_table,
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbb  bbbbbbbbbbb',
+'bbbbbbbbbb .. bbbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbb ...... bbbbbbbb',
+'bbbbbbb ........ bbbbbbb',
+'bbbbbb .......... bbbbbb',
+'bbbbb     ....     bbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb      bbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb' );
+ );
+	'leftArrowPixmap' : icon ( 
+	24 24 3 1
+	leftArrowPixmap_color_table : color_table (
+		color ( '#000000' )= ' ',
+		color ( '#6666cfcfffff' )= '.',
+		'buttonBackground' = 'o');
+	'leftArrowPixmap' :  icon (
+		color_table = leftArrowPixmap_color_table,
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooo ooooooooooooo',
+'ooooooooo  ooooooooooooo',
+'oooooooo . ooooooooooooo',
+'ooooooo .. ooooooooooooo',
+'oooooo ...         ooooo',
+'ooooo ............ ooooo',
+'oooo ............. ooooo',
+'oooo ............. ooooo',
+'ooooo ............ ooooo',
+'oooooo ...         ooooo',
+'ooooooo .. ooooooooooooo',
+'oooooooo . ooooooooooooo',
+'ooooooooo  ooooooooooooo',
+'oooooooooo ooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo' );
+ );
+	'rightArrowPixmap' : icon ( 
+	24 24 3 1
+	rightArrowPixmap_color_table : color_table (
+		color ( '#000000' )= ' ',
+		color ( '#6666cfcfffff' )= '.',
+		'buttonBackground' = 'o');
+	'rightArrowPixmap' :  icon (
+		color_table = rightArrowPixmap_color_table,
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'ooooooooooooo oooooooooo',
+'ooooooooooooo  ooooooooo',
+'ooooooooooooo . oooooooo',
+'ooooooooooooo .. ooooooo',
+'ooooo         ... oooooo',
+'ooooo ............ ooooo',
+'ooooo ............. oooo',
+'ooooo ............. oooo',
+'ooooo ............ ooooo',
+'ooooo         ... oooooo',
+'ooooooooooooo .. ooooooo',
+'ooooooooooooo . oooooooo',
+'ooooooooooooo  ooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo' );
+ );
+	'filePrintIPixmap' : icon ( 
+	24 24 7 1
+	filePrintIPixmap_color_table : color_table (
+		color ( 'SlateGrey' )= ' ',
+		color ( 'LightGrey' )= '.',
+		color ( 'MistyRose' )= 'o',
+		color ( '#848284' )= 'O',
+		color ( '#FFFFFF' )= 'a',
+		color ( '#FFFF00' )= 'b',
+		'buttonBackground' = 'c');
+	'filePrintIPixmap' :  icon (
+		color_table = filePrintIPixmap_color_table,
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccc        cccccccc',
+'cccccccc ...... cccccccc',
+'cccccccc .   .. cccccccc',
+'cccccccc ...... cccccccc',
+'cccccccc .    . cccccccc',
+'cccccccc ...... cccccccc',
+'ccccccc          ccccccc',
+'cccccc .......... cccccc',
+'ccccc              ccccc',
+'ccccc ............ ccccc',
+'ccccc . .......... ccccc',
+'ccccc ............ ccccc',
+'cccccc            cccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc' );
+ );
+	'filePrintPixmap' : icon ( 
+	24 24 7 1
+	filePrintPixmap_color_table : color_table (
+		color ( '#000000' )= ' ',
+		color ( 'white' )= '.',
+		color ( 'MistyRose' )= 'o',
+		color ( '#848284' )= 'O',
+		color ( '#FFFFFF' )= 'a',
+		color ( '#FFFF00' )= 'b',
+		'buttonBackground' = 'c');
+	'filePrintPixmap' :  icon (
+		color_table = filePrintPixmap_color_table,
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccc        cccccccc',
+'cccccccc ...... cccccccc',
+'cccccccc .   .. cccccccc',
+'cccccccc ...... cccccccc',
+'cccccccc .    . cccccccc',
+'cccccccc ...... cccccccc',
+'ccccccc          ccccccc',
+'cccccc .......... cccccc',
+'ccccc  OOOOOOOOOO  ccccc',
+'ccccc ............ ccccc',
+'ccccc . .......... ccccc',
+'ccccc ............ ccccc',
+'cccccc            cccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc' );
+ );
+	'fileSaveIPixmap' : icon ( 
+	24 24 3 1
+	fileSaveIPixmap_color_table : color_table (
+		color ( 'SlateGray' )= ' ',
+		color ( 'LightGrey' )= '.',
+		'buttonBackground' = 'o');
+	'fileSaveIPixmap' :  icon (
+		color_table = fileSaveIPixmap_color_table,
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'ooooo              ooooo',
+'ooooo . ........ . ooooo',
+'ooooo . ........ . ooooo',
+'ooooo . ........ . ooooo',
+'ooooo . ........ . ooooo',
+'ooooo . ........ . ooooo',
+'ooooo . ........ . ooooo',
+'ooooo ..        .. ooooo',
+'ooooo ............ ooooo',
+'ooooo ..         . ooooo',
+'ooooo ..      .. . ooooo',
+'ooooo ..      .. . ooooo',
+'ooooo ..      .. . ooooo',
+'oooooo             ooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo' );
+ );
+	'fileSavePixmap' : icon ( 
+	24 24 7 1
+	fileSavePixmap_color_table : color_table (
+		color ( '#000000' )= ' ',
+		color ( 'white' )= '.',
+		color ( 'MistyRose' )= 'o',
+		color ( '#848284' )= 'O',
+		color ( '#FFFFFF' )= 'a',
+		color ( '#FFFF00' )= 'b',
+		'buttonBackground' = 'c');
+	'fileSavePixmap' :  icon (
+		color_table = fileSavePixmap_color_table,
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'ccccc              ccccc',
+'ccccc o ........ o ccccc',
+'ccccc o ........ o ccccc',
+'ccccc o ........ o ccccc',
+'ccccc o ........ o ccccc',
+'ccccc o ........ o ccccc',
+'ccccc o ........ o ccccc',
+'ccccc oo        oo ccccc',
+'ccccc oooooooooooo ccccc',
+'ccccc oo         o ccccc',
+'ccccc oo      .. o ccccc',
+'ccccc oo      .. o ccccc',
+'ccccc oo      .. o ccccc',
+'cccccc             ccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc',
+'cccccccccccccccccccccccc' );
+ );
+	'helpHelpIPixmap' : icon ( 
+	24 24 2 1
+	helpHelpIPixmap_color_table : color_table (
+		color ( 'SlateGrey' )= ' ',
+		'buttonBackground' = '.');
+	'helpHelpIPixmap' :  icon (
+		color_table = helpHelpIPixmap_color_table,
+'........................',
+'........................',
+'........................',
+'........................',
+'........................',
+'..........    ..........',
+'.........      .........',
+'........  ...   ........',
+'........  ....  ........',
+'........  ...   ........',
+'............   .........',
+'...........   ..........',
+'...........  ...........',
+'...........  ...........',
+'...........  ...........',
+'........................',
+'...........  ...........',
+'...........  ...........',
+'........................',
+'........................',
+'........................',
+'........................',
+'........................',
+'........................' );
+ );
+	'helpHelpPixmap' : icon ( 
+	24 24 2 1
+	helpHelpPixmap_color_table : color_table (
+		color ( '#000084' )= ' ',
+		'buttonBackground' = '.');
+	'helpHelpPixmap' :  icon (
+		color_table = helpHelpPixmap_color_table,
+'........................',
+'........................',
+'........................',
+'........................',
+'........................',
+'..........    ..........',
+'.........      .........',
+'........  ...   ........',
+'........  ....  ........',
+'........  ...   ........',
+'............   .........',
+'...........   ..........',
+'...........  ...........',
+'...........  ...........',
+'...........  ...........',
+'........................',
+'...........  ...........',
+'...........  ...........',
+'........................',
+'........................',
+'........................',
+'........................',
+'........................',
+'........................' );
+ );
+	'editPastePixmap' : icon ( 
+	24 24 6 1
+	editPastePixmap_color_table : color_table (
+		color ( '#000000' )= ' ',
+		color ( 'DimGrey' )= '.',
+		color ( 'tan' )= 'o',
+		color ( '#FFFFFF' )= 'O',
+		color ( '#FFFF00' )= 'a',
+		'buttonBackground' = 'b');
+	'editPastePixmap' :  icon (
+		color_table = editPastePixmap_color_table,
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbb    bbbbbbbbbb',
+'bbbbbb     aa     bbbbbb',
+'bbbbb ooo a  a ooo bbbbb',
+'bbbbb oo aaaaaa oo bbbbb',
+'bbbbb oo        oo bbbbb',
+'bbbbb oooooooooooo bbbbb',
+'bbbbb ooooo....... bbbbb',
+'bbbbb ooooo.OOOOO..bbbbb',
+'bbbbb ooooo.OOOOO.O.bbbb',
+'bbbbb ooooo.O...O...bbbb',
+'bbbbb ooooo.OOOOOOO.bbbb',
+'bbbbb ooooo.O.....O.bbbb',
+'bbbbbb     .OOOOOOO.bbbb',
+'bbbbbbbbbbb.........bbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb' );
+ );
+	'fileNewPixmap' : icon ( 
+	24 24 4 1
+	fileNewPixmap_color_table : color_table (
+		'buttonBackground' = ' ',
+		color ( 'Black' )= '.',
+		color ( 'White' )= 'o',
+		color ( 'LightGrey' )= 'O');
+	'fileNewPixmap' :  icon (
+		color_table = fileNewPixmap_color_table,
+'                        ',
+'                        ',
+'                        ',
+'                        ',
+'                        ',
+'      .......           ',
+'      .ooooo..          ',
+'      .ooooo.O.         ',
+'      .ooooo.OO.        ',
+'      .ooooo.OOO.       ',
+'      .ooooo......      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      ............      ',
+'                        ',
+'                        ',
+'                        ',
+'                        ',
+'                        ' );
+ );
+	'editCutPixmap' : icon ( 
+	24 24 2 1
+	editCutPixmap_color_table : color_table (
+		color ( 'Black' )= ' ',
+		'buttonBackground' = '.');
+	'editCutPixmap' :  icon (
+		color_table = editCutPixmap_color_table,
+'........................',
+'........................',
+'........................',
+'........................',
+'........................',
+'.......... ... .........',
+'.......... ... .........',
+'.......... ... .........',
+'..........  .  .........',
+'........... . ..........',
+'...........   ..........',
+'............ ...........',
+'...........   ..........',
+'........... .   ........',
+'.........   . .. .......',
+'........ .. . .. .......',
+'........ .. . .. .......',
+'........ .. ..  ........',
+'.........  .............',
+'........................',
+'........................',
+'........................',
+'........................',
+'........................' );
+ );
+	'editCopyPixmap' : icon ( 
+	24 24 3 1
+	editCopyPixmap_color_table : color_table (
+		color ( '#000000' )= ' ',
+		color ( '#FFFFFF' )= '.',
+		'buttonBackground' = 'o');
+	'editCopyPixmap' :  icon (
+		color_table = editCopyPixmap_color_table,
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'ooooo      ooooooooooooo',
+'ooooo ....  oooooooooooo',
+'ooooo .... . ooooooooooo',
+'ooooo .  .       ooooooo',
+'ooooo ..... ....  oooooo',
+'ooooo .     .... . ooooo',
+'ooooo ..... .  .    oooo',
+'ooooo .     ....... oooo',
+'ooooo ..... .     . oooo',
+'ooooo       ....... oooo',
+'ooooooooooo .     . oooo',
+'ooooooooooo ....... oooo',
+'ooooooooooo         oooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo' );
+ );
+	'fileOpenPixmap' : icon ( 
+	24 24 4 1
+	fileOpenPixmap_color_table : color_table (
+		color ( '#000000' )= ' ',
+		color ( 'tan' )= '.',
+		color ( 'DarkGoldenrod' )= 'o',
+		'buttonBackground' = 'O');
+	'fileOpenPixmap' :  icon (
+		color_table = fileOpenPixmap_color_table,
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOO   OOOOOOO',
+'OOOOOOOOOOOOO OOO O OOOO',
+'OOOOOOOOOOOOOOOOOO  OOOO',
+'OOOOOO   OOOOOOOO   OOOO',
+'OOOOO ooo       OOOOOOOO',
+'OOOOO ooooooooo OOOOOOOO',
+'OOOOO ooooooooo OOOOOOOO',
+'OOOOO oooo          OOOO',
+'OOOOO ooo ......... OOOO',
+'OOOOO oo ......... OOOOO',
+'OOOOO o ......... OOOOOO',
+'OOOOO  ......... OOOOOOO',
+'OOOOO           OOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO' );
+ );
+	'fileNewIPixmap' : icon ( 
+	24 24 3 1
+	fileNewIPixmap_color_table : color_table (
+		'buttonBackground' = ' ',
+		color ( 'SlateGray' )= '.',
+		color ( 'LightGrey' )= 'o');
+	'fileNewIPixmap' :  icon (
+		color_table = fileNewIPixmap_color_table,
+'                        ',
+'                        ',
+'                        ',
+'                        ',
+'                        ',
+'      .......           ',
+'      .ooooo..          ',
+'      .ooooo.o.         ',
+'      .ooooo.oo.        ',
+'      .ooooo.ooo.       ',
+'      .ooooo......      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      .oooooooooo.      ',
+'      ............      ',
+'                        ',
+'                        ',
+'                        ',
+'                        ',
+'                        ' );
+ );
+	'fileOpenIPixmap' : icon ( 
+	24 24 3 1
+	fileOpenIPixmap_color_table : color_table (
+		color ( 'SlateGray' )= ' ',
+		color ( 'LightGrey' )= '.',
+		'buttonBackground' = 'o');
+	'fileOpenIPixmap' :  icon (
+		color_table = fileOpenIPixmap_color_table,
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooo   ooooooo',
+'ooooooooooooo ooo o oooo',
+'oooooooooooooooooo  oooo',
+'oooooo   oooooooo   oooo',
+'ooooo ...       oooooooo',
+'ooooo ......... oooooooo',
+'ooooo ......... oooooooo',
+'ooooo ....          oooo',
+'ooooo ... ......... oooo',
+'ooooo .. ......... ooooo',
+'ooooo . ......... oooooo',
+'ooooo  ......... ooooooo',
+'ooooo           oooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo' );
+ );
+	'editCopyIPixmap' : icon ( 
+	24 24 3 1
+	editCopyIPixmap_color_table : color_table (
+		color ( 'SlateGrey' )= ' ',
+		color ( 'LightGrey' )= '.',
+		'buttonBackground' = 'o');
+	'editCopyIPixmap' :  icon (
+		color_table = editCopyIPixmap_color_table,
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'ooooo      ooooooooooooo',
+'ooooo ....  oooooooooooo',
+'ooooo .... . ooooooooooo',
+'ooooo .  .       ooooooo',
+'ooooo ..... ....  oooooo',
+'ooooo .     .... . ooooo',
+'ooooo ..... .  .    oooo',
+'ooooo .     ....... oooo',
+'ooooo ..... .     . oooo',
+'ooooo       ....... oooo',
+'ooooooooooo .     . oooo',
+'ooooooooooo ....... oooo',
+'ooooooooooo         oooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo' );
+ );
+	'editCutIPixmap' : icon ( 
+	24 24 2 1
+	editCutIPixmap_color_table : color_table (
+		color ( 'SlateGrey' )= ' ',
+		'buttonBackground' = '.');
+	'editCutIPixmap' :  icon (
+		color_table = editCutIPixmap_color_table,
+'........................',
+'........................',
+'........................',
+'........................',
+'........................',
+'........................',
+'.......... ... .........',
+'.......... ... .........',
+'.......... ... .........',
+'..........  .  .........',
+'........... . ..........',
+'...........   ..........',
+'............ ...........',
+'...........   ..........',
+'........... .   ........',
+'.........   . .. .......',
+'........ .. . .. .......',
+'........ .. . .. .......',
+'........ .. ..  ........',
+'.........  .............',
+'........................',
+'........................',
+'........................',
+'........................' );
+ );
+	'editPasteIPixmap' : icon ( 
+	24 24 4 1
+	editPasteIPixmap_color_table : color_table (
+		color ( 'SlateGrey' )= ' ',
+		color ( 'SlateGrey' )= '.',
+		color ( 'LightGrey' )= 'o',
+		'buttonBackground' = 'O');
+	'editPasteIPixmap' :  icon (
+		color_table = editPasteIPixmap_color_table,
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOO    OOOOOOOOOO',
+'OOOOOO     oo     OOOOOO',
+'OOOOO ooo o  o ooo OOOOO',
+'OOOOO oo oooooo oo OOOOO',
+'OOOOO oo        oo OOOOO',
+'OOOOO oooooooooooo OOOOO',
+'OOOOO ooooo....... OOOOO',
+'OOOOO ooooo.ooooo..OOOOO',
+'OOOOO ooooo.ooooo.o.OOOO',
+'OOOOO ooooo.o...o...OOOO',
+'OOOOO ooooo.ooooooo.OOOO',
+'OOOOO ooooo.o.....o.OOOO',
+'OOOOOO     .ooooooo.OOOO',
+'OOOOOOOOOOO.........OOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO',
+'OOOOOOOOOOOOOOOOOOOOOOOO' );
+ );
+	'leftArrowIPixmap' : icon ( 
+	24 24 3 1
+	leftArrowIPixmap_color_table : color_table (
+		color ( 'SlateGrey' )= ' ',
+		color ( 'LightGrey' )= '.',
+		'buttonBackground' = 'o');
+	'leftArrowIPixmap' :  icon (
+		color_table = leftArrowIPixmap_color_table,
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooo ooooooooooooo',
+'ooooooooo  ooooooooooooo',
+'oooooooo . ooooooooooooo',
+'ooooooo .. ooooooooooooo',
+'oooooo ...         ooooo',
+'ooooo ............ ooooo',
+'oooo ............. ooooo',
+'oooo ............. ooooo',
+'ooooo ............ ooooo',
+'oooooo ...         ooooo',
+'ooooooo .. ooooooooooooo',
+'oooooooo . ooooooooooooo',
+'ooooooooo  ooooooooooooo',
+'oooooooooo ooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo' );
+ );
+	'rightArrowIPixmap' : icon ( 
+	24 24 3 1
+	rightArrowIPixmap_color_table : color_table (
+		color ( 'SlateGrey' )= ' ',
+		color ( 'LightGrey' )= '.',
+		'buttonBackground' = 'o');
+	'rightArrowIPixmap' :  icon (
+		color_table = rightArrowIPixmap_color_table,
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'ooooooooooooo oooooooooo',
+'ooooooooooooo  ooooooooo',
+'ooooooooooooo . oooooooo',
+'ooooooooooooo .. ooooooo',
+'ooooo         ... oooooo',
+'ooooo ............ ooooo',
+'ooooo ............. oooo',
+'ooooo ............. oooo',
+'ooooo ............ ooooo',
+'ooooo         ... oooooo',
+'ooooooooooooo .. ooooooo',
+'ooooooooooooo . oooooooo',
+'ooooooooooooo  ooooooooo',
+'ooooooooooooo oooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo',
+'oooooooooooooooooooooooo' );
+ );
+	'upArrowIPixmap' : icon ( 
+	24 24 6 1
+	upArrowIPixmap_color_table : color_table (
+		color ( 'SlateGrey' )= ' ',
+		color ( 'LightGrey' )= '.',
+		color ( 'tan' )= 'o',
+		color ( '#FFFFFF' )= 'O',
+		color ( '#FFFF00' )= 'a',
+		'buttonBackground' = 'b');
+	'upArrowIPixmap' :  icon (
+		color_table = upArrowIPixmap_color_table,
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbb  bbbbbbbbbbb',
+'bbbbbbbbbb .. bbbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbb ...... bbbbbbbb',
+'bbbbbbb ........ bbbbbbb',
+'bbbbbb .......... bbbbbb',
+'bbbbb     ....     bbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb .... bbbbbbbbb',
+'bbbbbbbbb      bbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb',
+'bbbbbbbbbbbbbbbbbbbbbbbb' );
+ );
+	'aboutHelpPixmap' : icon ( 
+	100 100 3 1
+	aboutHelpPixmap_color_table : color_table (
+		color ( '#000084' )= ' ',
+		'buttonBackground' = '.',
+		color ( '#9ca69ca8ffff' )= 'o');
+	'aboutHelpPixmap' :  icon (
+		color_table = aboutHelpPixmap_color_table,
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'..............................................oooooooooo............................................',
+'.........................................ooooo           ...........................................',
+'........................................oo                 .........................................',
+'......................................ooo                   ........................................',
+'.....................................oo                       ......................................',
+'....................................oo                         .....................................',
+'...................................oo                           ....................................',
+'...................................o                             ...................................',
+'...................................o                             ...................................',
+'..................................o             ......            ..................................',
+'.................................oo          ...........           .................................',
+'.................................o          .............          .................................',
+'.................................o         ...............          ................................',
+'.................................o         ...............o         ................................',
+'.................................o        ................o         ................................',
+'.................................o        ................o         ................................',
+'.................................o        ................o         ................................',
+'.................................o        ................o         ................................',
+'.................................o        ...............oo         ................................',
+'.................................o        ..............oo         .................................',
+'.................................o        .............oo          .................................',
+'..................................        ............oo          ..................................',
+'...................................      ............oo           ..................................',
+'...................................................ooo           ...................................',
+'..................................................oo            ....................................',
+'.................................................oo            .....................................',
+'................................................oo            ......................................',
+'...............................................oo            .......................................',
+'..............................................oo            ........................................',
+'..............................................o            .........................................',
+'.............................................oo          ...........................................',
+'.............................................o          ............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'..............................................         .............................................',
+'...............................................       ..............................................',
+'....................................................................................................',
+'................................................ooo.................................................',
+'..............................................ooo   ................................................',
+'..............................................o       ..............................................',
+'.............................................oo       ..............................................',
+'.............................................o         .............................................',
+'.............................................o         .............................................',
+'..............................................         .............................................',
+'...............................................       ..............................................',
+'...............................................       ..............................................',
+'.................................................   ................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................',
+'....................................................................................................' );
+ );
+object 'helpShell' : XmDialogShell {
+	arguments {
+	privateMethod = '	Widget myCommWidget ;
+	static char *helpDir ;
+';
+	publicMethod = '	void Exit();
+	void UpdateUI();
+	void SetHelpTopic(const char *key, Boolean bAddToHistory = FALSE);
+	void SetTopic(const char *key, Boolean bAddToHistory = FALSE);
+	Boolean DoCommand(long cmd);
+	Boolean DispatchCommand(long cmd, Boolean bUpdate);
+	Boolean OnCommand(long cmd);
+	Boolean OnUpdateCommand(long cmd);
+	void MainLoop(XtAppContext appContext, Display *display);
+	static void NewTopic( Widget w, XtPointer client_data, XEvent *event, Boolean *ctd ) ;
+	void NewTopic( Widget w, XEvent *event, Boolean *ctd ) ;
+	void IPCConnect( Window w ) ;
+	void SetupIPC( int argc, char **argv ) ;
+	char *GetHelpDir() ;
+';
+	lastGenName = 'helpShell';
+	codeStruct = 4;
+	baseClass = 'xd_ApplicationShell_c,public CCmdHandler';
+	className = 'CGuru';
+	createPreludeStatus = 2;
+	preInstantiation = 'void CGuru::create (Display *display, char *app_name, int app_argc, char **app_argv, char *app_class_name)
+';
+	preRealisation = '	helpDir = 0 ;';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	XmNtitle = 'XD/Help';
+	XmNiconMask = '<helpShellMask>';
+	XmNiconPixmap = '<helpShellPixmap>';
+	XmNprimary = 1;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnHelpIndex', 1  ;
+		'OnUnsetStatus', 0  not_windows;
+		'OnSetStatus', 0  not_windows;
+		'OnFind', 0  ;
+		'OnHelpVersion', 0  ;
+		'OnNavHistory', 0  ;
+		'OnTextSelectionChanged', 1  ;
+		'OnLinkSelection', 1  ;
+		'OnNavIndex', 0  ;
+		'OnNavForward', 0  ;
+		'OnNavBack', 0  ;
+		'OnEditClear', 0  ;
+		'OnEditPaste', 0  ;
+		'OnEditCopy', 0  ;
+		'OnEditCut', 0  ;
+		'OnEditUndo', 0  ;
+		'OnFilePrint', 0  ;
+		'OnFileRevert', 0  ;
+		'OnFileSaveAs', 0  ;
+		'OnFileSave', 0  ;
+		'OnFileClose', 0  ;
+		'OnFileNew', 0  ;
+		'OnFileQuit', 0  ;
+		'OnFileOpen', 0  ;
+		'OnSelectLink', 0  ;
+	};
+	};
+object 'mainForm' : XmForm {
+	arguments {
+	lastGenName = 'mainForm';
+	preRealisation = '	UpdateUI();';
+	XmNdialogTitle = 'XD/Help';
+	XmNresizePolicy = XmRESIZE_NONE;
+	XmNautoUnmanage = false;
+	};
+object 'menuBar' : XmMenuBar {
+	arguments {
+	lastGenName = 'menuBar';
+	XmNmenuHelpWidget = 'helpCB';
+	};
+object 'fileCB' : XmCascadeButton {
+	arguments {
+	lastGenName = 'fileCB';
+	folded = true;
+	XmNlabelString = 'File';
+	XmNmnemonic = 'F';
+	};
+object 'fileMenu' : XmPulldownMenu {
+	arguments {
+	lastGenName = 'fileMenu';
+	};
+object 'fileNewItem' : XmPushButton {
+	arguments {
+	lastGenName = 'fileNewItem';
+	managed = false;
+	XmNsensitive = false;
+	XmNlabelString = 'New';
+	XmNmnemonic = 'N';
+	XmNaccelerator = 'Ctrl<Key>N';
+	XmNacceleratorText = 'Ctrl+N';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFileNew', 0  ;
+	};
+	};
+};
+object 'fileOpenItem' : XmPushButton {
+	arguments {
+	lastGenName = 'fileOpenItem';
+	XmNlabelString = 'Open...';
+	XmNmnemonic = 'O';
+	XmNaccelerator = 'Ctrl<Key>O';
+	XmNacceleratorText = 'Ctrl+O';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFileOpen', 0  ;
+	};
+	};
+};
+object 'fileCloseItem' : XmPushButton {
+	arguments {
+	lastGenName = 'fileCloseItem';
+	managed = false;
+	XmNlabelString = 'Close';
+	XmNmnemonic = 'C';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFileClose', 0  ;
+	};
+	};
+};
+object '7' : XmSeparator {
+	arguments {
+	lastGenName = 'separator7';
+	managed = false;
+	};
+};
+object 'fileSaveItem' : XmPushButton {
+	arguments {
+	lastGenName = 'fileSaveItem';
+	managed = false;
+	XmNlabelString = 'Save';
+	XmNmnemonic = 'S';
+	XmNaccelerator = 'Ctrl<Key>S';
+	XmNacceleratorText = 'Ctrl+S';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFileSave', 0  ;
+	};
+	};
+};
+object 'fileSaveAsItem' : XmPushButton {
+	arguments {
+	lastGenName = 'fileSaveAsItem';
+	managed = false;
+	XmNlabelString = 'Save As...';
+	XmNmnemonic = 'A';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFileSaveAs', 0  ;
+	};
+	};
+};
+object 'fileRevertItem' : XmPushButton {
+	arguments {
+	lastGenName = 'fileRevertItem';
+	managed = false;
+	XmNlabelString = 'Revert to Saved';
+	XmNmnemonic = 'R';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFileRevert', 0  ;
+	};
+	};
+};
+object '8' : XmSeparator {
+	arguments {
+	lastGenName = 'separator8';
+	managed = false;
+	};
+};
+object 'filePrintItem' : XmPushButton {
+	arguments {
+	lastGenName = 'filePrintItem';
+	XmNlabelString = 'Print...';
+	XmNmnemonic = 'P';
+	XmNaccelerator = 'Ctrl<Key>P';
+	XmNacceleratorText = 'Ctrl+P';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFilePrint', 0  ;
+	};
+	};
+};
+object '9' : XmSeparator {
+	arguments {
+	lastGenName = 'separator9';
+	};
+};
+object 'fileQuitItem' : XmPushButton {
+	arguments {
+	lastGenName = 'fileQuitItem';
+	XmNlabelString = 'Exit';
+	XmNmnemonic = 'E';
+	XmNaccelerator = 'Ctrl<Key>E';
+	XmNacceleratorText = 'Ctrl+E';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFileQuit', 0  ;
+	};
+	};
+};
+};
+};
+object 'editCB' : XmCascadeButton {
+	arguments {
+	lastGenName = 'editCB';
+	XmNlabelString = 'Edit';
+	XmNmnemonic = 'E';
+	};
+object 'editMenu' : XmPulldownMenu {
+	arguments {
+	lastGenName = 'editMenu';
+	folded = true;
+	};
+object 'editUndoItem' : XmPushButton {
+	arguments {
+	lastGenName = 'editUndoItem';
+	managed = false;
+	XmNlabelString = 'Undo';
+	XmNmnemonic = 'Z';
+	XmNaccelerator = 'Ctrl<Key>Z';
+	XmNacceleratorText = 'Ctrl+Z';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnEditUndo', 0  ;
+	};
+	};
+};
+object '10' : XmSeparator {
+	arguments {
+	lastGenName = 'separator10';
+	managed = false;
+	};
+};
+object 'editCutItem' : XmPushButton {
+	arguments {
+	lastGenName = 'editCutItem';
+	managed = false;
+	XmNlabelString = 'Cut';
+	XmNmnemonic = 't';
+	XmNaccelerator = 'Ctrl<Key>X';
+	XmNacceleratorText = 'Ctrl+X';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnEditCut', 0  ;
+	};
+	};
+};
+object 'editCopyItem' : XmPushButton {
+	arguments {
+	lastGenName = 'editCopyItem';
+	XmNlabelString = 'Copy';
+	XmNmnemonic = 'C';
+	XmNaccelerator = 'Ctrl<Key>C';
+	XmNacceleratorText = 'Ctrl+C';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnEditCopy', 0  ;
+	};
+	};
+};
+object 'editPasteItem' : XmPushButton {
+	arguments {
+	lastGenName = 'editPasteItem';
+	managed = false;
+	XmNlabelString = 'Paste';
+	XmNmnemonic = 'P';
+	XmNaccelerator = 'Ctrl<Key>V';
+	XmNacceleratorText = 'Ctrl+V';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnEditPaste', 0  ;
+	};
+	};
+};
+object '11' : XmSeparator {
+	arguments {
+	lastGenName = 'separator11';
+	managed = false;
+	};
+};
+object 'editClearItem' : XmPushButton {
+	arguments {
+	lastGenName = 'editClearItem';
+	managed = false;
+	XmNlabelString = 'Clear';
+	XmNmnemonic = 'e';
+	XmNaccelerator = '<Key>osfDelete';
+	XmNacceleratorText = 'Del';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnEditClear', 0  ;
+	};
+	};
+};
+};
+};
+object 'navCB' : XmCascadeButton {
+	arguments {
+	lastGenName = 'navCB';
+	XmNlabelString = 'Navigation';
+	XmNmnemonic = 'N';
+	};
+object 'navMenu' : XmPulldownMenu {
+	arguments {
+	lastGenName = 'navMenu';
+	folded = true;
+	};
+object 'navBackItem' : XmPushButton {
+	arguments {
+	lastGenName = 'navBackItem';
+	XmNlabelString = 'Back';
+	XmNmnemonic = 'B';
+	XmNaccelerator = 'Ctrl<Key>B';
+	XmNacceleratorText = 'Ctrl+B';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnNavBack', 0  ;
+	};
+	};
+};
+object 'navForwardItem' : XmPushButton {
+	arguments {
+	lastGenName = 'navForwardItem';
+	XmNlabelString = 'Forward';
+	XmNmnemonic = 'F';
+	XmNaccelerator = 'Ctrl<Key>F';
+	XmNacceleratorText = 'Ctrl+F';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnNavForward', 0  ;
+	};
+	};
+};
+object 'navIndexItem' : XmPushButton {
+	arguments {
+	lastGenName = 'navIndexItem';
+	XmNlabelString = 'Index';
+	XmNmnemonic = 'I';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnNavIndex', 0  ;
+	};
+	};
+};
+object '12' : XmSeparator {
+	arguments {
+	lastGenName = 'separator12';
+	};
+};
+object 'navHistoryItem' : XmPushButton {
+	arguments {
+	lastGenName = 'navHistoryItem';
+	XmNlabelString = 'History...';
+	XmNmnemonic = 'H';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnNavHistory', 0  ;
+	};
+	};
+};
+object '13' : XmSeparator {
+	arguments {
+	lastGenName = 'separator13';
+	};
+};
+object 'navFindItem' : XmPushButton {
+	arguments {
+	lastGenName = 'navFindItem';
+	XmNlabelString = 'Find...';
+	XmNmnemonic = 'd';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFind', 0  ;
+	};
+	};
+};
+};
+};
+object 'helpCB' : XmCascadeButton {
+	arguments {
+	lastGenName = 'helpCB';
+	XmNlabelString = 'Help';
+	XmNmnemonic = 'H';
+	};
+object 'helpMenu' : XmPulldownMenu {
+	arguments {
+	lastGenName = 'helpMenu';
+	};
+object 'helpOnVersionItem' : XmPushButton {
+	arguments {
+	lastGenName = 'helpOnVersionItem';
+	XmNlabelString = 'On Version...';
+	XmNmnemonic = 'O';
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnHelpVersion', 0  ;
+	};
+	};
+};
+object 'helpIndexItem' : XmPushButton {
+	arguments {
+	lastGenName = 'helpIndexItem';
+	XmNlabelString = 'Help...';
+	XmNmnemonic = 'H';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnHelpIndex', 1  ;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	};
+};
+};
+};
+};
+object 'statusBar' : XmForm {
+	arguments {
+	was_selected = true;
+	lastGenName = 'statusBar';
+	codeStruct = 4;
+	className = 'CStatusBar';
+	};
+object 'statusLabel' : XmLabel {
+	arguments {
+	lastGenName = 'statusLabel';
+	generateResName = true;
+	XmNtraversalOn = false;
+	XmNlabelString = ' ';
+	};
+};
+    attachments {
+    attachment {
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 1 0;
+    };
+    };
+};
+object 'toolBar' : XmRowColumn {
+	arguments {
+	lastGenName = 'toolBar';
+	XmNspacing = 0;
+	XmNorientation = XmHORIZONTAL;
+	XmNpacking = XmPACK_TIGHT;
+	};
+object 'newButton' : XmPushButton {
+	arguments {
+	lastGenName = 'newButton';
+	managed = false;
+	generateResName = true;
+	XmNsensitive = false;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Opens a new (empty) help document';
+	XmNlabelPixmap = '<fileNewPixmap>';
+	XmNlabelInsensitivePixmap = '<fileNewIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnFileNew', 0  ;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	};
+};
+object 'openButton' : XmPushButton {
+	arguments {
+	lastGenName = 'openButton';
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Opens a help document';
+	XmNlabelPixmap = '<fileOpenPixmap>';
+	XmNlabelInsensitivePixmap = '<fileOpenIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFileOpen', 0  ;
+	};
+	};
+};
+object 'saveButton' : XmPushButton {
+	arguments {
+	lastGenName = 'saveButton';
+	managed = false;
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Saves the current help document';
+	XmNlabelPixmap = '<fileSavePixmap>';
+	XmNlabelInsensitivePixmap = '<fileSaveIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFileSave', 0  ;
+	};
+	};
+};
+object 'printButton' : XmPushButton {
+	arguments {
+	lastGenName = 'printButton';
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Prints the current help document';
+	XmNlabelPixmap = '<filePrintPixmap>';
+	XmNlabelInsensitivePixmap = '<filePrintIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnFilePrint', 0  ;
+	};
+	};
+};
+object '14' : XmSeparator GADGET {
+	arguments {
+	lastGenName = 'separator14';
+	XmNwidth = 4;
+	XmNseparatorType = XmNO_LINE;
+	XmNorientation = XmVERTICAL;
+	XmNmargin = 0;
+	};
+};
+object 'cutButton' : XmPushButton {
+	arguments {
+	lastGenName = 'cutButton';
+	managed = false;
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Cuts the current document to the clipboard';
+	XmNlabelPixmap = '<editCutPixmap>';
+	XmNlabelInsensitivePixmap = '<editCutIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNhelpCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnEditCut', 0  ;
+	};
+	};
+};
+object 'copyButton' : XmPushButton {
+	arguments {
+	lastGenName = 'copyButton';
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Copies the current document to the clipboard';
+	XmNlabelPixmap = '<editCopyPixmap>';
+	XmNlabelInsensitivePixmap = '<editCopyIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnEditCopy', 0  ;
+	};
+	};
+};
+object 'pasteButton' : XmPushButton {
+	arguments {
+	lastGenName = 'pasteButton';
+	managed = false;
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Pastes a document from the clipboard';
+	XmNlabelPixmap = '<editPastePixmap>';
+	XmNlabelInsensitivePixmap = '<editPasteIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnEditPaste', 0  ;
+	};
+	};
+};
+object '15' : XmSeparator GADGET {
+	arguments {
+	lastGenName = 'separator15';
+	XmNwidth = 4;
+	XmNseparatorType = XmNO_LINE;
+	XmNorientation = XmVERTICAL;
+	XmNmargin = 0;
+	};
+};
+object 'backButton' : XmPushButton {
+	arguments {
+	lastGenName = 'backButton';
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Reverts to the previous help document';
+	XmNlabelPixmap = '<leftArrowPixmap>';
+	XmNlabelInsensitivePixmap = '<leftArrowIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnNavBack', 0  ;
+	};
+	};
+};
+object 'forwardButton' : XmPushButton {
+	arguments {
+	lastGenName = 'forwardButton';
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Moves to the next help document';
+	XmNlabelPixmap = '<rightArrowPixmap>';
+	XmNlabelInsensitivePixmap = '<rightArrowIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnNavForward', 1  ;
+	};
+	};
+};
+object 'firstButton' : XmPushButton {
+	arguments {
+	lastGenName = 'firstButton';
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Moves to the first help document';
+	XmNlabelPixmap = '<homePixmap>';
+	XmNlabelInsensitivePixmap = '<homeIPixmap>';
+	XmNlabelString = '<>';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	XmNactivateCallback = {
+		'OnNavIndex', 1  ;
+	};
+	};
+};
+object '16' : XmSeparator GADGET {
+	arguments {
+	lastGenName = 'separator16';
+	XmNwidth = 4;
+	XmNseparatorType = XmNO_LINE;
+	XmNorientation = XmVERTICAL;
+	XmNmargin = 0;
+	};
+};
+object 'tb_helpButton' : XmPushButton {
+	arguments {
+	name = 'helpButton';
+	lastGenName = 'tb_helpButton';
+	generateResName = true;
+	XmNbackground = 'buttonBackground';
+	XmNtooltip = 'Provides help on XD/Help';
+	XmNlabelPixmap = '<helpHelpPixmap>';
+	XmNlabelInsensitivePixmap = '<helpHelpIPixmap>';
+	XmNlabelString = 'Help';
+	XmNlabelType = XmPIXMAP;
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnHelpIndex', 0  ;
+	};
+	XmNarmCallback = {
+		'OnSetStatus', 0  not_windows;
+	};
+	XmNdisarmCallback = {
+		'OnUnsetStatus', 0  not_windows;
+	};
+	};
+};
+};
+object 'panedWindow' : XmPanedWindow {
+	arguments {
+	lastGenName = 'panedWindow';
+	};
+object '5' : XmForm {
+	arguments {
+	lastGenName = 'form5';
+	XmNwidth = 350;
+	XmNheight = 300;
+	XmNpaneMinimum = 64;
+	};
+object '1' : XmScrolledText {
+	arguments {
+	lastGenName = 'scrolledText1';
+	};
+abstract object '6' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar6';
+	};
+};
+abstract object '7' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar7';
+	};
+};
+abstract object 'helpText' : XmText {
+	arguments {
+	lastGenName = 'helpText';
+	accessControl = 0;
+	XmNcolumns = 44;
+	XmNeditable = false;
+	XmNresizeHeight = true;
+	XmNresizeWidth = true;
+	XmNwordWrap = true;
+	XmNeditMode = XmMULTI_LINE_EDIT;
+	XmNscrollHorizontal = false;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'OnTextSelectionChanged', 1  ;
+	};
+	XmNgainPrimaryCallback = {
+		'OnTextSelectionChanged', 1  not_windows;
+	};
+	XmNmotionVerifyCallback = {
+		'OnTextSelectionChanged', 1  not_windows;
+	};
+	XmNlosePrimaryCallback = {
+		'OnTextSelectionChanged', 1  not_windows;
+	};
+	XmNlosingFocusCallback = {
+		'OnTextSelectionChanged', 1  ;
+	};
+	};
+};
+};
+object 'titleText' : XmTextField {
+	arguments {
+	lastGenName = 'titleText';
+	accessControl = 0;
+	XmNcolumns = 30;
+	XmNeditable = false;
+	};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0 10;
+	XmNtopAttachment = 3 2 8;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 1 0;
+    };
+    };
+};
+object '7' : XmForm {
+	arguments {
+	lastGenName = 'form7';
+	XmNpaneMinimum = 125;
+	};
+object '3' : XmScrolledList {
+	arguments {
+	lastGenName = 'scrolledList3';
+	};
+abstract object '8' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar8';
+	};
+};
+abstract object '9' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar9';
+	};
+};
+abstract object 'linksList' : XmList {
+	arguments {
+	lastGenName = 'linksList';
+	XmNselectionPolicy = XmBROWSE_SELECT;
+	XmNlistSizePolicy = XmRESIZE_IF_POSSIBLE;
+	};
+	methods {
+	XmNbrowseSelectionCallback = {
+		'OnLinkSelection', 1  ;
+	};
+	XmNdefaultActionCallback = {
+		'OnSelectLink', 0  ;
+	};
+	};
+};
+};
+object 'linksLabel' : XmLabel {
+	arguments {
+	lastGenName = 'linksLabel';
+	generateResName = true;
+	XmNtraversalOn = false;
+	XmNlabelString = 'Links';
+	};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 3 2;
+    };
+    attachment {
+	XmNrightAttachment = 0 0 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 0 0 0;
+	XmNtopAttachment = 1 0;
+    };
+    };
+};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0 0;
+	XmNleftAttachment = 1 0 0;
+	XmNbottomAttachment = 0 0 0;
+	XmNtopAttachment = 1 0 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 0 0 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0 0;
+	XmNleftAttachment = 1 0 0;
+	XmNtopAttachment = 3 1 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0 0;
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 3 2;
+	XmNtopAttachment = 3 3 0;
+    };
+    };
+};
+};
+object 'aboutShell' : XmDialogShell {
+	arguments {
+	lastGenName = 'aboutShell';
+	codeStruct = 4;
+	className = 'CAboutBox';
+	createPreludeStatus = 2;
+	preInstantiation = 'void CAboutBox::create (Widget parent, char *widget_name)
+';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnOK', 0  ;
+	};
+	};
+object 'aboutDT' : XmMessageTemplate {
+	arguments {
+	lastGenName = 'aboutDT';
+	accessControl = 0;
+	XmNdialogTitle = 'About XD/Help';
+	XmNautoUnmanage = false;
+	XmNdialogType = XmDIALOG_TEMPLATE;
+	};
+abstract object '17' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator17';
+	};
+};
+object 'aboutOKButton' : XmPushButton {
+	arguments {
+	lastGenName = 'aboutOKButton';
+	XmNlabelString = 'OK';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnOK', 0  ;
+	};
+	};
+};
+object '2' : XmRowColumn {
+	arguments {
+	lastGenName = 'rowcol2';
+	XmNentryAlignment = XmALIGNMENT_CENTER;
+	};
+object 'prognameText' : XmLabel {
+	arguments {
+	lastGenName = 'prognameText';
+	generateResName = true;
+	XmNtraversalOn = false;
+	XmNforeground = color('red');
+	XmNlabelString = 'XD/Help';
+	XmNfontList = font('-adobe-helvetica-bold-o-normal--24-240-75-75-p-138-iso8859-1');
+	};
+};
+object 'xhd_picture' : XmLabel {
+	arguments {
+	lastGenName = 'xhd_picture';
+	generateResName = true;
+	XmNtraversalOn = false;
+	XmNlabelPixmap = '<aboutHelpPixmap>';
+	XmNlabelType = XmPIXMAP;
+	};
+};
+object 'aboutText' : XmLabel {
+	arguments {
+	lastGenName = 'aboutText';
+	generateResName = true;
+	XmNtraversalOn = false;
+	XmNlabelString = 'Copyright (c) 1990-2007 Imperial Software Technology Ltd. All Rights Reserved.
+Copyright (c) 1995-2007 Sun Microsystems, Inc. All Rights Reserved.
+Version 7.9 2007/04/10';
+	};
+};
+};
+};
+};
+object 'printDialog' : XmDialogShell {
+	arguments {
+	lastGenName = 'printDialog';
+	codeStruct = 4;
+	className = 'CPrintDialog';
+	createPreludeStatus = 2;
+	preInstantiation = 'void CPrintDialog::create (Widget parent, char *widget_name)
+';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnHelp', 0  ;
+		'OnCancel', 0  ;
+		'OnOK', 0  ;
+	};
+	};
+object 'printDT' : XmMessageTemplate {
+	arguments {
+	lastGenName = 'printDT';
+	XmNdialogTitle = 'Print';
+	XmNautoUnmanage = false;
+	XmNdefaultButton = 'printOKbutton';
+	XmNdialogType = XmDIALOG_TEMPLATE;
+	};
+abstract object '19' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator19';
+	};
+};
+object 'printOKbutton' : XmPushButton {
+	arguments {
+	name = 'okButton';
+	lastGenName = 'printOKbutton';
+	XmNlabelString = 'Print';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnOK', 0  ;
+	};
+	};
+};
+object '34' : XmPushButton {
+	arguments {
+	name = 'cancelButton';
+	lastGenName = 'button34';
+	XmNlabelString = 'Cancel';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnCancel', 0  ;
+	};
+	};
+};
+object '36' : XmPushButton {
+	arguments {
+	name = 'helpButton';
+	lastGenName = 'button36';
+	XmNlabelString = 'Help';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnHelp', 0  ;
+	};
+	};
+};
+object 'printForm' : XmForm {
+	arguments {
+	lastGenName = 'printForm';
+	};
+object 'printLabel' : XmLabel {
+	arguments {
+	lastGenName = 'printLabel';
+	generateResName = true;
+	XmNtraversalOn = false;
+	XmNlabelString = 'Print command:';
+	};
+};
+object 'printCommand' : XmText {
+	arguments {
+	lastGenName = 'printCommand';
+	XmNvalue = 'lpr';
+	XmNcolumns = 40;
+	};
+};
+    attachments {
+    attachment {
+	XmNleftAttachment = 1 0;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 1 0;
+    };
+    attachment {
+	XmNleftAttachment = 3 1;
+	XmNtopAttachment = 1 0;
+    };
+    };
+};
+};
+};
+object 'openFileDialog' : XmDialogShell {
+	arguments {
+	lastGenName = 'openFileDialog';
+	codeStruct = 4;
+	className = 'COpenFileDialog';
+	createPreludeStatus = 2;
+	preInstantiation = 'void COpenFileDialog::create (Widget parent, char *widget_name)
+';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnCancel', 0  not_windows;
+		'OnHelp', 0  not_windows;
+		'OnOK', 0  not_windows;
+	};
+	};
+object 'openFileFSB' : XmNewFileSelectionBox21 {
+	arguments {
+	lastGenName = 'openFileFSB';
+	XmNwidth = 300;
+	XmNdialogTitle = 'Open File';
+	XmNdialogStyle = XmDIALOG_FULL_APPLICATION_MODAL;
+	};
+	methods {
+	XmNcancelCallback = {
+		'OnCancel', 0  not_windows;
+	};
+	XmNokCallback = {
+		'OnOK', 0  not_windows;
+	};
+	};
+abstract object '64' : XmPushButton GADGET {
+	arguments {
+	name = 'Apply';
+	lastGenName = 'button64';
+	};
+};
+abstract object '65' : XmPushButton GADGET {
+	arguments {
+	name = 'Cancel';
+	lastGenName = 'button65';
+	};
+};
+abstract object '66' : XmPushButton GADGET {
+	arguments {
+	name = 'Help';
+	lastGenName = 'button66';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnHelp', 0  not_windows;
+	};
+	};
+};
+abstract object '4' : XmScrolledList {
+	arguments {
+	lastGenName = 'scrolledList4';
+	};
+abstract object '10' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar10';
+	};
+};
+abstract object '11' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar11';
+	};
+};
+abstract object '4' : XmList {
+	arguments {
+	name = 'ItemsList';
+	lastGenName = 'list4';
+	};
+};
+};
+abstract object '19' : XmLabel GADGET {
+	arguments {
+	name = 'Items';
+	lastGenName = 'label19';
+	};
+};
+abstract object '67' : XmPushButton GADGET {
+	arguments {
+	name = 'OK';
+	lastGenName = 'button67';
+	};
+};
+abstract object '15' : XmLabel GADGET {
+	arguments {
+	name = 'Selection';
+	lastGenName = 'label15';
+	};
+};
+abstract object '18' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator18';
+	};
+};
+abstract object '6' : XmTextField {
+	arguments {
+	name = 'Text';
+	lastGenName = 'text6';
+	};
+};
+abstract object '16' : XmLabel GADGET {
+	arguments {
+	name = 'FilterLabel';
+	lastGenName = 'label16';
+	};
+};
+abstract object '7' : XmTextField {
+	arguments {
+	name = 'FilterText';
+	lastGenName = 'text7';
+	};
+};
+abstract object '17' : XmLabel GADGET {
+	arguments {
+	name = 'Dir';
+	lastGenName = 'label17';
+	};
+};
+abstract object '5' : XmScrolledList {
+	arguments {
+	name = 'DirListSW';
+	lastGenName = 'scrolledList5';
+	};
+abstract object '12' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar12';
+	};
+};
+abstract object '13' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar13';
+	};
+};
+abstract object '5' : XmList {
+	arguments {
+	name = 'DirList';
+	lastGenName = 'list5';
+	};
+};
+};
+abstract object '13' : XmLabel GADGET {
+	arguments {
+	name = 'DirL';
+	lastGenName = 'label13';
+	};
+};
+abstract object '5' : XmTextField {
+	arguments {
+	name = 'DirText';
+	lastGenName = 'text5';
+	};
+};
+};
+};
+object 'cantOpenShell' : XmDialogShell {
+	arguments {
+	lastGenName = 'cantOpenShell';
+	codeStruct = 4;
+	className = 'COpenDbErrorAlert';
+	createPreludeStatus = 2;
+	preInstantiation = 'void COpenDbErrorAlert::create (Widget parent, char *widget_name)
+';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnOK', 1  ;
+	};
+	};
+object 'cantOpenMB' : XmMessageBox {
+	arguments {
+	lastGenName = 'cantOpenMB';
+	XmNdialogTitle = 'Error';
+	XmNdialogType = XmDIALOG_ERROR;
+	XmNmessageString = 'I can\'t find the help database.
+Please tell me where it is.';
+	};
+abstract object '45' : XmPushButton GADGET {
+	arguments {
+	name = 'Cancel';
+	lastGenName = 'button45';
+	managed = false;
+	};
+};
+abstract object '46' : XmPushButton GADGET {
+	arguments {
+	name = 'Help';
+	lastGenName = 'button46';
+	managed = false;
+	};
+};
+abstract object '11' : XmLabel GADGET {
+	arguments {
+	name = 'Message';
+	lastGenName = 'label11';
+	};
+};
+abstract object '47' : XmPushButton GADGET {
+	arguments {
+	name = 'OK';
+	lastGenName = 'button47';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnOK', 1  ;
+	};
+	};
+};
+abstract object '1' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator1';
+	};
+};
+abstract object '12' : XmLabel GADGET {
+	arguments {
+	name = 'Symbol';
+	lastGenName = 'label12';
+	};
+};
+};
+};
+object 'sysErrAlert' : XmDialogShell {
+	arguments {
+	lastGenName = 'sysErrAlert';
+	codeStruct = 4;
+	className = 'CSysErrorAlert';
+	createPreludeStatus = 2;
+	preInstantiation = 'void CSysErrorAlert::create (Widget parent, char *widget_name)
+';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnOK', 1  ;
+	};
+	};
+object 'sysErrorMB' : XmMessageBox {
+	arguments {
+	lastGenName = 'sysErrorMB';
+	XmNdialogTitle = 'Error';
+	XmNdialogStyle = XmDIALOG_FULL_APPLICATION_MODAL;
+	XmNdialogType = XmDIALOG_ERROR;
+	XmNmessageString = 'Error: ';
+	};
+abstract object '51' : XmPushButton GADGET {
+	arguments {
+	name = 'Cancel';
+	lastGenName = 'button51';
+	managed = false;
+	};
+};
+abstract object '52' : XmPushButton GADGET {
+	arguments {
+	name = 'Help';
+	lastGenName = 'button52';
+	managed = false;
+	};
+};
+abstract object 'messageLabel' : XmLabel GADGET {
+	arguments {
+	name = 'Message';
+	lastGenName = 'messageLabel';
+	accessControl = 0;
+	};
+};
+abstract object '53' : XmPushButton GADGET {
+	arguments {
+	name = 'OK';
+	lastGenName = 'button53';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnOK', 1  ;
+	};
+	};
+};
+abstract object '2' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator2';
+	};
+};
+abstract object '7' : XmLabel GADGET {
+	arguments {
+	name = 'Symbol';
+	lastGenName = 'label7';
+	};
+};
+};
+};
+object 'findAlert' : XmDialogShell {
+	arguments {
+	lastGenName = 'findAlert';
+	codeStruct = 4;
+	className = 'CFindAlert';
+	createPreludeStatus = 2;
+	preInstantiation = 'void CFindAlert::create (Widget parent, char *widget_name)
+';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnOK', 1  ;
+	};
+	};
+object 'noItemsFoundMB' : XmMessageBox {
+	arguments {
+	lastGenName = 'noItemsFoundMB';
+	XmNdialogTitle = 'Find...';
+	XmNdialogType = XmDIALOG_INFORMATION;
+	XmNmessageString = 'No matching items were found.';
+	};
+abstract object '57' : XmPushButton GADGET {
+	arguments {
+	name = 'Cancel';
+	lastGenName = 'button57';
+	managed = false;
+	};
+};
+abstract object '58' : XmPushButton GADGET {
+	arguments {
+	name = 'Help';
+	lastGenName = 'button58';
+	managed = false;
+	};
+};
+abstract object '18' : XmLabel GADGET {
+	arguments {
+	name = 'Message';
+	lastGenName = 'label18';
+	};
+};
+abstract object '59' : XmPushButton GADGET {
+	arguments {
+	name = 'OK';
+	lastGenName = 'button59';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnOK', 1  ;
+	};
+	};
+};
+abstract object '3' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator3';
+	};
+};
+abstract object '9' : XmLabel GADGET {
+	arguments {
+	name = 'Symbol';
+	lastGenName = 'label9';
+	};
+};
+};
+};
+object 'findDialog' : XmDialogShell {
+	arguments {
+	lastGenName = 'findDialog';
+	codeStruct = 4;
+	className = 'CFindDialog';
+	createPreludeStatus = 2;
+	preInstantiation = 'void CFindDialog::create (Widget parent, char *widget_name)
+';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnHelp', 1  ;
+		'OnClose', 1  ;
+		'OnFind', 1  ;
+	};
+	};
+object 'findDT' : XmMessageTemplate {
+	arguments {
+	lastGenName = 'findDT';
+	XmNdialogTitle = 'Find Text';
+	XmNautoUnmanage = false;
+	XmNdefaultButton = 'findButton';
+	XmNdialogType = XmDIALOG_TEMPLATE;
+	};
+abstract object '4' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator4';
+	};
+};
+object 'findButton' : XmPushButton {
+	arguments {
+	lastGenName = 'findButton';
+	XmNlabelString = 'Find';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnFind', 1  ;
+	};
+	};
+};
+object 'closeButton' : XmPushButton {
+	arguments {
+	lastGenName = 'closeButton';
+	XmNlabelString = 'Close';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnClose', 1  ;
+	};
+	};
+};
+object 'helpButton' : XmPushButton {
+	arguments {
+	lastGenName = 'helpButton';
+	XmNlabelString = 'Help';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnHelp', 1  ;
+	};
+	};
+};
+object 'findText' : XmTextField {
+	arguments {
+	lastGenName = 'findText';
+	};
+};
+};
+};
+object 'saveFileDialog' : XmDialogShell {
+	arguments {
+	lastGenName = 'saveFileDialog';
+	codeStruct = 4;
+	className = 'CSaveFileDialog';
+	createPreludeStatus = 2;
+	preInstantiation = 'void CSaveFileDialog::create (Widget parent, char *widget_name)
+';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnCancel', 0  not_windows;
+		'OnHelp', 0  not_windows;
+		'OnOK', 0  not_windows;
+	};
+	};
+object 'saveFileFSB' : XmNewFileSelectionBox21 {
+	arguments {
+	lastGenName = 'saveFileFSB';
+	XmNwidth = 300;
+	XmNdialogTitle = 'Save File';
+	XmNdialogStyle = XmDIALOG_FULL_APPLICATION_MODAL;
+	};
+	methods {
+	XmNokCallback = {
+		'OnOK', 0  not_windows;
+	};
+	};
+abstract object '56' : XmPushButton GADGET {
+	arguments {
+	name = 'Apply';
+	lastGenName = 'button56';
+	};
+};
+abstract object '68' : XmPushButton GADGET {
+	arguments {
+	name = 'Cancel';
+	lastGenName = 'button68';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnCancel', 0  not_windows;
+	};
+	};
+};
+abstract object '69' : XmPushButton GADGET {
+	arguments {
+	name = 'Help';
+	lastGenName = 'button69';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnHelp', 0  not_windows;
+	};
+	};
+};
+abstract object '6' : XmScrolledList {
+	arguments {
+	lastGenName = 'scrolledList6';
+	};
+abstract object '14' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar14';
+	};
+};
+abstract object '1' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar1';
+	};
+};
+abstract object '6' : XmList {
+	arguments {
+	name = 'ItemsList';
+	lastGenName = 'list6';
+	};
+};
+};
+abstract object '10' : XmLabel GADGET {
+	arguments {
+	name = 'Items';
+	lastGenName = 'label10';
+	};
+};
+abstract object '70' : XmPushButton GADGET {
+	arguments {
+	name = 'OK';
+	lastGenName = 'button70';
+	};
+};
+abstract object '21' : XmLabel GADGET {
+	arguments {
+	name = 'Selection';
+	lastGenName = 'label21';
+	};
+};
+abstract object '5' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator5';
+	};
+};
+abstract object '3' : XmTextField {
+	arguments {
+	name = 'Text';
+	lastGenName = 'text3';
+	};
+};
+abstract object '8' : XmLabel GADGET {
+	arguments {
+	name = 'FilterLabel';
+	lastGenName = 'label8';
+	};
+};
+abstract object '8' : XmTextField {
+	arguments {
+	name = 'FilterText';
+	lastGenName = 'text8';
+	};
+};
+abstract object '23' : XmLabel GADGET {
+	arguments {
+	name = 'Dir';
+	lastGenName = 'label23';
+	};
+};
+abstract object '1' : XmScrolledList {
+	arguments {
+	name = 'DirListSW';
+	lastGenName = 'scrolledList1';
+	};
+abstract object '2' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar2';
+	};
+};
+abstract object '3' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar3';
+	};
+};
+abstract object '2' : XmList {
+	arguments {
+	name = 'DirList';
+	lastGenName = 'list2';
+	};
+};
+};
+abstract object '14' : XmLabel GADGET {
+	arguments {
+	name = 'DirL';
+	lastGenName = 'label14';
+	};
+};
+abstract object '9' : XmTextField {
+	arguments {
+	name = 'DirText';
+	lastGenName = 'text9';
+	};
+};
+};
+};
+object 'historyShell' : XmDialogShell {
+	arguments {
+	publicMethod = '	class CLinkList *itsList;
+';
+	lastGenName = 'historyShell';
+	codeStruct = 4;
+	className = 'CHistoryDialog';
+	createPreludeStatus = 2;
+	preInstantiation = 'void CHistoryDialog::create (Widget parent, char *widget_name)
+';
+	suppressMFCResize = true;
+	XmNallowShellResize = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'OnHelp', 0  ;
+		'OnCancel', 0  ;
+		'OnOK', 0  ;
+	};
+	};
+object 'historyForm' : XmMessageTemplate {
+	arguments {
+	lastGenName = 'historyForm';
+	accessControl = 0;
+	XmNwidth = 300;
+	XmNheight = 180;
+	XmNdialogTitle = 'History';
+	XmNautoUnmanage = false;
+	XmNdefaultButton = 'gotoButton';
+	XmNdialogType = XmDIALOG_TEMPLATE;
+	};
+abstract object '6' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator6';
+	};
+};
+object '2' : XmScrolledList {
+	arguments {
+	lastGenName = 'scrolledList2';
+	};
+abstract object '4' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar4';
+	};
+};
+abstract object '5' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar5';
+	};
+};
+abstract object 'historyList' : XmList {
+	arguments {
+	lastGenName = 'historyList';
+	accessControl = 0;
+	XmNlistSizePolicy = XmCONSTANT;
+	};
+	methods {
+	XmNdefaultActionCallback = {
+		'OnOK', 0  ;
+	};
+	};
+};
+};
+object 'gotoButton' : XmPushButton {
+	arguments {
+	lastGenName = 'gotoButton';
+	XmNlabelString = 'Go to';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnOK', 0  ;
+	};
+	};
+};
+object '72' : XmPushButton {
+	arguments {
+	name = 'closeButton';
+	lastGenName = 'button72';
+	XmNlabelString = 'Close';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnCancel', 0  ;
+	};
+	};
+};
+object '74' : XmPushButton {
+	arguments {
+	name = 'helpButton';
+	lastGenName = 'button74';
+	XmNlabelString = 'Help';
+	};
+	methods {
+	XmNactivateCallback = {
+		'OnHelp', 0  ;
+	};
+	};
+};
+};
+};
+end module;

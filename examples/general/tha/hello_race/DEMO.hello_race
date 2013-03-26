@@ -1,0 +1,57 @@
+# Copyright 04/17/07 Sun Microsystems, Inc. All Rights Reserved
+# @(#)DEMO.hello_race 1.2 07/04/17 SMI
+
+
+                             DATA RACE DETECTION:
+                               HELLO_RACE DEMO
+                               ---------------
+
+
+
+Introduction
+------------
+
+The hello_race demo is basically a one liner with a data race. As this 
+runs on a laptop (using 4 threads), the results are correct. The tool
+nicely points out that there is a data race though.
+
+
+The test case
+-------------
+
+Start by displaying the source code of hello_race.c.  Point out that
+there is one parallel region (indicated by #pragma omp parallel).  In
+the parallel region, variable n is shared (indicated by shared(n)).
+In the body of the parallel region, there is an assignment to n (n =
+omp_get_thread_num()). This assignment results in a data race, as
+multiple threads assign to n concurrently.
+
+
+Checking for data races 
+-----------------------
+
+To check for data races in hello_race.c, do the following:
+
+
+% make clean (to remove all object files, experiment files, etc)
+
+% make demo
+
+
+The 'make demo' command builds and runs the code. It also brings up
+the Thread Analyzer GUI.
+
+When the Thread Analyzer GUI comes up, examine the contents of the
+"Races" tab.  Note that one data race is reported.  The data race
+occured because two different threads accessed the same memory
+location concurrently. Note that both thread accesses were "write"
+accesses.
+
+To see exactly where in the source code the data race occurred, click
+on the "Race Source" tab. The split screen shows that the first data
+race access occurred on line 16, and the second data race access
+occurred on the same line.  Both threads were assigning to variable n.
+
+Not that the tool detects the data race, although the result of the
+run may be correct.  So, getting correct results is not necessarily an
+indication that the program is bug-free.

@@ -1,0 +1,30 @@
+jsynprog is a java program that loads a C++ shared object, and calls
+various routines from it.
+
+jsynprog.main is the main method that calls functions from different
+classes.  It uses gethrtime and gethrvtime through JNI calls to time
+its own behavior, and writes an accounting file with its own timings,
+as well as writing messages to stdout.
+
+It has many methods, each typical of a Java program:
+
+Routine.memalloc does memory allocation, and triggers GC
+Routine.add_int does integer addition
+Routine.add_double does double (floating point) additions
+Sub_Routine.add_int is a derived calls that overrides Routine.add_int
+Routine.has_inner_class defines an inner class and uses it
+Routine.recurse shows direct recursion
+Routine.recursedeep does a deep recursion, to show how the
+	tools deal with a truncated stack
+Routine.bounce shows indirect recursion, bounce_a calls bounce_b
+	which in turn calls bounce_a
+Routine.array_op does array operations
+Routine.vector_op does vector operations
+Routine.sys_op uses methods from the System class
+jsynprog.jni_JavaJavaC: Java method calls another Java method that calls a C function
+jsynprog.JavaCJava: Java method calls a C function which in turn calls a Java method
+jsynprog.JavaCC: Java calls a C function that calls another C function
+
+Copyright © 2004 Sun Microsystems, Inc.
+4150 Network Circle, Santa Clara,California 95054, U.S.A.  
+All rights reserved.

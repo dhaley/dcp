@@ -1,0 +1,76 @@
+
+cachetest example program:
+
+Description:
+
+        The program cachetest is a simple program that calls eight versions
+        of a routine to perform a matrix-vector multiply. The versions are 
+        compiled with different compiler options and different loop nest
+	order and demonstrate a range of cache and CPU performance
+	characteristics.  This program can be used to explore the Sun
+	Sun Studio 9 Performance Analyzer. 
+
+Makefile:
+
+        make: compile and load cachetest.
+
+        make collect: collect data sets for the tutorial.
+
+        make clean: remove .o files and core files.
+
+        make clobber: make clean and remove executable and experiment files
+
+        Notes: 
+        (1) A make clobber should be done before building and running
+        this program, to clean up any unwanted files. 
+        (2) The makefile has a variety of options commented out which control
+        the optimization of the program.
+
+
+Usage:
+
+        cachetest
+
+Example Scenario:
+        
+        Step 1: Make a copy of the program and makefile
+
+        Copy the contents of the cachetest directory to your own
+        private working area with the following command:
+
+                cp -r /opt/SUNWspro/examples/analyzer/cachetest ~/cachetest
+
+        Note: /opt/SUNWspro is the base directory where the product is
+        installed. This directory may be different in your environment.
+
+        Step 2: Build the cachetest executable
+
+                cd ~/cachetest
+                make
+
+        You can collect data using the command line or the GUI. To use the 
+        command line for an experiment which records CPU cycles and instructions 
+        issued with the default name, type
+
+                collect -h cycles,,insts1 cachetest
+                analyzer test.1.er &
+
+        To collect data for the tutorial as described, type
+
+                make collect
+
+        This produces five experiments, called test.clock.1.er, test.cpi.1.er,
+	test.flops.1.er, test.memory.1.er and test.memory.2.er; the latter two
+	are grouped into an experiment group named memory.erg.  The first of
+	these experiments can be run on any machine; the others require US-III
+	for HW counter profiling.
+
+        The experiments record clock-based profiling data and hardware data for
+        CPU cycles, instructions executed, floating-point add and multiply 
+        instructions and D- and E-cache stall cycles.
+
+
+Copyright © 2004 Sun Microsystems, Inc.
+4150 Network Circle, Santa Clara,California 95054, U.S.A.  
+All rights reserved.
+

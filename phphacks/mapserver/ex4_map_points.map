@@ -1,0 +1,44 @@
+MAP
+  NAME MAP_POINTS
+  SIZE 600 300
+  EXTENT -180 -90 180 90
+
+  SYMBOL
+    NAME "circle"
+    TYPE ELLIPSE
+    FILLED TRUE
+    POINTS
+      1 1
+    END
+  END
+
+  LAYER
+    NAME clouds
+    TYPE RASTER
+    STATUS DEFAULT
+    DATA "data/global_clouds.tif"
+  END
+
+  LAYER
+    NAME custom_points
+    TYPE POINT
+    STATUS DEFAULT
+    FEATURE # Feature object replaced in script
+      POINTS
+        -121 54
+      END
+      TEXT "My Place"
+    END
+    CLASS
+      COLOR 250 0 0
+      OUTLINECOLOR 255 255 255
+      SYMBOL "circle"
+      SIZE 10
+      LABEL
+        POSITION AUTO
+        COLOR 250 0 0
+        OUTLINECOLOR 255 255 255
+      END
+    END
+  END
+END

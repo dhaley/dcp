@@ -1,0 +1,84 @@
+Note: To use the GUI versions of the tools, you must have a license.
+
+64bit example program:
+
+        The README describes the program in this directory that illustrates 
+        64-bit features and compilation environment. The program creates and 
+        writes a huge data set to a large file and allows you to access the 
+        data and, optionally, sort it. The data is a set of random numbers 
+        (of type 'short').
+
+About large files:
+
+        If the program is compiled as a 64-bit binary, you can use it to 
+        create and access files larger than 2**32 bytes (see below on how to 
+        compile a 64-bit binary). Using a 32-bit program, you can only access 
+        a file size upto 2*32 bytes. To create, access or sort a larger data 
+        set, compile and run the 64-bit binary.
+
+        NOTE: When creating such huge data files, ensure that you have enough 
+              disk space available. 
+
+Creating a 64-bit, v9 executable:
+
+        In the Makefile provided in this directory, uncomment the following 
+        line to a create a v9 64-bit binary. 
+        #ARCH = -xarch=v9
+
+Usage
+        See Step 4 below.
+
+Example Scenario:
+
+        Step 1: Make a copy of the program
+
+        Copy the contents of the 64bit directory to your own private working
+        area with the following command:
+
+                cp -r /opt/SUNWspro/examples/general/64bit ~/64bit
+
+        NOTE: /opt/SUNWspro is the base directory where the product is
+        installed. This directory may be different in your environment.
+
+        Step 2: Mount 64bit Program 
+
+        Start the IDE with the the sunstudio command.
+
+	In the Explorer window, right-click Filesystems at the top of the 
+	Filesystems tab and choose Mount -> Local Directory to open the	
+	Local Directory wizard. Find and select the 64bit directory on the 
+	Select Directory page of the wizard and click Finish.
+	
+        Step 3: Build your own copy of 64bit.
+
+        Expand the node, select Makefile and choose Build -> Make from the main 	
+	menu. You can see the build status "Build Successful." in the
+ 	Output Window.
+  
+        Step 4: Program usage
+        
+        Run 64bit under the debugger, type the following dbx commands in the 	
+	Output Window.
+
+        64bit -g <filename> -n <#> create and sort a data set of n items in file
+        64bit -s <filename>        sort data in file
+
+
+        Using the '-g' flag, you can create a data set of "n" random numbers. 
+        The program then presents you an interface that allows you to access 
+        a particular number in the file just the way you would access a 
+        particular value in an array (for example, provide a value for index 
+        in data[0...n]). Or, you can choose to sort the data. 
+
+        Using the '-s' flag, you can sort a data file (the file is assumed to 
+        be created during a previous run of main -g <filename> -n <#>) 
+        containing random, unsorted data. The program again presents a similar 
+        interface to the user to access or sort the elements.
+
+        NOTE: Sorting a huge data set takes a considerable amount of time. The 
+              program uses the qsort(3C) library funtion which is an 
+              implementation of the quick-sort algorithm.
+
+Copyright © 2004 Sun Microsystems, Inc.
+4150 Network Circle, Santa Clara,California 95054, U.S.A.  
+All rights reserved.

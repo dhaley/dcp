@@ -1,0 +1,60 @@
+Note: To use the GUI versions of the tools, you must have a license.
+
+memtest and gc_memtest example programs:
+
+Description:
+
+	memtest is meant to be run in the debugger, with both memory 	
+	access and memory use checking turned on. The program memtest has some 	
+	intentional memory access errors and intentional memory leaks. You can 	
+	use the runtime-error checking feature in the debugger to identify these
+	intentional errors.
+
+Usage:
+
+	memtest
+	Runs some logic with intentional memory errors. Run this 
+        executable within the debugger.
+
+Example Scenario:
+
+	Step 1: Make a copy of the program
+
+	Copy the contents of the memorychecks directory to your own
+        private working area with the following command: 
+
+		cp  /opt/SUNWspro/examples/general/memorychecks/* ~/memorychecks
+		
+	NOTE: /opt/SUNWspro is the base directory where the product is
+	installed. This directory may be different in your environment.
+
+	Step 2: Mount memtest directory. 
+
+	Start the IDE with the sunstudio command.
+
+	In the Explorer window, right-click Filesystems at the top of the 
+	Filesystems tab and choose Mount -> Local Directory to open the 		
+	Local Directory wizard. Find and select the memorychecks directory in
+	the Select Directory page of the wizard and click Finish. 
+	
+	Step 3: Build your own copy of memtest.
+  
+        Expand the node, select Makefile, and choose Build -> Make from the 
+        main menu. You can see the build status "Build Successful." from the
+ 	Output Window.
+
+	Step 4: Run the program under the debugger.
+
+        In the Explorer window, select memtest, and choose Debug -> Load 
+        Program from the main menu. Wait for the debugger session to start.
+        
+	To enable both the memory use checks and the memory access checks, 
+	choose Debug -> Memory -> Check Access and Debug -> Memory -> Check
+	Usage from the main menu.
+	
+	Continue to debug the program.
+
+	Step 5: See the result of the memory checking and play with it.
+
+Copyright © 2004 Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, California
+95054, U.S.A. All rights reserved.

@@ -1,0 +1,67 @@
+Note: To use the GUI versions of the tools, you must have a license.
+
+SortThread example program:
+
+Description:
+
+	The program SortThread enables the user to select a series of
+	sort programs to run. The GUI writen in Java(TM) Swing displays seven 	
+	available sorts. Each sort writen in C is run in a separate thread. 	
+	This program can be used to illustrate the Java debugging features of
+	Sun Studio and the multi-threaded capabilities of the debugger.
+
+Usage:
+
+	SortThread
+
+Example Scenario:
+
+
+	Step 1: Make a copy of the program
+
+	Copy the contents of the sortthread directory to your own 
+	private working area with the following command:
+
+		cp -r /opt/SUNWspro/examples/general/sortthread ~/sortthread
+
+	NOTE: /opt/SUNWspro is the base directory where the product is
+	installed. This directory maybe different in your environment.
+
+	Step 2: Mount sortthread Program 
+	
+	Start the IDE with the sun studio command.
+	
+	In the Explorer window, right-click Filesystems at the top of the 
+	Filesystems tab and choose Mount -> Local Directory to open the  
+	Local Directory wizard. Find and select the sortthread directory on 
+	the Select Directory page of the wizard and click Finish. 
+	
+	Step 3: Build your own copy of the SortThread program.
+
+        Expand the node, select Makefile, and choose Build -> Make from the 
+        main menu.
+
+        You can see the build status "Build Successful." in the Output Window.
+        
+        Make sure the resulting shared library that is built, libSortThread.so,
+        is in your library search path. You can do this by going to the
+	Debug menu. Select "Dbx Configure". Add an environment variable
+	called LD_LIBRARY_PATH.  The value of the variable should be the
+	full pathname of the directory that has the library in it.
+
+	Step 4: Run the program under the debugger.
+
+	In the Explorer window, select SortThread.java, and choose Debug -> 
+	Load Program from the main menu. Wait for the debugger session to start.
+	
+	You can now use the debugger to set breakpoints, step through
+	the code, and otherwise explore. Try setting a breakpoint in
+	SortThread.c and using the Threads view in the Debugger window to 
+	explore individual threads. Please see the online help in the IDE for 
+	more information on using the debugger.
+
+
+Copyright © 2004 Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, California
+95054, U.S.A. All rights reserved.
+
+	

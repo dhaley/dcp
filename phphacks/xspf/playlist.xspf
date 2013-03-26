@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+<title>My Radio</title>
+<annotation>http://localhost</annotation>
+<trackList>    
+<track>
+<location>http://www.mamata.com.br/hideout/hideout-albert.mp3</location>
+<annotation>[Hideout] Albert vignette 01</annotation>
+</track>			  
+</trackList>
+</playlist>

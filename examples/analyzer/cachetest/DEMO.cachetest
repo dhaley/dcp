@@ -1,0 +1,316 @@
+The demo covers the functionality of the analyzer for HW counter
+profiling.  It shows measurements at the function and source-code
+levels, as well as use of the Timeline.  It also shows a little
+about the handling of OpenMP parallel routines, although OpenMP
+functionality is better shown in the ompnest demo.
+
+There are three demos based on this code, one to show basic
+functionality, based on clock, cycles, and instruction profiling
+in one experiment, the second to show FLOP-metering, based
+on clock, fpadd, and fpmul profiling in one experiment,
+and the third based on two experiments in one experiment
+group, profiling based on the various cache stall counters.
+
+Please note that the sources for this code are NOT the ones checked
+into the tree here.  They differ by having the outermost loop
+in each of the two functions in each of the dgemv*.f90 source files
+removed, and having the barrier.f90 calls removed as well.
+(That is done to make the different versions do the same work,
+as opposed to having each function take at least 3 seconds.)
+
+Setup
+-----
+The experiment used for the first demo is:
+	test.cpi.1.er -- clock-profiling, with cycles and insts HWC
+
+The experiment used for the second demo is:
+	test.flops.1.er -- clock-profiling, with FPadd and FPMul HWC
+
+The experiment group, with two experiments, used for the third demo is:
+	memory.erg  -- it contains:
+	    test.memory.1.er -- clock, cycle and ecstall HWC profiling
+	    test.memory.2.er -- dcstall and icstall HWC profiling
+
+The code is built, and the experiments collected by typing "make demo".
+The installed directory contains a file named "dot.er.rc".
+Symlink ".er.rc" to it, since it sets the metrics as described
+below.
+
+
+Demoing the features:
+
+Go to the directory cachetest in the Demo Stagining area
+
+
+FIRST DEMO -- CPI Profiling
+---------------------------
+This demo shows more detailed information about this code,
+combining clock-profiling with HW counter profiling based on
+cycles and instructions -- all recorded in a single run.
+
+The directory also contains a .er.rc file, which determines
+the metrics that are visible, and sets the sort to be by
+name.
+
+Before starting, describe the target code to the viewer:
+
+The test code is a program with eight variants of
+Matrix-Vector multiplication (DGEMV in BLAS terminology):
+There are four copies of the identical source file, which has
+two copies of the dgemv_* routines.  The * is one of g, opt,
+hi, and p, standing for no-optimization, -O2, -fast, and
+-fast -parallel, respectively.  In addition, each routine
+name has a single digit suffix, 1 or 2.
+
+1 == straightforward implementation (dgemv_*1_) has poor cache/DTLB behavior
+2 == inverted-loops implementation (dgemv_*2_) performs much better
+
+The various versions have very different performance costs,
+which the demo will illustrate.
+
+
+1.  Type "analyzer test.cpi.1.er" into the shell window.
+
+2.  The function list will come up, as in the first demo.  It shows
+	Inclusive User CPU time, Inclusive Cycle time,
+	Inclusive Instructions Executed, Inclusive OMP Work,
+	and Inclusive OMP Wait.  The list will be sorted by
+	name; scroll down about one screen, so you can see
+	all ten lines with the functions whose names begin "dgemv"
+
+3.  The first 6 of these are _g1, _g2, _hi1, _hi2, _opt1, and _opt2;
+	the next 4 are the _p1 and _p2 outer functions, and the _p1 and _p2
+	loop-body functions.
+	Point out that the User CPU times are quite different for
+	the _g and _opt pairs, but similar for the _h and _p pairs.
+	Show the user that the Intstructions Executed for
+	each pair is approximately the same, so the big
+	difference between each pair is the time to do the work,
+	not the amount of work being done.  Tell the user
+	that the differences in time are due to how the
+	code uses memory, and that one loop order has poor
+	cache reuse, while the other has much better cache
+	reuse.
+
+4.  Concentrate on the _g pair, and point out that the CPU cycles
+	are different, AND that the CPU cycles differ from the
+	User CPU time.
+
+	Explain that the User-CPU timer is running whenever the
+	kernel thinks the process is in user mode, but the Cycle
+	counter runs when the CHIP is in user mode.  The two differ
+	when the OS is processing so-called "fast traps" on behalf
+	of the process.  The OS still thinks it's user code, but
+	the chip is not in user mode, so the two different.  In
+	this case, the fast trap is due to TLB misses, and the
+	difference between the two reveals the cost of the TLB misses.
+	The two versions of the dgemv_g{1,2}_ routines differ in
+	loop order, which makes the greatly affects the number of TLB
+	misses.
+
+	If the user doesn't know about TLB, or seems confused, either
+	explain the memory subsystem, as described under the third
+	cachetest demo, or say "we'll come back to that in a later demo."
+
+5.  Now point out that for the _hi pair, the metrics are approximately
+	the same.  Select _hi1, and switch to source.  Place the mouse
+	over the first green tick mark in the margin, and click.
+	The source will position to line 16, which is where
+	all the work is done; point out that the commentary almost
+	at the top of the screen says "L2 interchanged with L3".
+	Tell the user that the compiler knows which order will
+	give the best performance, and has interchanged the loops
+	at high optimization, and that's why the two _hi routines
+	show approximately the same metrics.
+
+6.  Now click on the Timeline Tab.  It will come up with a total
+	of seven bars.  The top bar (with the two histogram bars as icon)
+	shows the overview data, obtained from the kernel.
+	The next three show clock, cycle, and instruction profiling
+	events for thread 1, and the last three, which don't show anything
+	until close the the end of the run, show clock, cycle, and instruction
+	profiling for thread 2.  It starts at the first point at which
+	the target starts running in parallel.
+
+7.  Point out the bars of color, with three stacked rectangles in each bar.
+	Click in one of the three, in the second brown area, and show
+	that the callstack for that event is loaded into the Event tab.
+	Show that the callstack indicated "load_arrays", and that
+	there are repeated sections of timeline between each of the other
+	sections, because the arrays are initialized before each
+	matric-vector multiply.
+
+	If the user notices that the first of the brown areas seem
+	longer than the subsequent ones, point out that the top bar
+	shows more blue than the others, and tell the user that the blue
+	color represents to system-cpu time, and is there because the
+	first time those addresses are touched, the system needs to
+	allocate and page them in, but after that, they're resident.
+
+	Point out that the there are two tan areas, marking the _g routines,
+	and two greem areas marking the _opt versions,
+	and two red areas marking the _hi versions, and a pair of
+	areas marking the _p parallel versions with different colors.
+
+	Tell the user that in the tan/green cases, the first one is much
+	longer than the second, but in the red/green-blue cases
+	case they're about the same, providing a visual indication
+	of the execution-time differences.
+
+8.  Now show the user the first region where the second thread is active,
+	and point out that both threads are doing the same thing for
+	the dgemv_p1 function; also point out that there's
+	a light purple gap in the second thread between two regions.
+	Click there, and show the user the single callstack frame
+	<OMP-idle>.  Tell the user that the code is doing serial
+	initialization of the arrays, and the second thread
+	is simply waiting for the next time the code executes
+	in parallel.
+
+
+End the demo by exiting the analyzer.
+Ask if the user would like to see FLOP-metering, or memory profiling
+from this code.
+
+If not, ask if the user is interested in the other demos -- see bottom of this
+page.
+
+
+SECOND DEMO -- FLOPS profiling
+------------------------------
+This demo shows how the HW counter profiling can be used to do FLOP-metering.
+
+1.  Type "analyzer test.flops.1.er" into the shell window.
+
+2.  The function list will come up, as in the first demos.  It shows
+	Inclusive User CPU time, Inclusive FP Adds, and Inclusive FP muls,
+	as well as the OMP Work and Wait metrics.
+
+3.  As before, scroll to the dgemv_ part of the listing, and point
+	out that ALL of the routines show that same FLOP count,
+	but, as before, the _g and _opt pair have different times.
+
+4.  Bring up the metric chooser, and add Inclusive Wall time.
+	Tell the user that the flop-rate is calculated by
+	    (FP_Adds + FP_Muls) / Wall_time
+	If he or she asks why we don't compute it directly,
+	tell them we're working on that feature.
+
+
+End the demo by exiting the analyzer.
+Ask if the user would like to see Memory Performance
+
+
+
+THIRD DEMO -- Memory Performance
+--------------------------------
+This demo shows the detailed information the analyzer can record
+on memory performance.
+
+1.  Ask if the user understands how memory systems work.  If
+	he says yes, skip the explanation below and go to step 3.
+	If he or she says no, or is hesitant, or says, "how do you
+	describe it", go through the explanation in step 2.
+
+2.  Description of memory subsystems:
+	All modern machines have CPUs that are much faster than memory,
+	and present the challenge, especially for HPC codes, of figuring
+	out how to get the data to the CPU registers fast enough.
+	And all modern machines address this issue with caches,
+	and many support "prefetching".
+
+	When the program needs a data word (or the next instruction),
+	the virtual address is sent to the memory subsystem, and,
+	when all is working as efficiently as possible, the memory
+	location being addressed will have its data (or instruction)
+	in the first-level cache.  When that happens, the data is
+	available immediately -- the register can be used in the
+	next clock period (for data), or the instruction can be
+	decoded and issued in the next clock period.
+
+	However, things don't always run as efficiently as possible,
+	and many things can happen that will slow the machine down.
+
+	A partial list of such problems is:
+
+	    The page containing the word requested may not be in
+		memory.  That delays the code until it is read from
+		disk, at a cost of ~ 10 milliseconds, and is called
+		a "page fault". 
+
+	    The page may be in memory, but not mapped into the process'
+		address space.  The delays the code until it gets
+		mapped, at a cost of ~ 100 cycles, and is called a
+		"TLB miss".  On some machines, US-III among them,
+		there are two TLBs, one for data, and one for instructions,
+		so there can be DTLB or ITLB misses.
+
+	    The page may be mapped, but the word not in any cache.
+		That delays the code until the word is fetched from
+		memory to the secondary cache, and then to the primary
+		cache and then either to the register (for data), or
+		to the instruction unit (for instructions).  That can
+		cost 100's of cycles, depending on architectural details
+		and memory subsystem.  It is called an "E-cache miss".
+
+	    The word might be in the E-cache, but not in the primary
+		cache.  As with TLBs there are two such caches, one for
+		instructions, and one for data.  It can cost 10's of
+		cycles, and is called either an "I-cache miss", or
+		a "D-cache miss".  One some machines, US-III among them,
+		there is also a difference between a D-cache miss for
+		reading, and a D-cache miss for writing.
+
+	    On the store side, there is another resource, called the
+		store-queue, which is used to hold data between the
+		register from which it is being stored and memory.
+		If the store-queue is full, the code is delayed
+		until a slot opens.
+
+	The analyzer can record data for many of these events, and
+	can infer further information for others, as will be shown
+	is shown in the next step.
+
+3.  Invoke the analyzer as "analyzer memory.erg"
+	It will read the two experiments in the group, and show
+	the function list.
+
+	The user at this point may ask why we need to do two
+	separate experiments.  Explain that we are exploring
+	multiplexing the counters, but we are not yet confident
+	that multiplexing won't lead to misleading data.  Acknowledge
+	that SGI and the Parallel Tools Consortium PAPI project do
+	support multiplexing, but that we remain unconvinced.
+	If the user doesn't ask, don't say anything.
+
+4.  Starting at the first column from the left, the function list
+	shows Inclusive User CPU time, Inclusive CPU Cycle time,
+	Incl. D&E-cache stall time (summed), Incl. E-cache stall,
+	Incl. I-cache stall time, and OMP Work and OMP Wait.
+
+5.  Scroll down to the cluster of dgemv_ routines.
+	dgemv_g1_ is the slowest version, and of the ~21 secs. of CPU
+	time it takes, ~10 secs are due to TLB misses, computed as
+	"User CPU sec." - "CPU-cycles sec."  Note that dgemv_g2_
+	shows about the same time for those two metrics, implying
+	many fewer TLB misses.
+
+	Continuing,
+	The first routine has about 2.5 X as much time lost to D- and E-
+	cache misses as the second.  It has about twice as much time lost due
+	to E-cache misses only, implying few D-cache misses that are not
+	also E-cache misses.  For the second routine, however, the
+	E-cache miss times are only about 2/3 of the D+E-cache combined
+	times, implying that it has relatively more D-cache misses.
+	Neither routine had any I-cache misses to speak of.
+
+6.  Show the user that for the _hi routines, the difference between
+	User CPU and CPU Cycles is small, but the the D+E-cache time
+	is 80% of the User CPU time.  That implies that even the
+	most efficient version is memory-bound.
+
+End the demo by exiting the Analyzer.
+
+----------------
+ @(#)DEMO.cachetest 1.5 06/04/24 SMI
+

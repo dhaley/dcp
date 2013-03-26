@@ -1,0 +1,18 @@
+This is a simple C++ calculator example.
+
+CalcDemo.xd             X-Designer source
+CalcDemo.h              Generated (and included) header file
+CalcDemo.defaults       Generated defaults file
+CalcDialog.c            Generated C++
+
+CalcDemo.c              Main program and callbacks
+NodeParse.c             Calculator engine
+Nodes.h
+Value.c
+Value.h
+
+xdclass.h               XD base class header
+xdxmdialog.c            XD base class
+xdxtclass.c
+
+Makefile                Makefile for Sun CC

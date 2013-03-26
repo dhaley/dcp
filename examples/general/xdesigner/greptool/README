@@ -1,0 +1,22 @@
+			greptool example
+			----------------
+
+This directory contains the files required to build the greptool 
+example application. greptool provides a Motif interface for the UNIX 
+grep(1V) utility.
+
+Files contained in the directory are as follows:
+
+Makefile	- makefile used to build greptool example
+errordialog.xd	- save file for greptool error dialog
+errordialog.c   - C file which includes generated error dialog code
+errordialog.xc  - the code generated from errordialog.xd
+maindialog.xd   - save file for greptool main dialog
+maindialog.c    - C file which includes the generated main dialog code
+maindialog.xc   - the code generated from maindialog.xd
+rungrep.c	- contains code to run the grep utility
+greptool.c      - contains main() routine
+setcommand.c	- back end code to set up command buffer
+greptool.h      - header file
+xm_error.bm	- bitmap file
+

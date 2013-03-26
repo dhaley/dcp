@@ -1,0 +1,98 @@
+module 'XApplication'
+version = 48;
+xdesigned = 1;
+applicationName = 'XApplication';
+generateNameC = * 'textf_base.c';
+generateNameCMainProgram = * 'textf.c';
+generateNameStubs = * 'textf_base_stubs.c';
+generateNameExterns = * 'textf_base.h';
+generateCPixmapFile = '';
+generateCHeaderFile = 'textf_base.h';
+generateNameMakefile = 'Makefile';
+motifFlavour = 2;
+generateMask = 4325384;
+useMask = 1;
+ansiC = 1;
+generateNewMakefile = 1;
+generateMakeTemplate = 0;
+useCPixmaps = 0;
+useUILPixmaps = 0;
+useCHeaders = 1;
+useCUILHeaders = 0;
+CPPFlavour = 0;
+useCPPHeaders = 0;
+useCPPHeadersMFCWindows = 0;
+useCPPHeadersMFCMotif = 0;
+javaVersion = 2;
+/* group data */
+groupIndex 0;
+/* end group data */
+object 'shell' : XtSessionShell {
+	arguments {
+	lastGenName = 'shell';
+	createPreludeStatus = 1;
+	preInstantiation = 'void create_shell (Display *display, char *app_name, int app_argc, char **app_argv)';
+	XmNallowShellResize = true;
+	XmNsession = 1;
+	};
+object 'textf_base' : XmTextField {
+	arguments {
+	lastGenName = 'textf_base';
+	codeStruct = 2;
+	instantiateAs = 'textf_c';
+	};
+	callbacks {
+	XmNpopupHandlerCallback = '
+popup_handler_callback()
+';
+	};
+object 'textf_popupA' : XmPopupMenu {
+	arguments {
+	lastGenName = 'textf_popupA';
+	codeStruct = 4;
+	XmNpopupEnabled = XmPOPUP_AUTOMATIC;
+	XmNmenuPost = '<Button3>';
+	};
+object 'cut_b' : XmPushButton {
+	arguments {
+	lastGenName = 'cut_b';
+	XmNlabelString = 'Cut';
+	};
+};
+object 'copy_b' : XmPushButton {
+	arguments {
+	lastGenName = 'copy_b';
+	XmNlabelString = 'Copy';
+	};
+};
+object 'paste_b' : XmPushButton {
+	arguments {
+	lastGenName = 'paste_b';
+	XmNlabelString = 'Paste';
+	};
+};
+};
+object 'textf_popupB' : XmPopupMenu {
+	arguments {
+	lastGenName = 'textf_popupB';
+	codeStruct = 4;
+	XmNpopupEnabled = XmPOPUP_AUTOMATIC;
+	XmNmenuPost = '<Button3>';
+	};
+object 'read_b' : XmPushButton {
+	arguments {
+	lastGenName = 'read_b';
+	XmNlabelString = 'Read';
+	};
+};
+object 'write_b' : XmPushButton {
+	arguments {
+	was_selected = true;
+	lastGenName = 'write_b';
+	XmNlabelString = 'Write';
+	};
+};
+};
+};
+};
+end module;

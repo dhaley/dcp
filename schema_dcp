@@ -1,0 +1,197 @@
+
+1)
+dcp_procedure_verifcation
+-------------------------
+sysid (not null)
+gcn_num (unique)
+project_id
+fmw_request_date (date)
+san_cr_num
+regtool_defined (not null) - dynamically obtained from regtool
+regtool_prod_status (not null) - dynamically obtained from regtool
+regtool_prod_status_sdt
+netwrk_isr_id
+console_defined (boolean) - [yes/no]
+os_load_date (date)
+n1_patching_completed (boolen) - [yes/no]
+metadb_defined_on_two_disks (boolean) - [yes/no]
+root_disk_mirrored (boolean) - [yes/no]
+mirror_boot_disk_defined (boolean) - [yes/no]
+network_inferfaces_full_duplex (boolen) - [yes/no]
+network_interfaces_any_faults (varchar text field)
+ipmp_configured (boolen) - [yes/no]
+throughput_rate_verified (boolen) - [yes/no]
+vlan_tagging (boolen) - [yes/no]
+sendmail_verified (boolen) - [yes/no]
+sendmail_root_alias (boolen) - [yes/no]
+san_switch_port_requested (boolen) - [yes/no]
+san_connected (boolen) - [yes/no]
+storage_paths_validated (boolen) - [yes/no]
+lvm_md_tab_updated (boolen) - [yes/no]
+dumpadm_validated (boolen) - [yes/no]
+autfs_enabled (boolen) - [yes/no]
+auto_boot_on_error (boolen) - [yes/no]
+auto_boot (boolen) - [yes/no]
+backups_started (boolen) - [yes/no]
+cluster_configured (boolen) - [yes/no]
+cluster_eis_certified (boolen) - [yes/no]
+moved_off_swan (boolen) - [yes/no]
+explorer_enabled (boolen) - [yes/no]
+scic_enabled (boolen) - [yes/no]
+sunmc_enabled (boolen) - [yes/no]
+sunswat_enabled (boolen) - [yes/no]
+helios_entry (boolen) - [yes/no]
+eis_radiance_case (varchar field)
+netcool_inventory_sdt (varchar field)
+sunmc_t5xx0_card_reader (boolen) - [yes/no]
+t5xx0_patch_137111-08 (boolen) - [yes/no]
+root_password_set (boolen) - [yes/no]
+zone_scripts_applied (boolen) - [yes/no]
+fss_enabled (boolen) - [yes/no]
+
+
+2)
+sun_server
+-----------
+sysid (not null)
+hostid (not null)
+model_id (not null)
+location_id (not null)
+network_id
+os_id (not null)
+slevel_id (not null)
+op_env_id (not null)
+frmware_obp_id
+frmware_alom_id
+frmware_hypervisor_id
+frmware_sms_sun_fire_boards_id
+
+3)
+model
+-----
+model_id (not null)
+model_name (not null)
+
+4)
+location
+--------
+location_id (not null)
+location_name (not null) [ brm, clt, gmp03 ] 
+
+5)
+network
+-------
+network_id (not null)
+network_name (not null) [ gmp_eb2_fe, be, swan, brm_eb2_be, eb3_be, on-swan, clt_eb3_fe_num_1 ]
+
+6)
+os
+--
+os_id (not null)
+os_name (not null) ( SunOS Windows )
+
+os_version
+----------
+os_version_id (not null)
+os_version_name (not null) 5.10
+
+
+server_os
+---------
+sysid (not null)
+os_id (not null)
+os_version (not null) [sunos 5.10 ]
+processor_type_id (not null)
+
+
+
+
+
+7)
+processor_type
+--------------
+processor_type_id (not null)
+processor_type_name (not null) (sparc, i386)
+
+8)
+slevel
+------
+slevel_id (not null)
+slevel_name (not null)
+
+9)
+op_env
+------
+op_env_id (not null)
+op_env_name (not null)
+
+
+
+10)
+project
+-------
+project_id (not null)
+project_name (not null)
+
+11)
+netwrk_isr
+----------
+netwrk_isr_id (not null)
+netwrk_isr_name (not null)
+
+12)
+server_frmware_disks
+--------------------
+sysid (not null)
+frmware_disks_id (not null)
+
+13)
+server_frmware_hba
+------------------
+sysid (not null)
+frmware_hba_id (not null)
+
+14)
+frmware_disks
+-------------
+frmware_disks_id (not null)
+frmware_disks_name (not null)
+
+15)
+frmware_hba
+-----------
+frmware_hba_id (not null)
+frmware_hba_name (not null)
+
+16)
+frmware_obp
+-----------
+frmware_obp_id
+frmware_obp_name
+
+17)
+frmware_alom
+------------
+frmware_alom_id (not null)
+frmware_alom_name (not null)
+
+18)
+frmware_hypervisor
+------------------
+frmware_hypervisor_id (not null)
+frmware_hypervisor_name (not null)
+
+
+
+
+
+
+http://dev.mysql.com/doc/refman/5.1/en/tutorial.html
+
+
+create database dcp;
+
+
+
+CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+

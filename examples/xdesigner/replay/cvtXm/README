@@ -1,0 +1,42 @@
+This directory contains sources for the "Motif" widget integrations.
+
+--------------------------------------------------------------------
+
+The position-sensitive Motif widgets (eg List, Scale, Scrollbar) are
+handled the same way as 3rd party custom widgets. For each widget class,
+two routines are registered:
+
+	one to convert from (x,y) to a meaningful description
+	another to convert from the meaningful description to (x,y)
+
+We distribute these sources:
+	- as full examples of how to integrate a widget
+	- so that the record/replay behaviour of a motif widget
+	  can be modified if necessary.
+
+--------------------------------------------------------------------
+
+The text widget is (by default) treated as a special case.
+Our experience is that most test cases benefit from treating
+a text widget as something in which new data REPLACES old.
+In file selection boxes, for example, you want to put a filename
+in the selection field. You are not interested in testing
+whether you can insert or otherwise edit the text field.
+
+The default text widget implementation has no notion of position.
+You simply push, doubleclick or multiclick the text widget.
+
+If you build this directory -DHANDLE_TEXT=1, you get simple
+position sensitive reocrd/replay of text widgets - useful for testing
+text widgets that are being used as editors.
+
+--------------------------------------------------------------------
+
+Input method hooks are also to be found here, for text fields and for
+text widgets. The hooks involve registering a Get/Put pair using
+xdsIMregister() - in register.c
+
+Note that the current implementation will not allow insertion INTO
+a text field via an input method to be replayed. So if you build
+-DHANDLE_TEXT=1, you will need a more sophisticated method of interrogating
+the input method to identify the inserted text.

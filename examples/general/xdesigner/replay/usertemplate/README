@@ -1,0 +1,47 @@
+/* README */
+
+Example Additional Replay Commands (the import/user interface)
+--------------------------------------------------------------
+
+
+This directory contains an example set of extensions to the
+replay engine.
+
+It builds a shared object called libtemplate.so
+(or on HPUX libtemplate.sl).
+
+The object has two example commands:
+	HalloWorld      Which prints out a message, and illustrates
+			the principle of the user command
+
+	dowhile         An extension that allows you to "loop" commands
+			in the Replay engine.
+
+
+For example, in a replay script you might have:
+
+import template
+
+in ApplicationShell
+
+	user HalloWorld now is the time for all good men
+
+	user dowhile IsSensitive(delete_button) push delete_button
+
+
+
+
+To build this software:
+-----------------------
+
+1. check the machine target by typing
+	$ make
+
+   (it will print out thelist of known targets - ie machine types)
+
+2. make the shared object for your system, eg for solaris
+
+	$ make solaris
+
+3. install it into the lib/xds directory, where all the Replay objects
+   are kept.

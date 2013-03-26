@@ -1,0 +1,10 @@
+This directory contains the files needed to integrate your
+application with Netscape for its online help.  The files are:
+
+Makefile     - to make the files helplink.o and nscontrol.o
+helplink.c   - an implementation of the function XDhelp_link, which
+               when compiled produces helplink.o
+nscontrol.c  - an implementation of the function SendNetscapeTo, which
+		   controls Netscape in a simple manner.
+helplink.o   - a file to link with your generated code to interface
+               with the Netscape linkup

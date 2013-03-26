@@ -1,0 +1,521 @@
+-- Host: localhost    Database: dcp
+-- ------------------------------------------------------
+-- Server version       5.1.25-rc
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `dcp`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `dcp` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `dcp`;
+
+DROP TABLE IF EXISTS frmware_hypervisor;
+CREATE TABLE frmware_hypervisor (
+       frmware_hypervisor_id int(2) NOT NULL,
+       frmware_hypervisor_name varchar(100) NOT NULL,
+       PRIMARY KEY  (`frmware_hypervisor_id`),
+       UNIQUE (frmware_hypervisor_name)
+) type=MyISAM;
+
+DROP TABLE IF EXISTS frmware_alom;
+CREATE TABLE frmware_alom (
+       frmware_alom_id int(2) NOT NULL,
+       frmware_alom_name varchar(100) NOT NULL,
+       PRIMARY KEY  (`frmware_alom_id`),
+       UNIQUE (frmware_alom_name)
+) type=MyISAM;
+
+DROP TABLE IF EXISTS frmware_obp;
+CREATE TABLE frmware_obp (
+       frmware_obp_id int(2) NOT NULL,
+       frmware_obp_name varchar(100) NOT NULL,
+       PRIMARY KEY  (`frmware_obp_id`),
+       UNIQUE (frmware_obp_name)
+) type=MyISAM;
+
+DROP TABLE IF EXISTS frmware_hba;
+CREATE TABLE frmware_hba (
+       frmware_hba_id int(2) NOT NULL,
+       frmware_hba_name varchar(100) NOT NULL,
+       PRIMARY KEY  (`frmware_hba_id`),
+       UNIQUE (frmware_hba_name)
+) type=MyISAM;
+
+DROP TABLE IF EXISTS frmware_disks;
+CREATE TABLE frmware_disks (
+       frmware_disks_id int(2) NOT NULL,
+       frmware_disks_name varchar(100) NOT NULL,
+       PRIMARY KEY  (`frmware_disks_id`),
+       UNIQUE (frmware_disks_name)
+) type=MyISAM;
+
+DROP TABLE IF EXISTS netwrk_isr;
+CREATE TABLE netwrk_isr (
+       netwrk_isr_id int(2) NOT NULL,
+       netwrk_isr_name varchar(100) NOT NULL,
+       PRIMARY KEY  (`netwrk_isr_id`),
+       UNIQUE (netwrk_isr_name)
+) type=MyISAM;
+
+--DROP TABLE IF EXISTS project;
+--CREATE TABLE project (
+--       project_id int(2) NOT NULL,
+--       project_name varchar(100) NOT NULL,
+--       PRIMARY KEY  (`project_id`),
+--       UNIQUE (project_name)
+--) type=MyISAM;
+
+-- Operating Environment
+
+DROP TABLE IF EXISTS op_env;
+CREATE TABLE op_env (
+       op_env_id int(2) NOT NULL,
+       op_env_name varchar(100) NOT NULL,
+       PRIMARY KEY  (`op_env_id`),
+       UNIQUE (op_env_name)       
+) type=MyISAM;
+
+-- Service Level
+
+DROP TABLE IF EXISTS slevel;
+CREATE TABLE slevel (
+       slevel_id int(2) NOT NULL,
+       slevel_name varchar(100) NOT NULL,
+       PRIMARY KEY  (`slevel_id`),
+       UNIQUE (slevel_name)              
+) type=MyISAM;
+
+
+-- Processor type (sparc, i386)
+
+DROP TABLE IF EXISTS processor_type;
+CREATE TABLE processor_type (
+       processor_type_id int(2) NOT NULL,
+       processor_type_name varchar(100) NOT NULL,
+       PRIMARY KEY  (`processor_type_id`),
+       UNIQUE (processor_type_name)                     
+) type=MyISAM;
+
+DROP TABLE IF EXISTS os;
+CREATE TABLE os (
+       os_id int(2) NOT NULL,
+       os_name varchar(50) NOT NULL,
+       PRIMARY KEY  (`os_id`),
+       UNIQUE (os_name)                            
+) type=MyISAM;
+
+DROP TABLE IF EXISTS os_version;
+CREATE TABLE os_version (
+       os_version_id int(2) NOT NULL,
+       os_version_name varchar(50) NOT NULL,
+       PRIMARY KEY  (`os_version_id`),
+       UNIQUE (os_version_name)                                   
+) type=MyISAM;
+
+DROP TABLE IF EXISTS os_release;
+CREATE TABLE os_release (
+       os_release_id int(2) NOT NULL,
+       os_release_name varchar(50) NOT NULL,
+       PRIMARY KEY  (`os_release_id`),
+       UNIQUE (os_release_name)                                          
+) type=MyISAM;
+
+-- DROP TABLE IF EXISTS netwrk;
+-- CREATE TABLE netwrk (
+--        netwrk_id int(2) NOT NULL,
+--        netwrk_name varchar(50) NOT NULL,
+--        PRIMARY KEY  (`netwrk_id`),
+--        UNIQUE (netwrk_name)                                                 
+--) type=MyISAM;
+
+DROP TABLE IF EXISTS location;
+CREATE TABLE location (
+       location_id int(2) NOT NULL,
+       location_name varchar(50) NOT NULL,
+       PRIMARY KEY  (`location_id`),
+       UNIQUE (location_name)                   
+) type=MyISAM;
+
+DROP TABLE IF EXISTS model;
+CREATE TABLE model (
+       model_id int(2) NOT NULL,
+       model_name varchar(50) NOT NULL,
+       PRIMARY KEY  (`model_id`),
+       UNIQUE (model_name)                          
+) type=MyISAM;
+
+
+-- Like systems table in BSM
+-- could be populated from Regtool
+
+DROP TABLE IF EXISTS server_console;
+CREATE TABLE server_console (
+       console_id int(2) NULL,
+       console_hostname varchar(128) NOT NULL,
+       console_port int(2) NOT NULL,
+       PRIMARY KEY  (`console_id`)
+) type=MyISAM;       
+
+
+DROP TABLE IF EXISTS sun_server;
+CREATE TABLE sun_server (
+       sysid decimal(13,4) NOT NULL,
+       hostname varchar(128) NOT NULL,
+       status char(1) NOT NULL,
+       hostid varchar(15) NOT NULL,
+       serial_number varchar(20) NOT NULL,
+       division varchar(40) NOT NULL,
+       model_id int(2) NOT NULL,
+       location_id int(2) NOT NULL,
+       netwrk_isr_id int(2) NOT NULL,
+       slevel_id int(2) NOT NULL,
+       op_env_id int(2) NOT NULL,
+       frmware_obp_id int(2) NULL,
+       frmware_alom_id int(2) NULL,
+       frmware_hypervisor_id int(2) NULL,
+       os_instance_id int(2) NULL,
+       regtool_prod_status ENUM('Yes', 'No') NOT NULL,
+       console_id int(2) NULL,
+       PRIMARY KEY  (`sysid`),
+       UNIQUE (hostname),
+       CONSTRAINT `FK_sun_server_1` FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`) ON DELETE CASCADE,
+       CONSTRAINT `FK_sun_server_2` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`) ON DELETE CASCADE,       
+       CONSTRAINT `FK_sun_server_3` FOREIGN KEY (`netwrk_isr_id`) REFERENCES `netwrk_isr` (`netwrk_isr_id`) ON DELETE CASCADE,
+       CONSTRAINT `FK_sun_server_4` FOREIGN KEY (`slevel_id`) REFERENCES `slevel` (`slevel_id`) ON DELETE CASCADE,
+       CONSTRAINT `FK_sun_server_5` FOREIGN KEY (`op_env_id`) REFERENCES `op_env` (`op_env_id`) ON DELETE CASCADE,
+       CONSTRAINT `FK_sun_server_6` FOREIGN KEY (`frmware_obp_id`) REFERENCES `frmware_obp` (`frmware_obp_id`) ON DELETE CASCADE,
+       CONSTRAINT `FK_sun_server_7` FOREIGN KEY (`frmware_alom_id`) REFERENCES `frmware_alom` (`frmware_alom_id`) ON DELETE  CASCADE,
+       CONSTRAINT `FK_sun_server_8` FOREIGN KEY (`frmware_hypervisor_id`) REFERENCES `frmware_hypervisor` (`frmware_hypervisor_id`) ON DELETE CASCADE,       
+       CONSTRAINT `FK_sun_server_9` FOREIGN KEY (`os_instance_id`) REFERENCES `os_version_release` (`os_instance_id`) ON DELETE CASCADE,
+       CONSTRAINT `FK_sun_server_10` FOREIGN KEY (`console_id`) REFERENCES `server_console` (`console_id`) ON DELETE CASCADE
+       ) type=MyISAM;
+
+
+DROP TABLE IF EXISTS server_frmware_hba;
+CREATE TABLE server_frmware_hba (
+       sysid decimal(13,4) unsigned NOT NULL,
+       frmware_hba_id int(2) NOT NULL,
+       PRIMARY KEY  (`sysid`, `frmware_hba_id`),
+       CONSTRAINT `FK_server_firmware_hba_1` FOREIGN KEY (`sysid`) REFERENCES `sun_server` (`sysid`) ON DELETE CASCADE,
+       CONSTRAINT `FK_server_firmware_hba_2` FOREIGN KEY (`frmware_hba_id`) REFERENCES `frmware_hba` (`frmware_hba_id`) ON DELETE CASCADE
+) type=MyISAM;
+
+
+DROP TABLE IF EXISTS server_frmware_disks;
+CREATE TABLE server_frmware_disks (
+       sysid decimal(13,4) unsigned NOT NULL,
+       frmware_disks_id int(2) NOT NULL,
+       PRIMARY KEY  (`sysid`, `frmware_disks_id`),
+       CONSTRAINT `FK_server_firmware_disks_1` FOREIGN KEY (`sysid`) REFERENCES `sun_server` (`sysid`) ON DELETE CASCADE,
+       CONSTRAINT `FK_server_firmware_disks_2` FOREIGN KEY (`frmware_disks_id`) REFERENCES `frmware_disks` (`frmware_disks_id`) ON DELETE CASCADE
+) type=MyISAM;
+
+
+-- these all need to be concatenated primary keys - evertime this
+--   table is updated it's deleted and re-created
+
+DROP TABLE IF EXISTS os_version_release;
+CREATE TABLE os_version_release (
+       os_instance_id int(2) NOT NULL,
+       os_id int(2) NOT NULL,
+       os_version_id int(2) NOT NULL,
+       os_release_id int(2) NOT NULL,
+       processor_type_id int(2) NOT NULL,
+       PRIMARY KEY  (`os_instance_id`),
+       CONSTRAINT `FK_os_version_release_1` FOREIGN KEY (`os_id`) REFERENCES `os` (`os_id`) ON DELETE CASCADE,
+       CONSTRAINT `FK_os_version_release_2` FOREIGN KEY (`os_version_id`) REFERENCES `os_version` (`os_version__id`) ON DELETE CASCADE,
+       CONSTRAINT `FK_os_version_release_3` FOREIGN KEY (`os_release_id`) REFERENCES `os_release` (`os_release_id`) ON DELETE CASCADE,
+       CONSTRAINT `FK_os_version_release_4` FOREIGN KEY (`processor_type_id`) REFERENCES `processor_type` (`processor_type_id`) ON DELETE CASCADE
+) type=MyISAM;
+
+
+
+
+-- should be able to query sdesk for date opened of ticket, date closed
+
+DROP TABLE IF EXISTS dcp_procedure_verification;
+CREATE TABLE dcp_procedure_verification (
+       sdesk_num int(10) NOT NULL,
+       login varchar(18) NOT NULL,
+       submit_time datetime NULL,
+       close_time datetime NULL,
+       usr_sunid varchar(10) NOT NULL,
+       usr_nm varchar(41) NOT NULL,
+       usr_dept varchar(15) NOT NULL,
+       priority int(1) NOT NULL,
+       new_priority int(1) NOT NULL,
+       request_status varchar(15) NOT NULL,
+       short_desc varchar(80) NOT NULL,
+       sysid decimal(13,4) unsigned NULL,       
+       note varchar(144) NULL,
+       regtool_prod_status_sdt int(10) NULL,
+       gcn_num int(10) NULL,       
+--       console_in_t4 ENUM('yes', 'no') NOT NULL default 'no',
+       os_load_date DATETIME NOT NULL default '0000-00-00 00:00:00',
+--       os_load_date DATETIME NULL,
+       netwrk_inferfaces_full_duplex ENUM('yes', 'no') NOT NULL default 'no',
+       netwrk_interfaces_any_faults ENUM('yes', 'no') NOT NULL default 'no',
+       ipmp_configured ENUM('yes', 'no') NOT NULL default 'no',
+       sendmail_verified ENUM('yes', 'no') NOT NULL default 'no',
+       sendmail_root_alias ENUM('yes', 'no') NOT NULL default 'no',
+       dumpadm_validated ENUM('yes', 'no') NOT NULL default 'no',
+       backups_started ENUM('yes', 'no') NOT NULL default 'no',
+       backups_sdt_num int(10) NULL,
+       explorer_enabled ENUM('yes', 'no') NOT NULL default 'no',
+       scic_enabled ENUM('yes', 'no') NOT NULL default 'no',
+       sunmc_enabled ENUM('yes', 'no') NOT NULL default 'no',
+       sunswat_enabled ENUM('yes', 'no') NOT NULL default 'no',
+       helios_entry ENUM('yes', 'no') NOT NULL default 'no',
+       eis_radiance_case int(10) NULL,
+       netcool_inventory_sdt int(10) NULL,
+       root_password_set ENUM('yes', 'no') NOT NULL default 'no',
+       zone_scripts_applied ENUM('yes', 'no') NOT NULL default 'no',
+       fss_enabled ENUM('yes', 'no') NOT NULL default 'no',
+       eds_tools_installed ENUM('yes', 'no') NOT NULL default 'no',
+       frmware_obp_validation ENUM('yes', 'no') NOT NULL default 'no',
+       frmware_hba_validation ENUM('yes', 'no') NOT NULL default 'no',
+       frmware_disks_validation ENUM('yes', 'no') NOT NULL default 'no',                     
+       frmware_alom_validation ENUM('yes', 'no') NOT NULL default 'no',
+       frmware_hypervisor_validation ENUM('yes', 'no') NOT NULL default 'no',
+       lu_patch_update ENUM('yes', 'no') NULL default 'no',
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_1` FOREIGN KEY (`sysid`) REFERENCES `sun_server` (`sysid`) ON DELETE CASCADE
+       ) type=MyISAM;
+
+
+# ALTER TABLE dcp_procedure_verification CHANGE submit_time submit_time DATETIME NULL;
+# ALTER TABLE dcp_procedure_verification CHANGE close_time close_time DATETIME NULL;    
+
+# ALTER TABLE dcp_procedure_verification CHANGE os_load_date os_load_date DATETIME NOT NULL default '0000-00-00 00:00:00';
+
+       
+ALTER TABLE dcp_procedure_verification CHANGE status request_status
+varchar(80) NOT NULL;
+
+ALTER TABLE dcp_procedure_verification CHANGE os_load_date os_load_date DATETIME NULL;
+
+       
+DROP TABLE IF EXISTS dcp_procedure_verification_eeprom;
+CREATE TABLE dcp_procedure_verification_eeprom (
+       sdesk_num int(10) NOT NULL,       
+       mirror_boot_disk_defined ENUM('yes', 'no') NOT NULL default 'no',
+       auto_boot_on_error ENUM('yes', 'no') NOT NULL default 'no',
+       auto_boot ENUM('yes', 'no') NOT NULL default 'no',
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_eeprom_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE   
+) type=MyISAM;
+
+DROP TABLE IF EXISTS dcp_procedure_verification_svm;
+CREATE TABLE dcp_procedure_verification_svm (
+       sdesk_num int(10) NOT NULL,       
+       metadb_defined_on_two_disks ENUM('yes', 'no') NOT NULL default 'no',
+       boot_from_mirror_enabled ENUM('yes', 'no') NOT NULL default 'no',
+       lvm_md_tab_updated ENUM('yes', 'no') NOT NULL default 'no',
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_svm_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE   
+) type=MyISAM;
+
+DROP TABLE IF EXISTS dcp_procedure_verification_zfs;
+CREATE TABLE dcp_procedure_verification_zfs (
+       sdesk_num int(10) NOT NULL,       
+       boot_zpool ENUM('yes', 'no') NOT NULL default 'no',
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_zfs_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE   
+) type=MyISAM;
+
+
+DROP TABLE IF EXISTS dcp_procedure_verification_clt;
+CREATE TABLE dcp_procedure_verification_clt (
+       sdesk_num int(10) NOT NULL,       
+       cam_sheet_sent ENUM('yes', 'no') NOT NULL default 'no',
+       cam_sheet_sent_date datetime NOT NULL,       
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_clt_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE   
+) type=MyISAM;
+
+
+# ALTER TABLE dcp_procedure_verification_clt CHANGE cam_sheet_sent_date cam_sheet_sent_date DATETIME NULL;
+
+
+DROP TABLE IF EXISTS dcp_procedure_verification_vlan;
+CREATE TABLE dcp_procedure_verification_vlan (
+       sdesk_num int(10) NOT NULL,       
+       vlan_tagging ENUM('yes', 'no') NOT NULL default 'no',
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_vlan_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE   
+) type=MyISAM;
+
+       
+DROP TABLE IF EXISTS dcp_procedure_verification_cluster;
+CREATE TABLE dcp_procedure_verification_cluster (
+       sdesk_num int(10) NOT NULL,       
+       cluster_eis_certified ENUM('yes', 'no') NOT NULL default 'no',
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_cluster_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE   
+) type=MyISAM;
+
+DROP TABLE IF EXISTS dcp_procedure_verification_x86;
+CREATE TABLE dcp_procedure_verification_x86 (
+       sdesk_num int(10) NOT NULL,       
+       fdisk_label_x86 ENUM('yes', 'no') NOT NULL default 'no',
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_x86_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE    ) type=MyISAM;
+
+DROP TABLE IF EXISTS dcp_procedure_verification_offswan;
+CREATE TABLE dcp_procedure_verification_offswan (
+       sdesk_num int(10) NOT NULL,       
+       moved_off_swan ENUM('yes', 'no') NOT NULL default 'no',
+       autofs_disabled ENUM('yes', 'no') NOT NULL default 'no',
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_offswan_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE    
+) type=MyISAM;
+
+DROP TABLE IF EXISTS dcp_procedure_verification_onswan;
+CREATE TABLE dcp_procedure_verification_onswan (
+       sdesk_num int(10) NOT NULL,       
+       autofs_enabled ENUM('yes', 'no') NOT NULL default 'no',
+       throughput_rate_verified ENUM('yes', 'no') NOT NULL default 'no',
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_onswan_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE        ) type=MyISAM;
+
+DROP TABLE IF EXISTS dcp_procedure_verification_san;
+CREATE TABLE dcp_procedure_verification_san (
+       sdesk_num int(10) NOT NULL,       
+       san_cr_num int(10) NULL,
+       san_switch_port_requested_date datetime NULL,
+       san_connected_date datetime NULL,
+       PRIMARY KEY  (`sdesk_num`),
+       CONSTRAINT `FK_dcp_procedure_verification_san_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE 
+) type=MyISAM;
+
+
+# ALTER TABLE dcp_procedure_verification_san CHANGE san_switch_port_requested_date san_switch_port_requested_date DATETIME NULL;
+# ALTER TABLE dcp_procedure_verification_san CHANGE san_connected_date san_connected_date DATETIME NULL;  
+
+DROP TABLE IF EXISTS dcp_procedure_verification_assignee;
+CREATE TABLE dcp_procedure_verification_assignee (
+       sdesk_num int(10) NOT NULL,
+       assignee varchar(50) NOT NULL,
+       PRIMARY KEY  (`sdesk_num`,`assignee`),
+       CONSTRAINT `FK_dcp_procedure_verification_assignee_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE 
+) type=MyISAM;
+
+DROP TABLE IF EXISTS dcp_procedure_verification_work_type;
+CREATE TABLE dcp_procedure_verification_work_type (
+       sdesk_num int(10) NOT NULL,
+       work_type ENUM('DCP','DCP_CLUSTER','ZONE CREATE','OFF SWAN','EOL') NOT NULL,
+       PRIMARY KEY  (`sdesk_num`,`work_type`),
+       CONSTRAINT `FK_dcp_procedure_verification_work_type_1` FOREIGN KEY (`sdesk_num`) REFERENCES `dcp_procedure_verification` (`sdesk_num`) ON DELETE CASCADE 
+) type=MyISAM;
+
+
+
+
+
+dcp_procedure_verifcation
+-------------------------
+
+
+
+
+
+
+
+
+
+--  `starttime` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+--  `endtime` timestamp NOT NULL default '0000-00-00 00:00:00',
+
+
+#############################################################################################
+
+CREATE VIEW os_choices as
+SELECT OVR.os_instance_id, OS.os_name, OS_VERSION.os_version_name,
+OS_RELEASE.os_release_name, PROCESSOR_TYPE.processor_type_name
+from os_version_release OVR, os OS, os_version OS_VERSION, os_release
+OS_RELEASE, processor_type PROCESSOR_TYPE
+where OVR.os_id = OS.os_id
+and OVR.os_version_id = OS_VERSION.os_version_id
+and OVR.os_release_id = OS_RELEASE.os_release_id
+and OVR.processor_type_id = PROCESSOR_TYPE.processor_type_id
+order by OS.os_name, PROCESSOR_TYPE.processor_type_name, OS_VERSION.os_version_name, OS_RELEASE.os_release_name
+
+DROP VIEW IF EXISTS all_dcps;
+CREATE VIEW all_dcps as
+SELECT DPV.sdesk_num, DPV.submit_time as 'Ticket Submit Time',
+DPV.request_status as 'SDT Status', DPV.short_desc, DPV.usr_nm as 'SDT Owner', SERV.hostname,
+OS.os_name, OS_VERSION.os_version_name,
+PROCESSOR_TYPE.processor_type_name
+FROM dcp_procedure_verification DPV, sun_server SERV,
+os_version_release OVR, os OS, os_version OS_VERSION, 
+processor_type PROCESSOR_TYPE
+WHERE DPV.sysid = SERV.sysid
+AND SERV.os_instance_id = OVR.os_instance_id
+AND OVR.os_id = OS.os_id
+and OVR.os_version_id = OS_VERSION.os_version_id
+and OVR.processor_type_id = PROCESSOR_TYPE.processor_type_id
+ORDER BY DPV.request_status, DPV.submit_time,
+OS.os_name, PROCESSOR_TYPE.processor_type_name, OS_VERSION.os_version_name
+;
+
+DROP VIEW IF EXISTS all_dcps_regtool;
+CREATE VIEW all_dcps_regtool as
+SELECT sun_server.hostname,
+frmware_obp.frmware_obp_name,
+frmware_alom.frmware_alom_name,
+frmware_hypervisor.frmware_hypervisor_name,
+frmware_hba.frmware_hba_name,
+frmware_disks.frmware_disks_name
+FROM sun_server
+LEFT OUTER JOIN frmware_obp
+ON sun_server.frmware_obp_id = frmware_obp.frmware_obp_id 
+LEFT OUTER JOIN frmware_alom
+ON sun_server.frmware_alom_id = frmware_alom.frmware_alom_id 
+LEFT OUTER JOIN frmware_hypervisor
+ON sun_server.frmware_hypervisor_id =
+frmware_hypervisor.frmware_hypervisor_id
+LEFT OUTER JOIN server_frmware_hba
+ON sun_server.sysid =  server_frmware_hba.sysid 
+LEFT OUTER JOIN frmware_hba
+ON (frmware_hba.frmware_hba_id = server_frmware_hba.frmware_hba_id)
+LEFT OUTER JOIN server_frmware_disks
+ON sun_server.sysid =  server_frmware_disks.sysid 
+LEFT OUTER JOIN frmware_disks
+ON (frmware_disks.frmware_disks_id = server_frmware_disks.frmware_disks_id)
+ORDER BY sun_server.hostname
+
+
+CREATE USER 'dcp'@'localhost' IDENTIFIED BY 'dcp';
+GRANT ALL PRIVILEGES ON dcp.* TO 'dcp'@'localhost'  WITH GRANT OPTION;
+
+
+
+
+
+
+
+populate data
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+	id INT NOT NULL AUTO_INCREMENT,
+	first TEXT NOT NULL,
+	last TEXT NOT NULL,
+	username TEXT NOT NULL,
+	password TEXT NOT NULL,
+	description TEXT,
+	PRIMARY KEY ( id )
+	);

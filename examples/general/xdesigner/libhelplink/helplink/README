@@ -1,0 +1,20 @@
+This directory contains the files needed to integrate your
+application with XD/Help for its online help. 
+
+To use XD/Help, your application must link with:
+
+1. the object file in this directory, which implements the function
+   XDhelp_link(), calls to which are generated into your application
+   code when it is generated and
+2. the client-side XD/Help protocol library, which you will find in
+   the directory src/help/client under the root directory of this
+   installation
+
+The files in this directory are are:
+
+Makefile     - to make the file helplink.o
+helplink.c   - an implementation of the function XDhelp_link, which
+               when compiled produces helplink.o
+helplink.o   - a file to link with your generated code to supply the
+               link between the generated calls and the client-side
+		   XD/Help library

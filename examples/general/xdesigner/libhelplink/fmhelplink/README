@@ -1,0 +1,18 @@
+This directory contains the bits to do an integration with FrameMaker.
+
+Makefile                            To make helplink.o
+helplink.c                          The source for the XDhelp_link callback.
+					Note this file #includes client.c from
+					libframe/fmclient
+helplink.o                          The built helplink.o
+libframe/4.0hack                    Bits from FrameMaker/source/OpenMaker
+libframe/fm_commands.h
+libframe/fmclient/Makefile
+libframe/fmclient/client.c          #included by helplink.c
+libframe/fmclient/stdfm_rpc.h
+libframe/fmclient/stdfm_rpc.x
+libframe/fmclient/xdr.c
+libframe/fmclient/xdr.o
+libframe/stdfm_rpc.x
+
+Link helplink.o and xdr.o into your application.

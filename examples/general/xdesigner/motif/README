@@ -1,0 +1,15 @@
+Here are some simple functions which you may find useful in the
+course of your Motif development.
+
+Actions.c       -   Actions on a drawing area
+BitmapCursor.c  -   Creating cursors from bitmaps
+Bitmaps.c       -   Compiling in bitmaps
+CloseCback.c    -   A close callback on a dialog shell
+CompExp.c       -   Compressing expose events
+Cursors.c       -   Setting the cursor on a window
+DynamicText.c   -   A popup text widget
+GraphExp.c      -   Handling Graphics expose events on a drawing area
+Menus.c         -   Popping up menus
+TextFile.c      -   Text widget file interface
+TextValidate.c  -   Validating text
+UndoLabels.c    -   Dynamic labels

@@ -1,0 +1,61 @@
+Note: To use the GUI versions of the tools, you must have a license.
+
+threadtest example program:
+
+Description:
+
+	The program threadtest is a program that allows the
+	caller to create some threads that do some simple work. 
+	It displays a window with three numbered buttons. Clicking
+	on one of the buttons creates one or more threads that 
+	does some simple work. The number on the button indicate
+	how many threads will be created by clicking on that button. 
+	Next to each button is a label. The created thread will 
+	use that label to let you know that the thread is running. 
+
+	You can run threadtest in the debugger to experiment
+	with the multi-threaded capabilities of the debugger.
+
+Usage:
+
+	threadtest
+
+Example Scenario:
+
+	Step 1: Make a copy of the program
+
+	Copy the contents of the threadtest directory to your own 
+	private working area with the following command:
+
+		cp -r /opt/SUNWspro/examples/general/threadtest ~/threadtest
+
+	NOTE: /opt/SUNWspro is the base directory where the product is
+	installed. This directory maybe different in your environment.
+
+	Step 2: Mount the threadtest Program 
+	
+	Start the IDE with the sunstudio command.
+	In the Explorer window, right-click Filesystems the top of the 
+	Filesystems tab and choose Mount -> Local Directory to open the 
+	Local Directory wizard. Find and select the threadtest directory on 
+	the Select Directory page of the wizard and click Finish. 
+	
+	Step 3: Build your own copy of the threadtest executable.
+
+        Expand the node, select Makefile, and choose Build -> Make from 
+        the main menu. You can see the build status "Build Successful." in the 
+        Output Window.
+        
+	Step 4: Run the program under the debugger.
+
+	In the Explorer window, select threadtest, and choose Debug -> Load 
+	Program from the main menu. Wait for the debugger session to start.
+	
+	You can now use the debugger to set breakpoints, step through
+	the code, and otherwise explore. Try setting a breakpoint in
+	myThread() and using the Threads view in the Debugger window to explore
+	individual threads. Please see the online help in the IDE for more
+	information on using the debugger.
+
+Copyright © 2004 Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, California
+95054, U.S.A. All rights reserved.

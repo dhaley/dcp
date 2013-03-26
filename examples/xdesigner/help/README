@@ -1,0 +1,6 @@
+This is the source for XD/Help. It is provided here to
+enable end users to modify or extend it, or to incorporate
+it into generated applications.
+
+To build xdhelp simply type 'make all' in this
+directory.

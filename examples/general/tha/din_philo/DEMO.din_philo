@@ -1,0 +1,331 @@
+# Copyright 04/17/07 Sun Microsystems, Inc. All Rights Reserved
+# @(#)DEMO.din_philo 1.1 07/04/17 SMI
+
+
+                        DEADLOCK DETECTION DEMO:
+                    THE DINING PHILOSOPHERS PROBLEM
+
+
+
+CONTENTS:
+
+I.   INTRODUCTION
+II.  WHAT IS DEADLOCK?
+III. THE DINING PHILOSOPHERS PROBLEM
+IV.  FIXING THE DEADLOCK PROBLEM
+V.   FILES FOR THE DEMO
+VI.  BUILDING AND RUNNING THE DEMO
+
+
+
+I. INTRODUCTION
+===============
+
+    This demo shows how the Thread Analyzer tool can be used to detect
+deadlocks in a program. A multi-threaded program that simulates the
+dining philosophers problem is used as example.
+
+    The demo shows how the Thread Analyzer tool can provide useful
+information about actual deadlocks that cause the program to hang, as
+well as provide information about potential deadlocks that may cause
+the program to hang in a different run. It is therefore useful to run
+the tool on multi-threaded programs, even the ones that terminate
+normally.
+
+    The demo shows how actual and potential deadlocks can be avoided
+by changing the logic of the program, so there will never be a
+circular chain of two or more threads where each thread waits for a
+lock that the next thread in the chain holds.
+
+    The demo shows that even though a program may have no actual or
+potential deadlocks, the Thread Analyzer tool may report false
+positive potential deadlocks if the tool cannot recognize events can
+occur concurrently and which cannot. One way to avoid false positives
+is to use synchronizations that the tool can recognize.
+
+    For more information about the Thread Analyzer tool, including a
+listing of the threading and memory allocation APIs that the tool can
+recognize, refer to Thread Analyzer documentation.
+
+
+II. WHAT IS DEADLOCK?
+=====================
+
+    Deadlock describes a condition where two or more threads are
+blocked (hung) forever, waiting for each other. There are many causes
+of deadlocks; these include erroneous program logic, inappropriate use
+of synchronizations and barriers, and so on.
+
+    We focus on deadlocks that are caused by inappropriate use of
+mutual exclusion locks. This type of deadlock is commonly encountered
+in multi-threaded applications. The Thread Analyzer tool can be used
+to detect this type of deadlock.
+
+    Suppose we have a process with two or more threads. A deadlock
+caused by inappropriate use of mutual exclusion locks occurs when the
+following three conditions hold:
+
+    (1) Threads already holding locks request new locks,
+    (2) The requests are made concurrently, and
+    (3) Two or more threads form a circular chain where each thread 
+        waits for a lock that the next thread in the chain holds.
+
+    Here is a simple example of such a deadlock condition:
+
+    Thread 1: holds lock A, requests lock B
+    Thread 2: holds lock B, requests lock A
+
+    A deadlock in a particular run of the program can be a potential
+deadlock or an actual deadlock. The distinction is as follows:
+
+    A potential deadlock is a deadlock that did not actually occur in
+the run of the program, but can occur in other runs of the program,
+depending on the scheduling of threads and the timings of requests for
+locks by the threads.
+    
+    An actual deadlock is a deadlock that actually occurred in the run of
+the program. An actual deadlock causes the threads involved to hang,
+but may or may not cause the whole process to hang.
+
+
+III. THE DINING PHILOSOPHERS PROBLEM
+====================================
+
+    We use a multi-threaded program to illustrate how the Sun Studio
+Thread Analyzer tool can be used to detect deadlocks that involve
+locks. The program is written in C and uses POSIX threads to simulate
+the dining philosophers problem. The source file is called
+din_philo.c. The program can exhibit both potential and actual
+deadlocks.
+
+    In din_philo.c, we have five philosophers, numbered 0-4. The
+philosophers are seated in numerical order around a table in clockwise
+fashion. The philosophers are separated by chopsticks. The chopstick
+on the left of each philosopher has the same number as the
+philosopher's own number. The chopstick on the right has a smaller
+number except for philosopher #0, where the chopstick on the right has
+the number 4. The setting is as follows:
+ 
+
+            P0
+        C4      C0            P = Philosopher
+                              C = Chopstick
+     P4    ----    P1
+          |Food|   
+     C3    ----    C1
+             
+       P3        P2
+            C2
+
+
+Initially, the philosophers are thinking. When they are done thinking,
+they will attempt to eat food that is placed on the table for all
+philosophers to share. In order to eat, each philosopher must have two
+chopsticks.
+
+A philosopher will first reach for the chopstick on his right. Once a
+philosopher has grabbed the chopstick on his right, he will try to
+grab the chopstick on his left (i.e. the chopstick with the same
+number as the philosopher). When a philosopher has grabbed both
+chopsticks, he can eat. After the philosopher has had some food, he
+puts down the left and right chopsticks in their respective positions
+on the table, and then repeats the whole process again (grab right
+chopstick, grab left chopstick, eat some food, put down left
+chopstick, put down right chopstick). The process is repeated until
+there is no more food left on the table to consume.
+
+In the program, philosopher #1 can be put to sleep for a specific
+amount of time (sleep_seconds) before attempting to pick
+chopsticks. If he sleeps long enough, then the program may finish
+without an actual deadlock. The number of seconds philosopher #1
+sleeps can be specified as argument to the executable. If no argument
+is specified, then the philosopher will not sleep by default.
+
+The following pseudo-code shows the logic for each philosopher:
+
+
+   while (there is still food on the table)
+      {
+        if (sleep argument is specified and I am philosopher #1)
+           {
+             sleep specified amount of time
+           }
+
+        grab right fork
+        grab left fork
+        eat some food
+        put down left fork
+        put down right fork 
+      }
+
+
+An actual deadlock occurs when every philosopher is holding the
+chopstick on his right, and waiting for the chopstick on his left to
+become available. In this situation, the philosophers will wait
+forever and no philosopher can eat. Here is what the deadlock scenario
+looks like:
+
+Philosopher #0: holds chopstick #4, waits for chopstick #0
+Philosopher #1: holds chopstick #0, waits for chopstick #1
+Philosopher #2: holds chopstick #1, waits for chopstick #2
+Philosopher #3: holds chopstick #2, waits for chopstick #3
+Philosopher #4: holds chopstick #3, waits for chopstick #4
+
+This demo shows how the Thread Analyzer tool can be used to detect
+both potential and actual deadlocks.  Two possible fixes to the
+deadlock problem.
+
+
+IV. FIXING THE DEADLOCK PROBLEM
+===============================
+
+Deadlock in din_philo.c can be avoided by limiting the number of
+philosophers attempting to eat at the same time.  A token system can
+be used where a philosopher must first get a token before attempting
+to eat. The number of available tokens is less than the number of
+philosophers. After a philosopher gets a token, he can attempt to eat
+in the manner described above (grab right chopstick, grab left
+chopstick, eat, put down left chopstick, put down right
+chopstick). After eating, a philosopher returns the token and repeats
+the process.
+
+The following pseudo-code shows the logic for each philosopher when
+using the token system:
+
+
+   while (there is still food on the table)
+      {
+        get token
+        grab right fork
+        grab left fork
+        eat some food
+        put down left fork
+        put down right fork
+        return token 
+      }
+
+
+Two implementations of the dining philosophers problem using the token
+system are available.  The programs are called din_philo_fix1.c and
+din_philo_fix2.c, and use four tokens -- one less than the number of
+philosophers. So at most four philosophers can attempt to eat at the
+same time.
+
+The first program, din_philo_fix1.c implements the token system using
+synchronizations that the Thread Analyzer tool does not recognize.  So
+the Thread Analyzer reports a potential deadlock.
+
+The second program, din_philo_fix2.c implements the token system using
+synchronizations that the Thread Analyzer tool recognizes.  So the
+Thread Analyzer does report any deadlocks.
+ 
+
+V. FILES FOR THE DEMO
+=====================
+
+The files needed for this demo are:
+
+DEMO.din_philo: 
+   This file.
+
+Makefile: 
+   The make file.
+
+din_philo.c        : 
+   A POSIX threads program that implements the dining philosophers
+   problem. This program can hang (deadlock) at runtime. The
+   Thread Analyzer tool reports an actual and/or potential deadlock
+   in the program.
+
+din_philo_fix1.c: 
+   A POSIX thread program that implements the dining philosophers
+   problem but avoids deadlock by using a token system to limit the
+   number of philosophers attempting to eat at the same time. Even
+   though this program has no deadlocks, the Thread Analyzer tool
+   reports a deadlock, as it does not recognize the synchronizations 
+   used in the program.
+
+din_philo_fix2.c: 
+   This program, like din_philo_fix1.c, uses a token system to limit 
+   number of philosophers attempting to eat at the same time. However,
+   the synchronizations used are recognized by the Thread Analyzer
+   tool. Therefore the tool reports no deadlocks.
+
+
+VI. BUILDING AND RUNNING THE DEMO
+=================================
+
+1. Type the following command to remove executables, experiment files, 
+   .o files, and core files.
+
+   % make clean
+
+
+2. Type the following command to compile din_philo.c, din_philo_fix1.c, 
+   and din_philo_fix2.c.
+
+   % make compile
+
+   Executables generated are named din_philo, din_philo_fix1, 
+   and din_philo_fix2, respectively.
+
+   
+3. Type the following command to run din_philo program under
+   collect.
+
+   % make collect
+
+   If the program hangs, use CONTROL-C to abort the execution.
+
+
+4. Type the following command to check whether any deadlocks 
+   were detected in din_philo. The command invokes both the 
+   er_print utility and the Thread Analyzer GUI.
+
+   % make check
+
+   You will see that potential and/or actual deadlocks are 
+   reported.
+
+
+5. Type the following command to run din_philo_fix1 program under
+   collect.
+
+   % make collect_fix1
+
+   Program din_philo_fix1 does not have any deadlocks, so it will not hang.
+
+
+6. Type the following command to check whether any deadlocks 
+   were detected in din_philo_fix1. The command invokes both the 
+   er_print utility and the Thread Analyzer GUI.
+
+   % make check_fix1
+
+   Program din_philo_fix1 does not have any deadlocks. However, the 
+   Thread Analyzer reports a potential deadlock because it does not 
+   recognize the synchronizations used.
+
+
+7. Type the following command to run din_philo_fix2 program under
+   collect.
+
+   % make collect_fix2
+
+   Program din_philo_fix2 does not have any deadlocks, so it will not hang.
+
+
+8. Type the following command to check whether any deadlocks 
+   were detected in din_philo_fix2. The command invokes both the 
+   er_print utility and the Thread Analyzer GUI.
+
+   % make check_fix2
+
+   Program din_philo_fix2 does not have any deadlocks, and the
+   Thread Analyzer does not report any deadlocks because it recognizes 
+   the synchronizations used.
+
+
+                       =======================
+
+

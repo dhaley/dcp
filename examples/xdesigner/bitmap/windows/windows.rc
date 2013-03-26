@@ -1,0 +1,17 @@
+#include "afxres.h"
+#include "../windows/main_xd.h"
+IDR_shell ACCELERATORS PRELOAD MOVEABLE PURE
+BEGIN
+#define ID_shell_button1 32773
+	"N",	ID_shell_button1,	VIRTKEY, CONTROL
+#define ID_shell_button2 32774
+	"O",	ID_shell_button2,	VIRTKEY, CONTROL
+#define ID_shell_button3 32775
+	"E",	ID_shell_button3,	VIRTKEY, CONTROL
+#define ID_shell_button4 32778
+	"",	ID_shell_button4,	VIRTKEY
+#define ID_shell_button5 32779
+	"",	ID_shell_button5,	VIRTKEY
+#define ID_shell_button6 32780
+	"",	ID_shell_button6,	VIRTKEY
+END

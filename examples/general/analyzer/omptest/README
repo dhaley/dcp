@@ -1,0 +1,89 @@
+
+
+omptest example program:
+
+Description:
+
+        The program omptest is a simple program that does two calculations,
+        each in several different ways, using the various OpenMP, Sun and
+        Cray parallelization directives. The two different parallelization
+        techniques show different performance characteristics. This program 
+        can be used to explore the Performance Analyzer. 
+
+Makefile:
+
+        make: compile each of the source files with the appropriate options 
+        for parallelization. The output from each file is redirected to a file
+        with a suffix .make.out.
+
+        make expt: run an experiment on the resulting code, creating a
+        run.out file with the output from the run. Uses the default number of
+        processors.
+
+        make list: generate annotated source and annotated disassembly
+        from each of the source files into *.src and *.dis files, respectively.
+
+        make collect: collect two data sets for the tutorial with 4 and 2 processors.
+
+        make clean: remove .o files and core files.
+
+        make clobber: make clean and remove executable and experiment files
+
+        Notes: 
+        (1) A make clobber should be done before building and running
+        this program, to clean up any unwanted files. 
+        (2) The makefile has a variety of options commented out which control
+        the optimization of the program.
+
+
+Usage:
+
+        omptest
+
+Example Scenario:
+        
+        The default example must be run on a computer with at least 4 CPUs.
+
+        Step 1: Make a copy of the program and makefile
+
+        Copy the contents of the omptest directory to your own
+        private working area with the following command:
+
+                cp -r /opt/SUNWspro/examples/analyzer/omptest <myworkarea>/omptest
+
+        Note: /opt/SUNWspro is the base directory where the product is
+        installed. This directory may be different in your environment.
+
+        Step 2: Build the omptest executable
+
+                cd <myworkarea>/omptest
+                make
+
+        Step 3: Collect performance data
+
+                make collect
+
+        This produces two experiments, one called omptest.4.er which is run 
+        on 4 CPUs, and one called omptest.2.er which is run on 2 CPUs.
+
+        Step 4: Analyze the performance data
+
+        If you have a license for the GUI, type
+
+                analyzer <experiment> &
+
+	where <experiment> is one or more of the experiments listed above.
+
+	If you do not have the appropriate license, you can use er_print to
+	analyze the performance data:
+
+                er_print <experiment> &
+
+
+        From this point you can explore the features of the Analyzer and 
+        the performance of the omptest program.
+
+Copyright © 2004 Sun Microsystems, Inc.
+4150 Network Circle, Santa Clara,California 95054, U.S.A.  
+All rights reserved.
+

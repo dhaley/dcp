@@ -1,0 +1,12 @@
+#!/bin/sh
+
+for e in $*; do
+	sed -e 's/\[\]/<>/g' -e 's/^#/%#/' $e |		\
+	awk '/FmRpcCommandsT_val/ {
+		      print "typedef IntT FmRpcCommandsT<150>;";
+		      next; }
+		{ print $0; }'				\
+	> zot
+	rm -f $e
+	mv -f zot $e
+done

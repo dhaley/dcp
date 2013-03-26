@@ -1,0 +1,9 @@
+body { font-family: arial, verdana; font-size: small; margin: 0px; }
+.box { background: #eee; border: 1px solid black; }
+.box-title { background: white; text-align: center; font-weight: bold; }
+.box-content { background: white; font-size: xx-small; padding:10px;}
+.menu { margin: 5px; }
+.menu-active { margin: 2px; padding:5px; background: black; }
+.menu-active a { text-decoration: none; color: white; font-weight: bold; }
+.menu-inactive { margin: 2px; padding:5px; background: #ccc; }
+.menu-inactive a { text-decoration: none; }

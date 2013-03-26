@@ -1,0 +1,107 @@
+Note: To use the GUI versions of the tools, you must have a license.
+
+Cdlib example program:
+
+Description:
+
+	Cdlib scans the database file of the "workman" program. Workman is
+	a program which plays and displays information about audio CDs using 
+	a SCSI CD ROM drive connected to your Solaris workstation. The program
+	allows you to enter CD Title, Artist and Track information on any
+	CD that it plays. It maintains this information in a database file
+	(~/.workmandb) which it can then recall later when you load a CD it
+	has seen before. 
+
+	The Cdlib program scans through the database file and computes
+	statistics about the CDs entered such as the total amount of music,
+	the average length of all the CDs in the database and the longest
+	and shortest CD.
+
+Usage:
+
+	Cdlib
+		Analyzes the CD library information in $HOME/.workmandb
+
+	Cdlib database-file
+		Analyzes the CD library information in database-file
+
+Example Scenario:
+
+	Step 1: Make a copy of the program
+
+	Copy the contents of the cdlib directory to your own private working 
+	area with the following command:
+
+		cp  /opt/SUNWspro/examples/general/cdlib/* ~/cdlib
+		
+	NOTE: /opt/SUNWspro is the base directory where the product is
+	installed. This directory may be different in your environment.
+
+	If you do not already have a .workmandb file in your home
+        directory, copy the sample.workmandb file to your home directory
+        with the following command: 	
+
+		cp  ~/cdlib/sample.workmandb $HOME
+
+	Step 2: Mount Cdlib Program 
+
+	Start the IDE with the sunstudio command.
+
+	In the Explorer window, right-click Filesystems at the top of the 
+	Filesystems tab and choose Mount -> Local Directory to open the 	
+	Local Directory wizard. Find and select the cdlib directory in the 
+	Select Directory page of the wizard and click Finish. 
+	
+	Step 3: Build your own copy of Cdlib.
+
+	1. Create your own Makefile using Makefile wizard, if you do not want to
+	create Makefile and would like to use the existing Makefile, skip to 2.
+	
+	. Delete existing Makefile or rename it.
+	. From main menu, choose File -> New to bring up the New 		
+	  wizard. 
+	. On the Choose Template page, expand Makefiles, expand Simple 
+	  Makefiles, select Single Executable Makefile, and click Next. 
+	. On the Enter Name and Location page, type Makefile in the Name field 
+	  and click Next.
+	. Click Next on the Select Makefile Type and Platform page.
+	. On the Base Directory page, type  ~/cdlib in Base Directory field 
+	  and choose Next. 
+	. Click Next on the Build Output Directory page.
+	. On the Create List of Targets page, type Cdlib in the Target Name 
+	  field and choose Next. 
+	. On the Enter Source Files page, click Add to add Cdlib.c to the 
+	  Source Files list, and click Next. 
+	. On the Set Compiling Preference page, click Next.
+	. On the Review Makefile page, click Finish. 
+	. Review the Makefile information and select "Finish".
+	
+	2. Expand the node, select Makefile and choose Build -> Make from the 
+	main menu. You can see the build status "Build Successful." in the
+ 	Output Window.
+
+	Step 4: Run the program under the debugger.
+
+        In the Explorer window, select Cdlib, and choose Debug -> Load Program
+        from the main menu. Wait for the debugger session to start.
+        
+        In the Program I/O tab of the Output Window, if you get an error like: 
+	
+		"Error opening file <my home directory>/.workmandb" 
+	
+	it means you have never used the program workman or created a workman
+	CD database file. If so, go back to Editing workspace, right-click 	
+	Cdlib in Explorer window and choose Properties, select the Execution 	
+	tab, enter "sample.workmandb" in the Arguments field and press return. 	
+	Running the program again should work.
+	
+	Step 5: Play with it.
+
+	Though the program seems to work correctly, there are some bugs in it.
+	Use the runtime checking facilities available from Debug -> Memory -> 
+	Check Access and Debug -> Memory -> Check Usage to find access errors 
+	and potential memory leaks. Try making changes to enhance the program. 
+	Have fun.
+
+Copyright © 2004 Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, California 
+95054, U.S.A. All rights reserved.

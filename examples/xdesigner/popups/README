@@ -1,0 +1,380 @@
+Using the PopupMenu demo
+------------------------
+
+This directory contains a .xd file which provides a definition
+for a TextField in which a Popup Menu can be displayed.  It is
+designed to show how C++ classes and definitions can be used
+to provide new "GUI objects" and how these new objects can be
+used in your designs.
+
+Note that the the new Popup Menu only appears in a generated
+application, i.e. one which uses the new object and which is
+linked with its library. The object does not appear within the
+X-Designer design window.
+
+To use this new object:
+
+1.  Copy the files in this directory to a new directory of your
+    own (referred to later in this file as INSTALL_DIR). Give
+    yourself write permission on the copied files.
+
+2.  Check the Makefile:
+
+	Make sure the correct settings section for your platform has
+	been uncommented.
+
+	Make sure CCC is set to the name of the C++ compiler you want to use, e.g.
+
+		CCC=g++
+
+	to override the "native" compiler and use the GNU one instead.
+
+	Check that the include directory settings are correct for your platform.
+
+3.  Type "make".
+
+4.  Start up X-Designer, and load the file "textf_base.xd"
+
+5.  Select the second dialog in the window holding area.
+
+6.  Add the widget "textf_base" to the palette using the "Edit
+    definitions" dialog. Set the "Include file" field within
+    this dialog to $(INSTALL_DIR)/textf.h
+
+6.  Quit X-Designer.
+
+The definition can now be used.
+
+When compiling any code which uses this object, link in
+libtextf.a and libxdclass.a.  Add the parent directory of the
+library and $XDROOT/src/xdclass/lib to your library search
+path.  You will also need to add the library's parent
+directory and $XDROOT/src/xdclass/h to your list of include
+directories.
+
+Adding a new PopupMenu
+----------------------
+
+Here we show how to create a popup menu for a SelectionBox
+widget and how to create a popups library containing this new
+object and the text field object described above.
+
+For ease of explanation and reference, explicit names are used
+for widgets and files.  You should replace these names with
+those of your own.
+
+1.  Start X-Designer, and load in "textf_base.xd".
+
+2.  Save the file as "mypopups_base.xd".
+
+3.  Create a new dialog window by clicking on the Shell icon.
+
+4.  Add a SelectionBox from the palette and assign the
+    variable name "selb_base" to it.  This name, with a "_c"
+    suffix added, forms the base class from which your object
+    will be derived.
+
+5.  With the selb_base widget selected, display the Core
+    resources panel and move to its "Code generation" page.
+    Set the Structure type of the widget to "C++ class".
+    Change the value in the "Instantiate as" field to
+    "selb_c".
+
+6.  Select the shell in your dialog and set its Structure to
+    "Children only".  Close the Core resources panel.
+
+7.  Select the selb_base widget and make it a definition
+    (click on "Definition" from the Widget menu).  Save the
+    design file.
+
+8.  Add the definition to the palette.  To do this, first
+    display the "Edit definitions" dialog from the Palette
+    menu.  Press the "Prime" button in the dialog - this will
+    fill in most of the other details.  You also need to
+    specify a header file which will define your derived
+    class. This will be automatically included in generated
+    code which uses your new object. Enter "sb_popup.h" in the
+    "Include file" field.
+
+9.  Select from the window holding area the dialog which
+    contains a drawing area with a menu child. Copy and paste
+    this dialog.
+
+10. Change the variable name of the popup menu in the copied
+    dialog to "selb_popup".
+
+11. Change the labels of the buttons within the menu to:
+    "Ready", "Steady" and "Go".  Add a separator and another
+    button labeled "Stop" to the menu.
+
+    Note that callbacks should not be specified at this point
+    as they can only be defined for a class if the associated
+    Widget is a member of that class. In this case, the popup
+    menu is implemented as a member of a derived class.
+
+That concludes the modifications to the .xd file.
+
+12. Select "Generate/C++" from the Generate menu. Generate
+    the code to "mypopups_base.c".
+
+13. Generate C++ externs to "mypopups_base.h".
+
+14. Save the design file.
+
+15. Quit X-Designer
+
+16. Copy the file "textf.h" to "sb_popup.h".
+
+17. Copy the file "textf.c" to "sb_popup.c". This will be the
+    file in which you implement your derived class (and thus
+    your GUI object).
+
+18. Edit sb_popup.h.
+
+19. Change the #include line so that it now reads:
+
+    #include "mypopups_base.h"
+
+20. Change the name of the derived class "textf_c" to
+    "selb_c".
+
+21. Change the name of the base class "textf_base_c" to
+    "selb_base_c".
+
+22. Change the type of the class member "thePopup" from
+    "textf_popup_p" to "selb_popup_p".
+
+23. Change the typedef at the end of the file, so that it now
+    reads:
+
+    typedef selb_c *selb_p ;
+
+24. Save the file and exit.
+
+25. Edit sb_popup.c.
+
+26. Change the included headers to:
+
+    #include "mypopups_base.h"
+    #include "sb_popup.h"
+
+27. Change the class name "textf_c" to "selb_c" in both
+    of the definitions of the method popup_menu and in the
+    create procedure.
+
+28. Change the references to "textf_p" in the first popup_menu
+    function to "selb_p".
+
+29. Change "textf_base_p" to "selb_base_p" in the first line
+    of the create function.
+
+30. Change the construction of the popup menu in the second line to
+    construct your menu class.
+
+31. Save the file and exit.
+
+32. Edit "textf.h".
+
+33. Change the #include line so that it now reads:
+
+    #include "mypopups_base.h"
+
+34. Save the file and exit.
+
+35. Edit textf.c.
+
+36. Remove the #include "textf_base.h" line.
+
+37. Save the file and exit.
+
+38. Edit the Makefile
+
+39. Change the LIBTEXTFOBJS line to:
+
+    LIBPOPUPOBJS=textf.o sb_popup.o mypopups_base.o
+
+40. Change the files in the GENCFILES line to:
+
+    GENCFILES=mypopups_base.h mypopups_base.c
+
+41. Change the "all" line so that it now reads:
+
+    all: libpopups.a textf.h sb_popup.h mypopups_base.h
+
+42. Change the lines specifying rules for the generation of the
+    X-Designer generated files to:
+
+    mypopups_base.c:
+	    xdesigner -C $@ -f mypopups_base.xd
+
+    mypopups_base.h:
+	    xdesigner -E $@ -f mypopups_base.xd
+
+43. Remove the textf_base.o rule.
+
+44. Change the line specifying the rule for the compilation of
+    the textf.o file to:
+
+    textf.o: mypopups_base.h textf.h textf.c
+	    $(CCC) -c $(CFLAGS) $(IFLAGS) textf.c
+
+45. Add the following rules:
+
+    mypopups_base.o: mypopups_base.h mypopups_base.c
+	    $(CCC) -c $(CFLAGS) $(IFLAGS) mypopups_base.c
+
+    sb_popup.o: mypopups_base.h sb_popup.h sb_popup.c
+	    $(CCC) -c $(CFLAGS) $(IFLAGS) sb_popup.c
+
+46. Change the libtextf.a entry to:
+
+    libpopups.a: $(LIBPOPUPOBJS)
+	    rm -f $@
+	    ar cru $@ $(LIBPOPUPOBJS)
+	    -ranlib $@
+
+47. Change the files listed in the "clean" rule to:
+
+    clean:
+	    rm -f mypopups_base.c mypopups_base.h
+	    rm -f mypopups_base.o textf.o sb_popup.o
+	    rm -f libpopups.a
+
+48. Save and exit.
+
+49. Type make
+
+50. That's it! You should now have a definition on your palette
+    which, when you use it in a design, will have the popup menu you
+    want in your compiled generated application.
+
+When compiling any code which uses an object from the library,
+link in libpopups.a and libxdclass.a.  Add the parent directory
+of the library and $XDROOT/src/xdclass/lib to your library
+search path.  You will also need to add the library's parent
+directory and $XDROOT/src/xdclass/h to your list of include
+directories.
+
+Updating the Popups library
+---------------------------
+
+Once you have a popups library, adding another object to it is
+very straightforward. The steps below show how to add a popup
+menu to a list widget and then add this to the library.
+
+1.  Start X-Designer, and load in "mypopups_base.xd".
+
+2.  Create a new dialog window by clicking on the Shell icon.
+
+3.  Add a List from the palette and assign the variable
+    name "list_base" to it.
+
+4.  With the list_base widget selected, display the Core
+    resources panel and move to its "Code generation" page.
+    Set the Structure type of the widget to "C++ class".
+    Change the value in the "Instantiate as" field to
+    "list_c".
+
+5.  Select the shell in your dialog and set its Structure to
+    "Children only".  Close the Core resources panel.
+
+6.  Select the list_base widget and make it a definition
+    (click on "Definition" from the Widget menu).  Save the
+    design file.
+
+7.  Add the definition to the palette.  Set its Include file
+    to "list_popup.h".
+
+8.  Select from the window holding area the dialog which
+    contains a drawing area with a menu child. Copy and paste
+    this dialog.
+
+9.  Change the name of the popup menu in the copied dialog to
+    "list_popup".
+
+10. Change the contents of the popu menu as required.
+
+11. Generate C++ code to "mypopups_base.c".
+
+12. Generate C++ externs to "mypopups_base.h".
+
+13. Save the design file.
+
+14. Quit X-Designer
+
+15. Copy the file "textf.h" to "list_popup.h".
+
+16. Copy the file "textf.c" to "list_popup.c".
+
+17. Edit list_popup.h.
+
+18. Change the name of the derived class "textf_c" to
+    "list_c".
+
+19. Change the name of the base class "textf_base_c" to
+    "list_base_c".
+
+20. Change the type of the class member "thePopup" from
+    "textf_popup_p" to "list_popup_p".
+
+21. Change the typedef at the end of the file, so that it now
+    reads:
+
+    typedef list_c *list_p ;
+
+22. Save the file and exit.
+
+23. Edit list_popup.c.
+
+24. Change the included headers to:
+
+    #include "mypopups_base.h"
+    #include "list_popup.h"
+
+25. Change the class name "textf_c" to "list_c" in both
+    of the definitions of the method popup_menu and in the
+    create procedure.
+
+26. Change the references to "textf_p" in the first popup_menu
+    function to "list_p".
+
+27. Change "textf_base_p" to "list_base_p" in the first line
+    of the create function.
+
+28. Change the construction of the popup menu in the second line to
+    construct your menu class.
+
+29. Save the file and exit.
+
+30. Edit the Makefile
+
+35. Change the LIBPOPUPOBJS line to:
+
+    LIBPOPUPOBJS=textf.o sb_popup.o list_popup.o mypopups_base.o
+
+36. Change the "all" line so that it now reads:
+
+    all: libpopups.a textf.h sb_popup.h list_popup.h mypopups_base.h
+
+37. Add the following rule:
+
+    list_popup.o: mypopups_base.h list_popup.h list_popup.c
+	    $(CCC) -c $(CFLAGS) $(IFLAGS) list_popup.c
+
+38. Change the files listed in the "clean" rule to:
+
+    clean:
+	    rm -f mypopups_base.c mypopups_base.h
+	    rm -f mypopups_base.o textf.o sb_popup.o list_popup.o
+	    rm -f libpopups.a
+
+39. Save and exit.
+
+40. Type make to update the library.
+
+When compiling any code which uses an object from the library,
+link in libpopups.a and libxdclass.a.  Add the parent directory
+of the library and $XDROOT/src/xdclass/lib to your library
+search path.  You will also need to add the library's parent
+directory and $XDROOT/src/xdclass/h to your list of include
+directories.

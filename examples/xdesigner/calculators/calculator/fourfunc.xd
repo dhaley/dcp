@@ -1,0 +1,353 @@
+module 'MCalc'
+version = 48;
+xdesigned = 1;
+applicationName = 'MCalc';
+generateNameC = * 'fourfunc.xc';
+generateNameResDB = * 'fourfunc.res';
+generateUidFile = '';
+generateCPixmapFile = '';
+generateCHeaderFile = '';
+motifFlavour = 2;
+generateMask = 4390916;
+useMask = 1;
+ansiC = 0;
+generateNewMakefile = 1;
+generateMakeTemplate = 0;
+useCPixmaps = 0;
+useUILPixmaps = 0;
+useCHeaders = 0;
+useCUILHeaders = 0;
+CPPFlavour = 0;
+useCPPHeaders = 0;
+useCPPHeadersMFCWindows = 0;
+useCPPHeadersMFCMotif = 0;
+javaVersion = 2;
+/* group data */
+groupIndex 0;
+/* end group data */
+object 'calc_shell' : XtSessionShell {
+	arguments {
+	was_selected = true;
+	lastGenName = 'calc_shell';
+	createPreludeStatus = 1;
+	preInstantiation = 'void create_calc_shell (display, app_name, app_argc, app_argv)Display *display;
+char *app_name;
+int app_argc;
+char **app_argv;
+';
+	XmNallowShellResize = true;
+	XmNtitle = 'MCalc';
+	XmNsession = 1;
+	};
+object 'calc_form' : XmForm {
+	arguments {
+	lastGenName = 'calc_form';
+	XmNnavigationType = XmEXCLUSIVE_TAB_GROUP;
+	XmNautoUnmanage = false;
+	XmNhorizontalSpacing = 5;
+	XmNverticalSpacing = 5;
+	};
+object 'digits_rc' : XmRowColumn {
+	arguments {
+	lastGenName = 'digits_rc';
+	folded = true;
+	XmNnumColumns = 4;
+	XmNpacking = XmPACK_COLUMN;
+	XmNentryAlignment = XmALIGNMENT_CENTER;
+	};
+object 'digit7' : XmPushButton {
+	arguments {
+	lastGenName = 'digit7';
+	XmNlabelString = '7';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char *)7)
+';
+	};
+};
+object 'digit4' : XmPushButton {
+	arguments {
+	lastGenName = 'digit4';
+	XmNlabelString = '4';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char *)4)
+';
+	};
+};
+object 'digit1' : XmPushButton {
+	arguments {
+	lastGenName = 'digit1';
+	XmNlabelString = '1';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char *)1)
+';
+	};
+};
+object 'dec_point' : XmPushButton {
+	arguments {
+	lastGenName = 'dec_point';
+	XmNlabelString = '.';
+	};
+	callbacks {
+	XmNactivateCallback = '
+decimal_point()
+';
+	};
+};
+object 'digit8' : XmPushButton {
+	arguments {
+	lastGenName = 'digit8';
+	XmNlabelString = '8';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char *)8)
+';
+	};
+};
+object 'digit5' : XmPushButton {
+	arguments {
+	lastGenName = 'digit5';
+	XmNlabelString = '5';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char *)5)
+';
+	};
+};
+object 'digit2' : XmPushButton {
+	arguments {
+	lastGenName = 'digit2';
+	XmNlabelString = '2';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char *)2)
+';
+	};
+};
+object 'digit0' : XmPushButton {
+	arguments {
+	lastGenName = 'digit0';
+	XmNlabelString = '0';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char *)0)
+';
+	};
+};
+object 'digit9' : XmPushButton {
+	arguments {
+	lastGenName = 'digit9';
+	XmNlabelString = '9';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char *)9)
+';
+	};
+};
+object 'digit6' : XmPushButton {
+	arguments {
+	lastGenName = 'digit6';
+	XmNlabelString = '6';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char*)6)
+';
+	};
+};
+object 'digit3' : XmPushButton {
+	arguments {
+	lastGenName = 'digit3';
+	XmNlabelString = '3';
+	};
+	callbacks {
+	XmNactivateCallback = '
+digit_callback((char *)3)
+';
+	};
+};
+object 'eq_b' : XmPushButton {
+	arguments {
+	lastGenName = 'eq_b';
+	XmNlabelString = '=';
+	};
+	callbacks {
+	XmNactivateCallback = '
+Equals()
+';
+	};
+};
+object 'add_b' : XmPushButton {
+	arguments {
+	lastGenName = 'add_b';
+	XmNlabelString = '+';
+	};
+	callbacks {
+	XmNactivateCallback = '
+Add()
+';
+	};
+};
+object 'sub_b' : XmPushButton {
+	arguments {
+	lastGenName = 'sub_b';
+	XmNlabelString = '-';
+	};
+	callbacks {
+	XmNactivateCallback = '
+Subtract()
+';
+	};
+};
+object 'mul_b' : XmPushButton {
+	arguments {
+	lastGenName = 'mul_b';
+	XmNlabelString = '*';
+	};
+	callbacks {
+	XmNactivateCallback = '
+Multiply()
+';
+	};
+};
+object 'div_b' : XmPushButton {
+	arguments {
+	lastGenName = 'div_b';
+	XmNlabelString = '/';
+	};
+	callbacks {
+	XmNactivateCallback = '
+Divide()
+';
+	};
+};
+};
+object 'calc_display' : XmText {
+	arguments {
+	lastGenName = 'calc_display';
+	XmNsensitive = false;
+	XmNmaxLength = 20;
+	XmNcolumns = 20;
+	XmNeditable = false;
+	XmNcursorPositionVisible = false;
+	};
+};
+object 'unary_rc' : XmRowColumn {
+	arguments {
+	lastGenName = 'unary_rc';
+	XmNnumColumns = 4;
+	XmNorientation = XmHORIZONTAL;
+	XmNpacking = XmPACK_COLUMN;
+	XmNentryAlignment = XmALIGNMENT_CENTER;
+	};
+object 'sgn_b' : XmPushButton {
+	arguments {
+	lastGenName = 'sgn_b';
+	XmNlabelString = '+/-';
+	};
+	callbacks {
+	XmNactivateCallback = '
+ChangeSign()
+';
+	};
+};
+object 'm_b' : XmPushButton {
+	arguments {
+	lastGenName = 'm_b';
+	XmNlabelString = 'M';
+	};
+	callbacks {
+	XmNactivateCallback = '
+MemRecall()
+';
+	};
+};
+object 'ac_b' : XmPushButton {
+	arguments {
+	lastGenName = 'ac_b';
+	XmNforeground = color('white');
+	XmNbackground = color('orange');
+	XmNlabelString = 'AC';
+	};
+	callbacks {
+	XmNactivateCallback = '
+ClearAll()
+';
+	};
+};
+object 'mplus_b' : XmPushButton {
+	arguments {
+	lastGenName = 'mplus_b';
+	XmNlabelString = 'M+';
+	};
+	callbacks {
+	XmNactivateCallback = '
+MemAdd()
+';
+	};
+};
+object 'ce_b' : XmPushButton {
+	arguments {
+	lastGenName = 'ce_b';
+	XmNlabelString = 'C';
+	};
+	callbacks {
+	XmNactivateCallback = '
+ClearEntry()
+';
+	};
+};
+object 'mminus_b' : XmPushButton {
+	arguments {
+	lastGenName = 'mminus_b';
+	XmNlabelString = 'M-';
+	};
+	callbacks {
+	XmNactivateCallback = '
+MemSubtract()
+';
+	};
+};
+};
+object 'logo_l' : XmLabel {
+	arguments {
+	lastGenName = 'logo_l';
+	XmNlabelType = XmPIXMAP;
+	};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 0 0 0;
+	XmNleftAttachment = 1 0 1;
+	XmNbottomAttachment = 1 0;
+	XmNtopAttachment = 3 2 10;
+    };
+    attachment {
+	XmNleftAttachment = 1 0;
+	XmNtopAttachment = 1 0;
+    };
+    attachment {
+	XmNrightAttachment = 1 0;
+	XmNleftAttachment = 3 1 15;
+	XmNtopAttachment = 3 2 10;
+    };
+    attachment {
+	XmNrightAttachment = 0 0 0;
+	XmNleftAttachment = 3 2 10;
+	XmNbottomAttachment = 0 0 0;
+	XmNtopAttachment = 1 0 2;
+    };
+    };
+};
+};
+end module;

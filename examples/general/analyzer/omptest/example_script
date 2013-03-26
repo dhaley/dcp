@@ -1,0 +1,6 @@
+#!/usr/bin/csh
+setenv PARALLEL 4
+collect -o omptest.1.er omptest
+setenv PARALLEL 2
+collect -o omptest.2.er omptest
+unsetenv PARALLEL

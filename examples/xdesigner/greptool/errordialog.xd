@@ -1,0 +1,114 @@
+module 'greptool'
+version = 48;
+xdesigned = 1;
+applicationName = 'greptool';
+generateNameC = * 'errordialog.xc';
+generateUidFile = '';
+generateCPixmapFile = '';
+generateCHeaderFile = '';
+motifFlavour = 2;
+generateMask = 4423680;
+useMask = 1;
+ansiC = 0;
+generateNewMakefile = 1;
+generateMakeTemplate = 0;
+useCPixmaps = 0;
+useUILPixmaps = 0;
+useCHeaders = 0;
+useCUILHeaders = 0;
+CPPFlavour = 0;
+useCPPHeaders = 0;
+useCPPHeadersMFCWindows = 0;
+useCPPHeadersMFCMotif = 0;
+javaVersion = 2;
+/* group data */
+groupIndex 0;
+/* end group data */
+object 'errorshell' : XmDialogShell {
+	arguments {
+	was_selected = true;
+	lastGenName = 'errorshell';
+	createPreludeStatus = 1;
+	preInstantiation = 'void create_errorshell (parent)
+Widget parent;
+';
+	XmNallowShellResize = true;
+	XmNtitle = 'errors';
+	};
+object '1' : XmMessageTemplate {
+	arguments {
+	lastGenName = 'messageBox1';
+	XmNautoUnmanage = false;
+	XmNdefaultButton = 'errorbutton';
+	XmNdialogType = XmDIALOG_TEMPLATE;
+	};
+abstract object '1' : XmSeparator GADGET {
+	arguments {
+	name = 'Separator';
+	lastGenName = 'separator1';
+	};
+};
+object 'errorform' : XmForm {
+	arguments {
+	lastGenName = 'errorform';
+	XmNwidth = 243;
+	XmNheight = 127;
+	XmNautoUnmanage = true;
+	};
+object '1' : XmLabel {
+	arguments {
+	lastGenName = 'label1';
+	XmNlabelPixmap = '/usr/xd/release/demos/greptool/xm_error.bm';
+	XmNlabelType = XmPIXMAP;
+	};
+};
+object '1' : XmScrolledText {
+	arguments {
+	lastGenName = 'scrolledText1';
+	};
+abstract object '1' : XmScrollBar {
+	arguments {
+	name = 'HorScrollBar';
+	lastGenName = 'scrollbar1';
+	};
+};
+abstract object '2' : XmScrollBar {
+	arguments {
+	name = 'VertScrollBar';
+	lastGenName = 'scrollbar2';
+	};
+};
+abstract object 'errortext' : XmText {
+	arguments {
+	lastGenName = 'errortext';
+	XmNcolumns = 27;
+	XmNeditable = false;
+	XmNresizeHeight = true;
+	XmNresizeWidth = true;
+	XmNeditMode = XmMULTI_LINE_EDIT;
+	XmNrows = 6;
+	};
+};
+};
+    attachments {
+    attachment {
+	XmNleftAttachment = 1 0 5;
+	XmNtopAttachment = 1 0 5;
+    };
+    attachment {
+	XmNrightAttachment = 1 0 5;
+	XmNleftAttachment = 3 1 5;
+	XmNbottomAttachment = 1 0 5;
+	XmNtopAttachment = 1 0 5;
+    };
+    };
+};
+object 'errorbutton' : XmPushButton {
+	arguments {
+	lastGenName = 'errorbutton';
+	XmNlabelString = 'OK';
+	};
+};
+};
+};
+end module;

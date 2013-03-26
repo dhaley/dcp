@@ -1,0 +1,23 @@
+This is a simple calculator example built using X-Designer.
+
+MCalc               defaults file, the .res files cat together.
+Makefile            to make the program
+callbacks.c         callback functions
+mcalc.bm            logo bitmap
+mcalc.c             the main program which #includes one of the generated
+		    interfaces.
+mcalc.res           main defaults file
+
+Two interfaces are supplied four func and scientific:
+
+fourfunc.xd         X-Designer source
+fourfunc.res        generated defaults
+fourfunc.xc         generated c
+
+scientific.xd       X-Designer source
+scientific.res      generated defaults
+scientific.xc       generated c
+
+mcalc.c includes the scientific interface by default. If you want the
+fourfunc interface then you must comment out the #include of scientific.xc
+in mcalc.c and remove the comments from #include fourfunc.xc.

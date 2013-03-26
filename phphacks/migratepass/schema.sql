@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  id MEDIUMINT NOT NULL AUTO_INCREMENT,
+  name TEXT,
+  pass TEXT,
+  PRIMARY KEY( id )
+);

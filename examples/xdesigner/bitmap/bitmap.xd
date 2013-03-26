@@ -1,0 +1,434 @@
+module 'XApplication'
+version = 48;
+xdesigned = 1;
+applicationName = 'XApplication';
+generateNameCPPMainProgramMFC = * 'windows/main.cxx';
+generateNameCPPMainProgramMFCMotif = * 'motif/main.cxx';
+generateNameCPPMFCWindows = * 'windows/main.cxx';
+generateNameCPPMFCMotif = * 'motif/main.cxx';
+generateNameCPPStubsMFCMotif = 'motif/specific.cxx';
+generateNameCPPExternsMFCWindows = * 'windows/main_xd.h';
+generateNameCPPExternsMFCMotif = * 'motif/main_xd.h';
+generateNameWinRes = * 'windows/windows.rc';
+generateCPPHeaderFileMFCWindows = '"main.h"';
+generateCPPHeaderFileMFCMotif = '"main.h"';
+generateNameMakefile = 'motif/Makefile';
+motifFlavour = 2;
+generateMask = 4325384;
+useMask = 1;
+ansiC = 1;
+generateNewMakefile = 0;
+generateMakeTemplate = 1;
+useCPixmaps = 0;
+useUILPixmaps = 0;
+useCHeaders = 0;
+useCUILHeaders = 0;
+CPPFlavour = 2;
+useCPPHeaders = 0;
+useCPPHeadersMFCWindows = 1;
+useCPPHeadersMFCMotif = 1;
+javaVersion = 2;
+/* group data */
+groupIndex 0;
+/* end group data */
+value
+	'magenta' : color ( '#ffff0000ffff' );
+	'cyan' : color ( '#0000ffffffff' );
+	'yellow' : color ( '#ffffffff0000' );
+	'blue' : color ( '#00000000ffff' );
+	'green' : color ( '#0000ffff0000' );
+	'red' : color ( '#ffff00000000' );
+	'white' : color ( '#ffffffffffff' );
+	'black' : color ( '#000000000000' );
+object 'shell' : XtSessionShell {
+	arguments {
+	was_selected = true;
+	lastGenName = 'shell';
+	codeStruct = 4;
+	XmNallowShellResize = true;
+	XmNsession = 1;
+	};
+	methods {
+	xdDeclareOnly = {
+		'DoExit', 0  ;
+	};
+	};
+object '1' : XmForm {
+	arguments {
+	lastGenName = 'form1';
+	XmNautoUnmanage = false;
+	};
+object '1' : XmMenuBar {
+	arguments {
+	lastGenName = 'menuBar1';
+	};
+object '1' : XmCascadeButton {
+	arguments {
+	lastGenName = 'cascade1';
+	XmNlabelString = 'File';
+	XmNmnemonic = 'F';
+	};
+object '1' : XmPulldownMenu {
+	arguments {
+	lastGenName = 'menu1';
+	};
+object '1' : XmPushButton {
+	arguments {
+	lastGenName = 'button1';
+	XmNlabelString = 'New';
+	XmNmnemonic = 'N';
+	XmNaccelerator = 'Ctrl<Key>N';
+	XmNacceleratorText = 'Ctrl + N';
+	};
+};
+object '2' : XmPushButton {
+	arguments {
+	lastGenName = 'button2';
+	XmNlabelString = 'Open';
+	XmNmnemonic = 'O';
+	XmNaccelerator = 'Ctrl<Key>O';
+	XmNacceleratorText = 'Ctrl + O';
+	};
+};
+object '3' : XmPushButton {
+	arguments {
+	lastGenName = 'button3';
+	XmNlabelString = 'Exit';
+	XmNmnemonic = 'E';
+	XmNaccelerator = 'Ctrl<Key>E';
+	XmNacceleratorText = 'Ctrl + E';
+	};
+	methods {
+	XmNactivateCallback = {
+		'DoExit', 0  ;
+	};
+	};
+};
+};
+};
+object '2' : XmCascadeButton {
+	arguments {
+	lastGenName = 'cascade2';
+	XmNlabelString = 'Edit';
+	XmNmnemonic = 'E';
+	};
+object '2' : XmPulldownMenu {
+	arguments {
+	lastGenName = 'menu2';
+	};
+object '4' : XmPushButton {
+	arguments {
+	lastGenName = 'button4';
+	XmNlabelString = 'Cut';
+	XmNmnemonic = 'C';
+	XmNaccelerator = '<Key>osfCut';
+	XmNacceleratorText = '<Keypad>Cut';
+	};
+};
+object '5' : XmPushButton {
+	arguments {
+	lastGenName = 'button5';
+	XmNlabelString = 'Copy';
+	XmNmnemonic = 'y';
+	XmNaccelerator = '<Key>osfCopy';
+	XmNacceleratorText = '<Keypad>Copy';
+	};
+};
+object '6' : XmPushButton {
+	arguments {
+	lastGenName = 'button6';
+	XmNlabelString = 'Paste';
+	XmNmnemonic = 'P';
+	XmNaccelerator = '<Key>osfPaste';
+	XmNacceleratorText = '<Keypad>Paste';
+	};
+};
+};
+};
+};
+object 'drawing' : XmDrawingArea {
+	arguments {
+	protectedMethod = '	void SetCell ( unsigned int x, unsigned int y );
+	void draw_line ( unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, unsigned int draw_first);
+	void horizontal_line ( unsigned int x0, unsigned int y0, unsigned int x1, unsigned int draw_first );
+	void draw_rectangle ( unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1 );
+	void fill_rectangle ( unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1 );
+	void DrawCells ();
+	void DrawGrid ();
+	void DrawCell ( unsigned int x, unsigned int y );
+	void XGridLine ( unsigned int x );
+	void YGridLine ( unsigned int y );
+	int initialised;
+	colour_type cells[32][32];
+	unsigned int start_x, start_y;
+#ifdef XD_MOTIF_MFC
+	Pixel *colours[8];
+	GC gc;
+#else
+	CBrush *colours[8];
+	CDC *dc;
+#endif
+ ';
+	lastGenName = 'drawing';
+	codeStruct = 4;
+	preInstantiation = '	colours[black]=&pixel_resources.black;
+	colours[white]=&pixel_resources.white;
+	colours[red]=&pixel_resources.red;
+	colours[green]=&pixel_resources.green;
+	colours[blue]=&pixel_resources.blue;
+	colours[yellow]=&pixel_resources.yellow;
+	colours[cyan]=&pixel_resources.cyan;
+	colours[magenta]=&pixel_resources.magenta;
+	initialised = FALSE;    
+	for ( unsigned char y = 0; y < 32; y++ )
+		for ( unsigned char x = 0; x < 32; )
+			for ( unsigned char c = (unsigned char)black; c <= (unsigned char)magenta; c++, x++ )
+				cells [x][y] = (colour_type)c; 
+
+';
+	XmNwidth = 250;
+	XmNheight = 250;
+	XmNmfcEvents = 'PAINT,LBUTTONDOWN,LBUTTONUP,';
+	};
+	methods {
+	XmNexposeCallback = {
+		'DoExpose', 1  not_windows;
+	};
+	xdDeclareOnly = {
+		'DoInput', 1  not_windows;
+		'DoExpose', 1  not_windows;
+	};
+	XmNinputCallback = {
+		'DoInput', 1  not_windows;
+	};
+	};
+};
+object '1' : XmRowColumn {
+	arguments {
+	lastGenName = 'rowcol1';
+	};
+object 'tool_box' : XmRadioBox {
+	arguments {
+	publicMethod = '	tool_type tool;';
+	lastGenName = 'tool_box';
+	codeStruct = 4;
+	accessControl = 0;
+	preInstantiation = 'tool = pencil;';
+	XmNnumColumns = 2;
+	XmNpacking = XmPACK_COLUMN;
+	};
+	methods {
+	xdDeclareOnly = {
+		'Fill', 0  ;
+		'Rectangle', 0  ;
+		'Line', 0  ;
+		'Pencil', 0  ;
+	};
+	};
+object '1' : XmToggleButton GADGET {
+	arguments {
+	lastGenName = 'toggle1';
+	XmNlabelString = 'Pencil';
+	XmNset = XmSET;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Pencil', 0  ;
+	};
+	};
+};
+object '2' : XmToggleButton GADGET {
+	arguments {
+	lastGenName = 'toggle2';
+	XmNlabelString = 'Line';
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Line', 0  ;
+	};
+	};
+};
+object '3' : XmToggleButton GADGET {
+	arguments {
+	lastGenName = 'toggle3';
+	XmNlabelString = 'Rect';
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Rectangle', 0  ;
+	};
+	};
+};
+object '4' : XmToggleButton GADGET {
+	arguments {
+	lastGenName = 'toggle4';
+	XmNlabelString = 'Fill';
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Fill', 0  ;
+	};
+	};
+};
+};
+object '1' : XmSeparator {
+	arguments {
+	lastGenName = 'separator1';
+	};
+};
+object 'colour_box' : XmRowColumn {
+	arguments {
+	publicMethod = '	colour_type colour;
+';
+	lastGenName = 'colour_box';
+	codeStruct = 4;
+	accessControl = 0;
+	preInstantiation = 'colour = black;';
+	XmNnumColumns = 2;
+	XmNpacking = XmPACK_COLUMN;
+	XmNradioBehavior = true;
+	};
+	methods {
+	xdDeclareOnly = {
+		'Magenta', 1  ;
+		'Cyan', 1  ;
+		'Yellow', 1  ;
+		'Blue', 1  ;
+		'Green', 1  ;
+		'Red', 1  ;
+		'White', 1  ;
+		'Black', 1  ;
+	};
+	};
+object '5' : XmToggleButton {
+	arguments {
+	lastGenName = 'toggle5';
+	XmNforeground = 'white';
+	XmNbackground = 'black';
+	XmNlabelString = 'Black';
+	XmNindicatorType = XmONE_OF_MANY;
+	XmNset = XmSET;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Black', 0  ;
+	};
+	};
+};
+object '6' : XmToggleButton {
+	arguments {
+	lastGenName = 'toggle6';
+	XmNbackground = 'white';
+	XmNlabelString = 'White';
+	XmNindicatorType = XmONE_OF_MANY;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'White', 0  ;
+	};
+	};
+};
+object '7' : XmToggleButton {
+	arguments {
+	lastGenName = 'toggle7';
+	XmNbackground = 'red';
+	XmNlabelString = 'Red';
+	XmNindicatorType = XmONE_OF_MANY;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Red', 0  ;
+	};
+	};
+};
+object '8' : XmToggleButton {
+	arguments {
+	lastGenName = 'toggle8';
+	XmNbackground = 'green';
+	XmNlabelString = 'Green';
+	XmNindicatorType = XmONE_OF_MANY;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Green', 0  ;
+	};
+	};
+};
+object '9' : XmToggleButton {
+	arguments {
+	lastGenName = 'toggle9';
+	XmNforeground = 'white';
+	XmNbackground = 'blue';
+	XmNlabelString = 'Blue';
+	XmNindicatorType = XmONE_OF_MANY;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Blue', 0  ;
+	};
+	};
+};
+object '10' : XmToggleButton {
+	arguments {
+	lastGenName = 'toggle10';
+	XmNbackground = 'yellow';
+	XmNlabelString = 'Yellow';
+	XmNindicatorType = XmONE_OF_MANY;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Yellow', 0  ;
+	};
+	};
+};
+object '11' : XmToggleButton {
+	arguments {
+	lastGenName = 'toggle11';
+	XmNbackground = 'cyan';
+	XmNlabelString = 'Cyan';
+	XmNindicatorType = XmONE_OF_MANY;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Cyan', 0  ;
+	};
+	};
+};
+object '12' : XmToggleButton {
+	arguments {
+	lastGenName = 'toggle12';
+	XmNbackground = 'magenta';
+	XmNlabelString = 'Magenta';
+	XmNindicatorType = XmONE_OF_MANY;
+	};
+	methods {
+	XmNvalueChangedCallback = {
+		'Magenta', 0  ;
+	};
+	};
+};
+};
+};
+    attachments {
+    attachment {
+	XmNrightAttachment = 1 0 5;
+	XmNleftAttachment = 1 0 5;
+	XmNbottomAttachment = 0 0 0;
+	XmNtopAttachment = 1 0 5;
+    };
+    attachment {
+	XmNrightAttachment = 1 0 5;
+	XmNleftAttachment = 3 3 5;
+	XmNbottomAttachment = 1 0 5;
+	XmNtopAttachment = 3 1 5;
+    };
+    attachment {
+	XmNrightAttachment = 0 0 0;
+	XmNleftAttachment = 1 0 5;
+	XmNbottomAttachment = 0 0 0;
+	XmNtopAttachment = 3 1 5;
+    };
+    };
+};
+};
+end module;

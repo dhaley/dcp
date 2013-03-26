@@ -1,0 +1,2 @@
+php -d include_path='.:/usr/local/php5/lib/php:mysql' bridge.php
+php -d include_path='.:/usr/local/php5/lib/php:oracle' bridge.php

@@ -1,0 +1,21 @@
+This directory contains example extensions to the replay software.
+
+Each subdirectory contains full source for the extension, as well
+as code and a Makefile to generate a shared object in the correct format.
+
+If you build any of this software, it should be installed into ../../../lib/xds,
+the directory that contains all the Capture/Replay modules.
+
+cvtXm           - the actual code used for handling XmLists XmDrawingAreas
+		  and other Motif widgets for which position is important.
+
+cvtTemplate     - a template user-widgets integration
+cvtXint         - an example integration of the INT EditTable widget
+cvtXtXrt	- an example integration of the XrtTable widget
+
+usertemplate    - an example of extending the command set of the replay
+		  engine (see import/user). Includes a HalloWorld command
+		  and a dowhile command.
+
+scripting       - an example scripting interface for C (so that you
+		  can write test scripts in C)

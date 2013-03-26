@@ -1,0 +1,205 @@
+jsynprog: synthetic Java/native application
+
+This demonstration covers the functionality of the Sun ONE Studio
+Performance Tools with respect to a synthetic Java program using both
+Sun ONE Studio Native Connector automatically-generated JNI for a
+simple, optimised C++ library and equivalent hand-written JNI which
+also includes calls back to Java.  It shows "Java mode" analyses of
+Functions, Lines and PCs lists, Callers-Callees, annotated Source and
+Disassembly listings and Timeline display.  Experiment collection is
+not part of the demonstration.
+
+The test application was run on a dual 900 MHz UltraSPARC III processor
+SunBlade-1000 running Solaris 9 and experiments collected using J2SDK 1.4.1.
+(High-resolution clock profiling was used for collection.)
+
+
+Setup
+-----
+Compile the C++ and Java test code, with compile flags specifying "-g"
+building the libcloop.so shared library and various classes.  Some of the
+functions in libcloop.so were also compiled "-xO3 -xnativeconnect" into
+an equivalent optimised shared library libcloopO.so, and the Sun ONE
+Studio Native Connector Tool used to generate a "Global" class with JNI
+wrappers such that they can be accessed from Java.  (The generated class
+is packaged in cloopO.jar, however, it's recommended to do collection
+with the unpacked directory class tree "cloopO").
+
+Run this executable with J2SDK 1.4.1, "java -classpath .:cloopO jsynprog".
+
+Run a collection experiment,
+    "collect -j on java -classpath .:cloopO jsynprog"
+
+(Note that it is preferable that collection is done into a directory on a
+local disk to avoid introducing perturbations in the trace.
+The experiment can be moved to another location after collection is complete.)
+
+(If collection is being done on Solaris 8, it's preferable to specify
+the "alternate" libthread library, setting LD_LIBRARY_PATH to /usr/lib/lwp.)
+
+(Note that Java collection is not possible from the Sun ONE Studio IDE
+Collector GUI or from the dbx/collector command-line.)
+
+For this demonstration, "high-resolution" clock profiling was used by
+specifying "-p high" as a collect argument.  (Periodic 1-second usage
+sampling remains configured by default.)
+
+The experiment p_hi_dir.er was collected on a Sun Blade 1000 with dual
+900 MHz US-III processors.
+
+Demoing the features:
+---------------------
+Go to the directory, $(DEMO)/analyzer/jsynprog
+
+1.  Type "analyzer p_hi_dir.er"
+	(Loading the experiment data takes a few seconds
+	 and no analysis is shown until all experiment data is loaded.)
+
+        (Alternatively, use the Sun ONE Studio IDE File Explorer to
+        navigate to the directory containing the experiment, select it,
+        and open the experiment in the Analyzer.)
+
+2.  When the function list comes up it will have 2 metric columns showing
+	Excl. User CPU (sec.) and Incl. User CPU (sec.).
+
+	The function list shows the most costly routines (ranked in terms of
+        User CPU time): several of the various jsynprog subtests are
+        seen to take a few seconds.
+
+        When each function is selected, the full set of (clock profiling) 
+        metrics and selected object attributes are summarised on the
+        right panel.  (Additional metrics and metric presentations as
+        percentages can be added to the main display via the View/Set 
+        Data Presentation/Metrics dialog.)
+
+        Of particular interest are likely to be the Java methods (such as
+        Routine.add_double, Routine$1$JInner.buildlist, java.util.Vector.remove
+        and Routine.memalloc) from synthetic loadobject "<JAVA_CLASSES>" and
+        native functions (such as Java_jsynprog_JavaJavaC and cfunc(int) from
+        libcloop.so with the hand-generated JNI, and CC() and cfunc(int) from
+        libcloopO.so with the automatically-generated JNI).  Source and Object
+        filenames are also shown as available.  (Note that the size of Java
+        methods are reported as 1 byte until source or disassembly analysis
+        determines the actual sizes.)
+
+        [At this point it is possible to explore the application's execution
+        behaviour with the Timeline (3) or proceed directly to examining its
+        Java/native interfaces with the Callers-Callees display (5).]
+
+3. Click on the Timeline tab to reveal the execution detail of this hybrid
+        Java/native application.  You may wish to enlarge the Analyzer
+        window (though the default settings should be adequate to show the
+        process utilisation samples and all of the thread event channels.)
+
+        The various threads are:
+          1: main user thread
+          2: Garbage Collector thread
+          3: helper thread
+          4: helper thread
+          5: WatcherThread
+          6: SuspendCheckerThread
+          7: signal handling thread
+          8: CompilerBroker (HotSpot dynamic compiler)
+          9: shutdown thread (not always caught by collection)
+
+        (Note that each thread is bound to an LWP with the same identifier.
+        As events are selected the application will be seen to use both CPUs
+        and the View->Set Data Presentation->Timeline dialog can be used to
+        specify display by CPU to see this behaviour.)
+
+        Thread 9 is only created during JVM shutdown and therefore sometimes
+        doesn't appear in experiments.  Threads 6 & 7 are basically inactive
+        throughout, while others are only occassionally active (3 & 4), and 
+        thread 5 polls regularly but is not interesting, as revealed by clicking
+        anywhere in its channel and examining the associated callstack and
+        event data which will show that it's asleep in select/_poll.
+
+        Selecting events from thread 8 and thread 2 will show the internal
+        operation of the HotSpot dynamic compiler and Garbage Collector.
+        (While the code for these can be disassembled, source is not available.)
+
+        The operation of the Garbage Collector is seen to correlate with
+        the main user thread running Routine.memalloc near the beginning
+        and Routine.allocate_vector midway through the test suite, with
+        regular checks every second throughout.
+
+        Although dynamic compilation occurs rapidly, compilation activities
+        are seen to correlate with transitions from one test to the next.
+
+        Selecting one of the periodic Experiment Samples from the top of
+        the display, each of which covers one second of the execution, it
+        can be seen that there are 8 threads alive for the duration of the
+        experiment (thread 9 only being created to wrap up at the end).
+        6 of the threads are blocked in User Lock state, one is asleep
+        (thread 5) and for the most part only one (the main user thread)
+        is active primarily in User CPU state.  (There's a small amount
+        of System CPU during the early phase, and some Page Faults right
+        at the beginning, but essentially no Wait CPU since jsynprog
+        with its single user thread didn't particularly exercise the
+        dual-CPU machine where the experiment was collected.)
+
+        (The View->Filter Data dialog can be used to filter out the data
+        from uninteresting threads if desired.)
+
+        In the middle of the execution of the main user thread (#1), the
+        prominent event callstacks entirely of cyan and their neighbours in
+        red and yellow stripes are convenient ties to the Callers-Callees
+        display for these recursive/alternating Java functions.
+
+        More interesting are the groups of callstacks corresponding to
+        the final set of tests which exercise Java calls into native
+        libraries (e.g., jsynprog.JavaCC -> Java_jsynprog_JavaCC
+        using manually-generated JNI and jsynprog.main -> CC via Native
+        Connector generated JNI in the nc.cloopo wrapper class),
+        and also calls from native code back into Java (e.g.,
+        jsynprog.JavaCJava -> Java_jsynprog_JavaCJava -> jsynprog.javafunc).
+
+        Annotated source and disassembly for the appropriate frame function
+        by selecting it and clicking on the Source or Disassembly tabs.
+        (Source is not available for JVM internal functions and some of the
+        interfacing functions, and Disassembly may not always be available.)
+
+        In particular, it may be instructive to compare the sources for
+        the NC-wrapped CC and its equivalent Java_jsynprog_JavaCC with
+        a explicit JNI interface.  Comparing disassembly shows the compiler
+        optimisations and commentary (line 30) in the NC-wrapped CC versus
+        the unoptimised Java_jsynprog_JavaCC.  (The optimised version was
+        executed much more often in the test, so comparing execution times
+        is not instructive, however, it was orders of magnitude faster.)
+
+        (Note that if you return to annotated Source or Disassembly
+        after having previously viewed it and scrolled to a different part
+        of the same file, the focus will return to the last view, otherwise
+        it will focus on the start of the selected function.)
+
+        At this point, the demo can be concluded, or can continue with the
+        Lines and PCs lists or the Callers-Callees functionality.
+
+4.      With a callstack frame selected in the Timeline, you can navigate
+        directly to the corresponding source line or disassembly instruction
+        in either the Source and Disassembly listings or Lines and PCs tables.
+        Selecting another source line or instruction from these displays updates
+        the Summary details for the selected object on the right, and allows
+        navigation to corresponding entries in other displays.
+
+5.      The callgraph can be investigated via the Callers-Callees display.
+
+        Select a function such as jsynprog.javafunc from the Timeline or
+        Function list, and then select the Callers-Callees tab: the
+        selected function is shown in the centre of the panel with the
+        functions it calls below and those which call it above. 
+        (Metrics for the selected function are shown in the Summary at right.)
+
+        Note the attibuted metrics calculated for these callers and callees
+        augmenting the exclusive and inclusive metrics already presented.
+
+        Clicking on a caller or callee changes the selection and the new
+        function is moved to the centre (and the Summary updated), and this
+        process can be repeated to navigate up and down the callgraph.
+
+        As an example, the Java method jsynprog.javafunc is called from the
+        interface function JNIEnv_::CallStaticIntMethod, itself called from
+        the native/JNI function Java_jsynprog_JavaCJava, which is shown
+        to have been called from jsynprog.JavaCJava both when it was being
+        interpreted by the Java Interpreter and after being dynamically compiled.
+

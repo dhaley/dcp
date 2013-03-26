@@ -1,0 +1,96 @@
+This demo covers the basic functionality of the analyer: function list,
+caller-callee list, and annotated source display.
+
+The test code is from the Analyzer test suite, and is a simple
+program with many functions, each showing a typical programming
+construct.
+
+Setup
+-----
+The code is compiled, with the Makefile in the directory,
+and a clock-based profiling (default) experiment, named test.1.er,
+is run on it.
+
+"make collect" will do both of those.
+
+Demoing the features:
+--------------------
+1.  Type analyzer test.1.er to the shell.
+	When it comes up, make the window a couple of lines longer than
+	the default
+
+2.  In the Function list will come up, point out the exclusive and
+	inclusive CPU secs for each function. Scroll up and down the list.
+	Select gpf_work, the fourth function.
+
+4.  Click on the callers-callees tab
+	Describe the callers above, the center selected function,
+	    and the (empty) callees below.
+	Point out the attributed metric, and that the tool
+	    shows most of the time from gpf_b
+
+5.  Use the callers and callees to navigate the program structure:
+	click on gpf_b in its callers
+	    point out that the function list, selects the new function, too.
+	click in gpf in its callers
+	click on commandline in its callers
+	    scroll up and down the callees list
+	click on gpf in its callees
+	click on gpf_b
+
+6.  Click on the Source tab
+	Point out that the highlighted line is the first real line in the
+	    selected function, gpf_b.
+	point out the zero exclusive time, but ~4 secs inclusive time
+	    for the line with the call to gpf_work.
+
+	Point to the corresponding gpf_work call from gpf_a.
+	Point out its excl/incl times, and that it is inside
+	a loop executed 10 times.
+
+	Explain what the analyzer is showing:
+	    Scroll down a little, to the first executable
+		line in gpf_work.  Show that it takes its argument,
+		squares it, and uses that as the iteration count for its loop.
+
+	    That's why most of the time comes from gpf_b; it calls gpf_work
+		once with an argument of 10, while gpf_a calls it 10 times
+		with an argument of 1.
+
+	    State that gprof, the traditional utility, would show exactly
+		the opposite, which is wrong.
+
+	The analyzer propagates time by actual callstack
+	sampling, which is accurate, but gprof propagates
+	time by call count, which is misleading.
+
+	Tell them that matix-multiply is an example of the kind
+	of function where gprof can be really misleading, since its
+	time goes as the cube of the order.
+
+	Go back to the Functions Tab.
+
+7.  Show that we also have data for metrics other than user-cpu in
+	the "Summary" Tab, in the right-hand group of tabs.
+
+	Point out all the metrics in the window, and then show
+	that as you click through the function list, the summary
+	window also updates.
+
+8.  Click on the "Data Presentation" button;  show the user
+	how you can select which metrics to show as
+	a value or as a percentage or both.
+
+	Show the user the other tabs in the Presentation dialog
+
+9.  Click on the Timeline tab.  Show the user the second bar
+	reflects patterns of behavior as a function of time.
+	Click on various points in thaat bar to show the various
+	callstacks.
+
+10.  End the demo by closing the Analyzer.  
+
+
+----------------
+ @(#)DEMO.synprog 1.2 06/03/07
+

@@ -1,0 +1,27 @@
+
+<table align="center">
+  <tbody>
+    <tr>
+      <td align="center"><b>{$HEADER}</b> 
+
+        <p></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{section name=display loop=$view_dcp}
+
+Short Desc:{$view_dcp[display].DCP_SHORT_DESC} 
+
+<table width="500" border="1" align="center">
+  <tbody>
+    <tr>
+      <td align="center"><b>{$data4}</b> </td>
+    </tr>
+    <tr>
+      <td>{$view_dcp[display].DCP_SHORT_DESC} </td>
+    </tr>
+  </tbody>
+</table>
+{/section}

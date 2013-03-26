@@ -1,0 +1,334 @@
+# Copyright 04/17/07 Sun Microsystems, Inc. All Rights Reserved
+# @(#)DEMO.prime_omp 1.2 07/04/17 SMI
+
+
+                          DATA RACE DETECTION:
+                               PRIME DEMO
+
+                             OPENMP VERSION
+                             ==============
+
+
+
+CONTENTS:
+
+I.   INTRODUCTION
+II.  SOME COMMON QUESTIONS AND ANSWERS
+III. DEMO DESCRIPTION
+IV.  FILES
+V.   BUILD AND RUN THE EXECUTABLES
+VI.  UNDERSTANDING THE EXPERIMENT RESULT
+VII. REMOVING THE DATA RACES
+
+
+
+I. INTRODUCTION
+===============
+
+A data race occurs when the following three conditions hold:
+
+(a) Two or more threads in a single process access the same memory
+    location concurrently, and
+
+(b) At least one of the accesses is for writing, and
+
+(c) The threads are not using any exclusive locks to control their
+    accesses to that memory location.
+
+When the above three conditions hold, the order of accesses is
+non-deterministic, and the computation may give different results from
+one run to another, depending on that order.
+
+Some data races are benign (safe; do not affect correctness), but
+many data races are bugs in the program.
+
+The Thread Analyzer detects data races in a multi-threaded program
+written using using the POSIX thread API, the Solaris Operating
+System thread API, OpenMP directives, Sun parallel directives,
+Cray parallel directives, or a mix of these.
+
+The Thread Analyzer follows the same "collect-analyze" model that the
+Sun Studio Analyzer uses. There are three steps involved in using the
+Thread Analyzer:
+
+    (a) Instrument the code, by compiling the source with the compiler
+        option -xinstrument=datarace
+    (b) Use collect to create a data-race-detection experiment
+    (c) Use tha (analyzer or er_print) to examine any data races 
+        reported in the data-race-detection experiment  
+
+The data races are detected at runtime and logged into the
+data-race-detection.  The instrumentation may incur a performance
+overhead of up to 100x.  In spite of this overhead, the Thread
+Analyzer can save the programmer much effort and time debugging a
+program with data races.
+
+
+II. SOME COMMON QUESTIONS AND ANSWERS
+=====================================
+
+Q. Does the Thread Analyzer detect data races at compile-time or
+   at runtime?
+
+A. The Thread Analyzer detects data races at runtime.  At compile-time,
+   the compiler inserts instrumentation code into the executable, so
+   data races can be detected at runtime.
+
+
+Q. Why does the Thread Analyzer report different data races in
+   different runs of the same program?
+
+A. The exact run-time behavior of a program depends on a variety of
+   factors, including the scheduling of threads by the Operating
+   System. The data race detection module of the Thread Analyzer uses
+   heuristics to improve performance. As a result, the Thread Analyzer
+   may not report all data races that it can detect.  The Thread
+   Analyzer guarantees, however, that if it detects that a memory 
+   location is involved in one or more data races, then it will 
+   report at least one of those data races.
+
+
+Q. Is the Thread Analyzer able to find all data-races in a program?
+
+A. No. The Thread Analyzer detects data races at runtime.  Since
+   the exact runtime behavior of a program depends on a variety of
+   factors (input data set used, the scheduling of threads by
+   the Operating System, etc.), not all data races in a program
+   may be detected.
+
+   Note that the Thread Analyzer is not a verification tool, but
+   is a checking tool.  If the Thread Analyzer does not report any
+   races, that does not imply that the program is race-free.
+
+
+Q. Can the Thread Analyzer detect data-races between different
+   processes?
+
+A. No. The Thread Analyzer currently only detects data races
+   between different threads spawned from a single process
+
+
+Q. How do I know whether a data race is benign or not?
+
+A. There is no hard and fast rule to determine this.  You need
+   to inspect the code of the program, and determine whether a
+   data race is benign or not based on the logic involved,
+   the type of variable, the machine architecture, etc.
+
+
+III. DEMO DESCRIPTION
+=====================
+
+This demo uses an OpenMP program that computes the number of prime
+numbers between 2 and 10000, using 4 threads.
+
+The demo shows:
+
+- How a data race may cause non-deterministic results in a
+  multi-threaded program.
+
+- How to use the Thread Analyzer to check for data races in a program.
+
+- How to fix data races.
+
+
+IV. FILES
+=========
+
+The files needed for this demo are:
+
+DEMO.prime_omp     : This file
+Makefile           : The make file
+prime_omp.c        : An OpenMP program that uses 4 threads to compute
+                     the number of primes between 2 and 10000.  This
+                     program has data races.
+prime.c            : The serial version of prime_omp.c
+prime_omp_fixed.c  : A reference fix of the data races in prime_omp.c
+
+
+V. BUILD AND RUN THE EXECUTABLES
+================================
+
+1. Remove executables, experiment files, .o files, and core files:
+
+   % make clean
+
+
+2. Build the executables (prime, prime_omp, and prime_omp_fixed)
+
+   % make compile
+
+   
+3. Run the serial program, prime, to see the correct output.  To run
+   the program, simply type:
+
+   % prime
+
+   Run the serial program several times.  Notice how different runs
+   consistently produce the same correct output (1229 prime numbers 
+   between 2 and 10000).
+
+
+4. Run the OpenMP program, prime_omp, to see incorrect output caused
+   by data races. To run the program, simply type:
+
+   % prime_omp
+
+   Run the OpenMP program several times. Notice how different runs 
+   produce different outputs. This indicates that there is a problem. 
+   Let's use the Thread Analyzer to check whether there are any data
+   races in the OpenMP program.
+
+
+5. To check for data races, type the following:
+
+   % make demo
+
+   This runs the OpenMP program, prime_omp.c, under collect (with -r
+   on), creates a data race experiment, and pops up the Thread 
+   Analyzer GUI.
+
+
+VI. UNDERSTANDING THE EXPERIMENT RESULT
+=======================================
+
+Examine the data race experiment results in the Thread Analyzer
+GUI. First look at the data races listed under the "Races" tab. For
+prime_omp.c, you will typically find 3 data races listed (in general,
+this number may vary from run to run, depending on what code was
+executed by the threads and in what order).
+
+You will see the following information about each data race in the
+list:
+
+- A unique id that identifies the data race.
+
+- The virtual address (Vaddr) associated with the data race. If
+  there is more than one virtual address, then (Multiple Addresses) 
+  will appear.
+
+- The two accesses by two different threads that constitute the
+  data race. For each access, the type of the access (Read or Write) is
+  shown, as well as the function, offset, and line number in the source
+  code where the access occurred.
+    
+- A button labeled "Total Traces" and the total number of traces
+  associated with the data race. Click on the "Total Traces" button 
+  to see the individual traces. Each trace refers to the pair of 
+  thread callstacks at the time the two data race accesses occurred. 
+  If you select a trace, the two callstacks will be displayed in 
+  the "Race Details" tab on the right-hand side of the screen.
+
+To see where exactly in the source a data race occurred, select a data
+race from the list of races under the "Races" tab, and then click on
+the "Race Source" tab.
+
+
+You may see the following data races listed under the "Races" tab:
+
+   Race #1
+   ------- 
+   Access 1: Write to total on line 52  (total++;)
+   Access 2: Write to total on line 52  (total++;)
+
+   Explanation: Two different threads attempt to update variable 
+   total concurrently, without using any locks to protect their
+   accesses. This is a data race that can lead to incorrect results.
+   
+   Here's a possible problematic scenario: Assume total is 4, and both
+   thread 1 and thread 2 execute total++ concurrently. After the
+   execution, the value of total may be 5 or 6.
+
+
+   Race #2
+   ------- 
+   Access 1: Write to primes[] on line 51 (primes[total] = i;)
+   Access 2: Write to primes[] on line 51 (primes[total] = i;)
+
+   Explanation: Two different threads attempt to update the same
+   element of primes[] concurrently, without using any locks to
+   protect their accesses. This is a data race that can lead to
+   incorrect results.
+
+   Here's a possible erroneous scenario: Two thread see the same 
+   value of total. So they overwrite the same element of array primes[].
+   Some elements of array primes[] will be defined multiple times,
+   while other elements will not be defined at all.
+
+
+   Race #3
+   ------- 
+   Access 1: Read of pflag[] on line 24   (if (!pflag[i])
+   Access 2: Write to pflag[] on line 27  (pflag[v] = 0;)
+
+   Explanation: Two different threads attempt to access the same
+   element of pflag[] concurrently, one access is for read
+   and the other access is for write. The threads do not use
+   any locks to protect their accesses.
+
+   Upon closer examination, we find that this race is actually
+   "benign".  It does not matter, from a correctness point of view, if
+   multiple threads check the same pflag[] element and write to it
+   concurrently. The initial value of a pflag[] element is 1. When the
+   threads update that element, they assign 0 to it. That is, the threads
+   store 0 in the same bit in the same byte of memory for that
+   element. On current architectures, it is safe to assume that those
+   stores are atomic. Therefore, when that element is read by a thread,
+   the value read will either be 1 or 0. If a thread checks a given
+   pflag[] element (line 24) before it has been assigned the value 0,
+   then it will execute lines 26-29. If in the meantime, another thread  
+   has assigned 0 to that same pflag[] element (line 27), that does not
+   change the final result. It just means that the first thread executed
+   lines 26-29 when it really did not need to.
+
+
+VII. REMOVING THE DATA RACES
+============================
+
+prime_omp_fixed.c is a fixed version of prime_omp.c. To see the
+differences between the original and the fixed version, type:
+
+   % diff prime_omp.c prime_omp_fixed.c  
+
+   51,52c51,55
+   <             primes[total] = i;
+   <             total++;
+   ---
+   >             #pragma omp critical
+   >             {
+   >                 primes[total] = i;
+   >                 total++;
+   >             }
+
+The fix shown above removes Races #1 and #2 by putting a critical
+section around the two assignments. Since Race #3 is benign, we do not
+bother to fix it.
+
+Check the fixed version, prime_omp_fixed.c, for data races, by typing:
+
+   % make demo_fixed
+
+This runs the fixed OpenMP version under collect (with -r on), creates
+a data race experiment, and pops up the Thread Analyzer GUI.
+
+Now examine the data race experiment results in the Thread Analyzer
+GUI. Notice that we now have only one race, instead of 3 races:
+
+   Race #1
+   ------- 
+   Access 1: Read pflag[] on line 24      (if (!pflag[i])
+   Access 2: Write to pflag[] on line 27  (pflag[v] = 0;)
+
+   This is the benign race we observed earlier.
+
+
+To further confirm that the fixed OpenMP version is indeed correct,
+run that version several times by typing:
+
+   % prime_omp_fixed
+
+Notice how different runs produce the same correct output (1229 prime
+numbers between 2 and 10000).
+
+
+                       =======================
